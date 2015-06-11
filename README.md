@@ -1,5 +1,13 @@
 # open-diablo-editor
 
+========
+Overview
+========
+
+This is an MIT-licensed Diablo editor, written in Java. At present it is very primitive. I uploaded the code due to a request from mewmew (see official forum thread at http://www.lurkerlounge.com/forums/thread-16344.html).
+
+At present it is usable but will require a little knowledge of Java coding. In a future revision (or revisions) I will add a GUI.
+
 ======
 Author
 ======
