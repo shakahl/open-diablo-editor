@@ -220,14 +220,14 @@ public class ItemModifier {
 			"% steal life", //38
 			"damage/penetrate armor", //39
 			"attack speed (1=readiness, 4=haste)", //3A
-			"hit recovery (1=balance, 3=harmony", //3B
+			"hit recovery (1=balance, 3=harmony)", //3B
 			"fast block", //3C
 			"+ damage done", //3D
 			"random speed arrows", //3E
 			"x-y damage done (unusual item damage)", //3F
 			"altered durability", //40
 			"no strength requirements", //41
-			"spell-", //42
+			"spell charges", //42
 			"attack speed (1=readiness, 4=haste)", //43
 			"one handed", //44
 			"+200% damage versus demons", //45
@@ -236,11 +236,11 @@ public class ItemModifier {
 			"constantly lose life", //48
 			"0-12.5% steal life", //49
 			"infravision", //4A
-			"specified armor class", //4B
+			"positive armor class", //4B
 			"armor class added to life", //4C
 			"10% of mana added to armor class", //4D
 			"+30-clvl% resist fire", //4E
-			"armor class" //4F
+			"negative armor class" //4F
 		};
 		return itemEffects;
 	}
