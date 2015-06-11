@@ -12,10 +12,12 @@ public class Quest {
 	};
 
 	String[] dungeonTypes = {
-		"Cathedral", // 0
-		"Catacombs", // 1
-		"Cave",      // 2
-		"Hell"       // 3
+		"Tristram",  // 0
+		"Cathedral", // 1
+		"Catacombs", // 2
+		"Caves",     // 3
+		"Hell"       // 4
+		             // -1 (0xFF) = "None"
 	}
 
 	String[] textEntries = {
@@ -320,7 +322,9 @@ public class Quest {
 		System.out.println("Slot number: " + slotNumber + " (hex: " + Integer.toHexString(slotNumber) + ")");
 		System.out.println("Dungeon level single: " + dungeonLevelSingle);
 		System.out.println("Dungeon level multi: " + dungeonLevelMulti);
-		System.out.println("Dungeon type: " + dungeonTypes[dungeonType]);
+		if(dungeonType >= 0 && dungeonType <= 4){
+			System.out.println("Dungeon type: " + dungeonTypes[dungeonType]);
+		}
 		System.out.println("Quest number: " + questNumber);
 		System.out.println("Unknown: " + byteFourValue);
 		System.out.println("Special level: " + specialLevels[specialLevel]);
