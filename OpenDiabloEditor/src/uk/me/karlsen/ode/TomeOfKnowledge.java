@@ -5,34 +5,34 @@ public class TomeOfKnowledge {
 	public static final long QUESTS_OFFSET = 653536l;
 	public static final int NUMBER_OF_QUESTS = 16;
 	public static final int QUEST_LENGTH_IN_BYTES = 16;
-	
+
 	public static final long SPELLS_OFFSET = 655872l;
 	public static final int NUMBER_OF_SPELLS = 36;
 	public static final int SPELL_LENGTH_IN_BYTES = 56;
-	
+
 	public static final long SHRINE_POINTERS_OFFSET = 648827l; //648831l;
 	public static final long SHRINE_MIN_LEVELS_OFFSET = 648932l;
 	public static final long SHRINE_MAX_LEVELS_OFFSET = 648960l;
 	public static final long SHRINE_GAME_TYPE_OFFSET = 648990l;
 	public static final int NUMBER_OF_SHRINES = 26;
-	
+
 	public static final long MODIFIERS_OFFSET = 498344l;
 	public static final int NUMBER_OF_MODIFIERS = 83;
 	public static final int MODIFIER_LENGTH_IN_BYTES = 48;
 	public static final int NUMBER_OF_ITEM_EFFECTS = 4;
-	
+
 	public static final long DIABLO_POINTERS_OFFSET = 4203008l;
 	public static final long HELLFIRE_POINTERS_OFFSET = 4199936l;
-	
+
 	public static final long UNIQUE_ITEMS_OFFSET = 506984;
 	public static final int UNIQUE_ITEM_LENGTH_IN_BYTES = 84;
 	public static final int NUMBER_OF_UNIQUE_ITEMS = 50;
-	
+
 	public static final long MIN_STATS_OFFSET = 650716;
 	public static final long MAX_STATS_OFFSET = 650788;
 	public static final long BLOCKING_BONUSES_OFFSET = 650764;
 	public static final int BONUSES_AND_FRAMESETS_OFFSET = 650632;
-	
+
 	public static final long CHARACTER_ZERO_SKILL_LOC_1 = 305285; //1024 (hex editor) <=> 4198400 (asm) [-s 4197376 or 0x0400C00]
 	public static final long CHARACTER_ZERO_SKILL_LOC_2 = 306884;
 	public static final long CHARACTER_ZERO_SPELL_LOC_1 = 15564;
@@ -42,21 +42,21 @@ public class TomeOfKnowledge {
 	public static final long CHARACTER_TWO_SKILL_LOC_1 = 305392;
 	public static final long CHARACTER_TWO_SKILL_LOC_2 = 306910;
 	public static final long CHARACTER_TWO_SPELL_LOC_1 = 15590;
-	
-	
+
+
 	public static final long BASE_ITEMS_OFFSET = 578568;
 	public static final int BASE_ITEM_LENGTH_IN_BYTES = 76;
 	public static final int NUMBER_OF_BASE_ITEMS = 35;
-	
+
 	public static final long BASE_MONSTERS_OFFSET = 613384;
 	public static final int BASE_MONSTER_LENGTH_IN_BYTES = 128;
 	public static final int NUMBER_OF_BASE_MONSTERS = 111;
 	public static final long MONSTER_ACTIVATION_BYTES_OFFSET = 627848;
-	
+
 	public static final long UNIQUE_MONSTERS_OFFSET = 627960;
 	public static final int NUMBER_OF_UNIQUE_MONSTERS = 97;
 	public static final int UNIQUE_MONSTER_LENGTH_IN_BYTES = 32;
-	
+
 	static String[] createSpellNamesArray(){
 		String[] spellNames = new String[37];
 		spellNames[0] = "none";
@@ -65,13 +65,13 @@ public class TomeOfKnowledge {
 		spellNames[3] = "Lightning";
 		spellNames[4] = "Flash";
 		spellNames[5] = "Identify";
-		spellNames[6] = "FireWall";
+		spellNames[6] = "Fire Wall";
 		spellNames[7] = "Town Portal";
 		spellNames[8] = "Stone Curse";
 		spellNames[9] = "Infravision";
 		spellNames[10] = "Phasing";
 		spellNames[11] = "Mana Shield";
-		spellNames[12] = "FireBall";
+		spellNames[12] = "Fireball";
 		spellNames[13] = "Guardian";
 		spellNames[14] = "Chain Lightning";
 		spellNames[15] = "Flame Wave";
