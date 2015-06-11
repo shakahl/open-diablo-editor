@@ -4,7 +4,7 @@ public class Spell {
 
 	String[] castingSounds = {"Fire", "Lighting", "Utility", "Other"};
 	String[] animationsWhenCasting = {"fire", "lightning", "magic/other"};
-	
+
 	private int unmoddedSpellIndex;
 	private int manaToCast;
 	private int animationWhenCasting;
@@ -32,7 +32,7 @@ public class Spell {
 	private long staffCostMultiplier;
 	//private byte[] spellBytes;
 	int index;
-	
+
 	public Spell(int index, byte[] byteArray, ReaderWriter rw) {
 		this.index = index+1; //spell index starts from 1, loop in SpellsStore starts from 0
 		if(byteArray.length != 56){
@@ -83,7 +83,7 @@ public class Spell {
 		bookCost = rw.convertFourBytesToNumber(byteArray[48], byteArray[49], byteArray[50], byteArray[51]);
 		staffCostMultiplier = rw.convertFourBytesToNumber(byteArray[52], byteArray[53], byteArray[54], byteArray[55]);
 	}
-	
+
 	//TODO -- refactor duplicate code (is in Spell and ShrinesStore)
 	private String getNameUsingPointer(long pointer){
 		ReaderWriter rwTemp = new ReaderWriter(true);
@@ -148,7 +148,7 @@ public class Spell {
 		System.out.println("Staff cost multiplier: " + staffCostMultiplier);
 		System.out.println();
 	}
-	
+
 	private String[] createSpellEffectsArray() {
 		String[] spellEffects = {
 			"Misc effect", //00
@@ -160,67 +160,69 @@ public class Spell {
 			"Fireball", //06
 			"Lightning", //07
 			"Lightning Trap (no damage)", //08
-			"No effect ???", //09
+			"Magblos?", //09
 			"Town Portal", //0A
-			"Flash (1 side)", //0B
-			"Flash (other side)", //OC
+			"Flash (bottom side)", //0B
+			"Flash (top side)", //OC
 			"Mana Shield", //0D
 			"Another type of Flame Wave", //0E
 			"Chain Lightning", //0F
 			"Crash!!!", //10
-			"Some funny sound", //11
+			"Blood", //11
 			"looks like the impact of the Bone Spirit spell", //12
 			"Stone Curse dust??", //13
-			"No effect", //14
-			"", //15
-			"", //16
-			"No effect", //17
+			"Gloom?", //14
+			"Magball?", //15
+			"Thin lightning (many)", //16
+			"Thin lightning", //17
 			"Blood Star", //18
-			"No effect", //19
+			"Flare explosion", //19
 			"Teleport", //1A
 			"Fire Arrow", //1B
-			"Crash!!", //1C
+			"Doom", //1C
 			"Another Fire Trap", //1D
 			"Stone Curse", //1E
 			"No effect", //1F
-			"Unknown", //20
+			"Invisible", //20
 			"Golem", //21
 			"Etherealize", //22
-			"", //23
-			"", //24
+			"Blodbur?", //23
+			"Apocalypse?", //24
 			"Healing", //25
-			"FireWall", //26
+			"Fire Wall", //26
 			"Infravision", //27
 			"Identify", //28
 			"Flame Wave", //29
 			"Nova", //2A
-			"", //2B
+			"Blood Boil", //2B
 			"Apocalypse", //2C
-			"Item Repair",
-			"Staff Recharge",
-			"Trap Disarm",
-			"Inferno?",
-			"Inferno",
-			"",
-			"",
-			"Charged Bolt",
-			"Holy Bolt",
-			"Resurrect",
-			"Telekinesis",
-			"",
-			"",
-			"",
-			"",
-			"Heal Other",
-			"Elemental",
-			"Another type of res?",
-			"Bone Spirit",
-			"charged bolt..small...on caster..no damage",
-			"Unholy Altar portal (no effect)"
+			"Item Repair", //2D
+			"Staff Recharge", //2E
+			"Trap Disarm", //2F
+			"Inferno?", //30
+			"Inferno", //31
+			"Golem?", //32
+			"Krull", //33
+			"Charged Bolt", //34
+			"Holy Bolt", //35
+			"Resurrect", //36
+			"Telekinesis", //37
+			"Lightning arrow", //38
+			"Acid bf?", //39
+			"Acid splash", //3A
+			"Acid pud", //3B
+			"Heal Other", //3C
+			"Elemental", //3D
+			"Resurrect (sun ray)", //3E
+			"Bone Spirit", // 3F
+			"charged bolt..small...on caster..no damage", //40
+			"Unholy Altar portal (no effect)",//41
+			"Apocalypse Fireplar?",//42
+			"Apocalypse Fireplar?" //43
 		};
 		return spellEffects;
 	}
-	
+
 	public byte[] getSpellAsBytes() {
 		byte[] spellAsBytes = new byte[56];
 		spellAsBytes[0] = (byte) unmoddedSpellIndex;
@@ -293,11 +295,11 @@ public class Spell {
 		spellAsBytes[53] = (byte) (staffCostMultiplier >>> 8); //staffCostMultiplier
 		spellAsBytes[54] = (byte) (staffCostMultiplier >>> 16); //staffCostMultiplier
 		spellAsBytes[55] = (byte) (staffCostMultiplier >>> 24); //staffCostMultiplier
-		
+
 		//System.out.println("ORIG: " + Arrays.toString(spellBytes));
 		//System.out.println("BACK: " + Arrays.toString(spellAsBytes));
 		//System.out.println();
-		
+
 		return spellAsBytes;
 	}
 

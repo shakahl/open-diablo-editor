@@ -7,7 +7,7 @@ public class UniqueItemStore {
 
 	ReaderWriter rw;
 	List<UniqueItem> uniqueItems;
-	
+
 	public UniqueItemStore(ReaderWriter rw){
 		this.rw = rw;
 		uniqueItems = new ArrayList<UniqueItem>();
@@ -22,7 +22,7 @@ public class UniqueItemStore {
 			pos = pos + spacing;
 		}
 	}
-	
+
 	private void readItem(long position){
 		long pos = position;
 		rw.seek(pos);
@@ -32,7 +32,7 @@ public class UniqueItemStore {
 			pos++;
 			rw.seek(pos);
 		}
-		
+
 		UniqueItem ui = new UniqueItem(readIn, rw);
 		uniqueItems.add(ui);
 	}
@@ -53,6 +53,6 @@ public class UniqueItemStore {
 			byte[] itemAsBytes = this.getItemAsBytes(i);
 			rw.writeBytes(itemAsBytes, pos);
 			pos = pos + TomeOfKnowledge.UNIQUE_ITEM_LENGTH_IN_BYTES;
-		}	
+		}
 	}
 }

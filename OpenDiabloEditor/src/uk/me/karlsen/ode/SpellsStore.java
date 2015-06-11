@@ -7,13 +7,13 @@ public class SpellsStore {
 
 	ReaderWriter rw = null;
 	List<Spell> spells = null;
-	
+
 	public SpellsStore(ReaderWriter rw){
 		this.rw = rw;
 		this.spells = new ArrayList<Spell>();
 		this.readInSpells();
 	}
-	
+
 	public void readInSpells(){
 		long pos = TomeOfKnowledge.SPELLS_OFFSET; //skills
 		long spacing = 56l;
@@ -22,7 +22,7 @@ public class SpellsStore {
 			pos = pos + spacing;
 		}
 	}
-	
+
 	private void readSpell(long position, int index) {
 		long pos = position;
 		rw.seek(position);
@@ -33,11 +33,11 @@ public class SpellsStore {
 			rw.seek(pos);
 			readIn[i] = rw.readByte();
 		}
-		
+
 		Spell s = new Spell(index, readIn, rw);
 		spells.add(s);
-		
-		
+
+
 	}
 
 	public void printSpells() {
@@ -56,6 +56,6 @@ public class SpellsStore {
 			byte[] spellAsBytes = this.getSpellAsBytes(i);
 			rw.writeBytes(spellAsBytes, pos);
 			pos = pos + TomeOfKnowledge.SPELL_LENGTH_IN_BYTES;
-		}		
+		}
 	}
 }

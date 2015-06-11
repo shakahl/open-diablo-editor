@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class BaseItem {
-	
+
 	String[] itemTypes = {
 		"invalid",					//00
 		"Weapons",					//01
@@ -14,7 +14,7 @@ public class BaseItem {
 		"Gold",						//04
 		"Novelty items"				//05
 	};
-	
+
 	String[] equipLocations = {
 		"invalid",										//00
 		"One handed (weapons and shields)",				//01
@@ -25,7 +25,7 @@ public class BaseItem {
 		"Amulet",										//06
 		"Unequipable"									//07
 	};
-	
+
 	String[] graphicValues = {
 		"Potion of Full Mana", //00
 		"White Scroll", //01
@@ -197,7 +197,7 @@ public class BaseItem {
 		"Short Battle Bow", // (A7)
 		"Gold" // (A8)
 	};
-	
+
 	String[] itemCodes = {
 			"All other items (novelties, potions, scrolls, books, etc)", //00
 			"Swords", //01
@@ -212,15 +212,21 @@ public class BaseItem {
 			"Staves", //0A
 			"Gold", //0B
 			"Rings", //0C
-			"Amulets" //0D	
+			"Amulets" //0D
 	};
-	
+
 	String[] baseItemActivationTriggers = {
 			"Item will never be found",		//00
 			"Item will be findable",		//01
 			"Findable, 2X occurance rate"	//02
 		};
-	
+
+	String[] qualityLevels = {
+			"Normal", // 00
+			"Magic",  // 01
+			"Unique"  // 02
+		};
+
 	List<Integer> specialEffectCodes = Arrays.asList(
 			0x01000000,
 			0x02000000,
@@ -255,8 +261,8 @@ public class BaseItem {
 			0x00000040,
 			0x00000080);
 
-	
-	
+
+
 	/*
 	Some effects do not work on certain base items
 	0x0100000 = Infravision
@@ -267,11 +273,11 @@ public class BaseItem {
 	0x20000000 = Extra Lighning Damage
 	0x40000000 = Cursed Hit Points
 	0x80000000 = ???
-	0x00010000 = ???
+	0x00010000 = User can't heal
 	0x00020000 = ???
 	0x00040000 = ???
 	0x00080000 = Knock target back
-	0x00100000 = ???
+	0x00100000 = Hit monster doesn't heal
 	0x00200000 = Steal 3% Mana
 	0x00400000 = Steal 5% Mana
 	0x00800000 = Steal 3% Life
@@ -292,7 +298,7 @@ public class BaseItem {
 	0x00000040 = +200% Damage to Demons
 	0x00000080 = Cursed Resistance
 	*/
-	
+
 	/*
 	Magic codes:
 	00 = Nothing
@@ -319,7 +325,7 @@ public class BaseItem {
 	2B = Ear/Heart
 	2C = Spectral Elixir
 	*/
-	
+
 	/*
 	Spell number
 	01 = Firebolt
@@ -359,13 +365,13 @@ public class BaseItem {
 	23 = Blood Star
 	24 = Bone Spirit
 	*/
-	
+
 	/*
 	Use once flag:
 	00 = Nothing
 	01 = Right clicking the item will make it disappear (potions, scrolls, books)
 	*/
-	
+
 	private long activationTrigger;
 	private int itemType;
 	private int equipLocation;
@@ -399,7 +405,7 @@ public class BaseItem {
 	//private byte[] itemBytes;
 	private int slotNumber;
 	private boolean changed;
-	
+
 	public BaseItem(int slotNumber, byte[] itemBytes, ReaderWriter rw) {
 		changed = false;
 		this.slotNumber = slotNumber;
@@ -420,7 +426,7 @@ public class BaseItem {
 			name = "None";
 		} else {
 			namePointer = rw.convertFourBytesToOffset(itemBytes[16], itemBytes[17], itemBytes[18], itemBytes[19]);
-			name = nf.getNameUsingPointer(namePointer);			
+			name = nf.getNameUsingPointer(namePointer);
 		}
 		if((itemBytes[20] + itemBytes[21] + itemBytes[22] + itemBytes[23]) == 0){
 			magicalNamePointer = 0;
@@ -429,6 +435,12 @@ public class BaseItem {
 			magicalNamePointer = rw.convertFourBytesToOffset(itemBytes[20], itemBytes[21], itemBytes[22], itemBytes[23]);
 			magicalName = nf.getNameUsingPointer(magicalNamePointer);
 		}
+		// ### [ NOTE ] ###
+		// qualityLevel occupies only byte itemBytes[24]. The following three
+		// bytes (itemBytes[25], itemBytes[26], itemBytes[27]) are reserved.
+		//
+		// TODO: Update the relevant code to reflect this.
+		// ### [/ NOTE ] ###
 		qualityLevel = rw.convertFourBytesToNumber(itemBytes[24], itemBytes[25], itemBytes[26], itemBytes[27]);
 		durability = rw.convertFourBytesToNumber(itemBytes[28], itemBytes[29], itemBytes[30], itemBytes[31]);
 		minAttackDamage = rw.convertFourBytesToNumber(itemBytes[32], itemBytes[33], itemBytes[34], itemBytes[35]);
@@ -446,7 +458,7 @@ public class BaseItem {
 		priceOne = rw.convertFourBytesToNumber(itemBytes[68], itemBytes[69], itemBytes[70], itemBytes[71]);
 		priceTwo = rw.convertFourBytesToNumber(itemBytes[72], itemBytes[73], itemBytes[74], itemBytes[75]);
 	}
-	
+
 	public byte[] getItemAsBytes(){
 		byte[] bytes = new byte[TomeOfKnowledge.BASE_ITEM_LENGTH_IN_BYTES];
 		bytes[0] = (byte)(activationTrigger >>>  0);
@@ -562,7 +574,7 @@ public class BaseItem {
 		System.out.println("Unique item code: " + uniqueItemCodes[uniqueItemCode]);
 		System.out.println("Byte fourteen: " + byteFourteen);
 		System.out.println("Byte fifteen: " + byteFifteen);
-		System.out.println("Quality level: " + qualityLevel);
+		System.out.println("Quality level: " + qualityLevels[(int) qualityLevel]);
 		System.out.println("Durability: " + durability);
 		System.out.println("Min attack damage: " + minAttackDamage);
 		System.out.println("Max attack damage: " + maxAttackDamage);
@@ -936,7 +948,7 @@ public class BaseItem {
 
 	public void setPriceTwo(long priceTwo) {
 		if(priceTwo >= 0 && priceTwo <= 999999){
-			this.priceTwo = priceTwo;	
+			this.priceTwo = priceTwo;
 			this.setChanged();
 		} else {
 			System.err.println("Error: BaseItem's setPriceTwo() was"

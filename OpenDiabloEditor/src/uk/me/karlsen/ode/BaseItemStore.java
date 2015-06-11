@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BaseItemStore {
-	
+
 	ReaderWriter rw;
 	List<BaseItem> baseItems;
 
@@ -25,9 +25,9 @@ public class BaseItemStore {
 			pos = pos + TomeOfKnowledge.BASE_ITEM_LENGTH_IN_BYTES;
 			rw.seek(pos);
 		}
-		
+
 	}
-	
+
 	public byte[] getItemAsBytes(int index){
 		return baseItems.get(index).getItemAsBytes();
 	}
@@ -45,6 +45,6 @@ public class BaseItemStore {
 			rw.writeBytes(itemAsBytes, pos);
 			pos = pos + TomeOfKnowledge.BASE_ITEM_LENGTH_IN_BYTES;
 		}
-		
+
 	}
 }

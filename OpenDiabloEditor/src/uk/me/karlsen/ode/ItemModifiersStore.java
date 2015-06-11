@@ -7,13 +7,13 @@ public class ItemModifiersStore {
 
 	ReaderWriter rw = null;
 	List<ItemModifier> itemModifiers = null;
-	
+
 	public ItemModifiersStore(ReaderWriter rw){
 		this.rw = rw;
 		itemModifiers = new ArrayList<ItemModifier>();
 		this.readInModifiers();
 	}
-	
+
 	public void readInModifiers(){
 		long pos = TomeOfKnowledge.MODIFIERS_OFFSET;
 		long spacing = TomeOfKnowledge.MODIFIER_LENGTH_IN_BYTES;
@@ -22,7 +22,7 @@ public class ItemModifiersStore {
 			pos = pos + spacing;
 		}
 	}
-	
+
 	private void readModifier(long position) {
 		long pos = position;
 		rw.seek(pos);
@@ -32,11 +32,11 @@ public class ItemModifiersStore {
 			pos++;
 			rw.seek(pos);
 		}
-		
+
 		ItemModifier im = new ItemModifier(readIn, rw);
 		itemModifiers.add(im);
 	}
-	
+
 	public void printModifiers(){
 		for(ItemModifier im : itemModifiers){
 			im.printModifier();
@@ -53,6 +53,6 @@ public class ItemModifiersStore {
 			byte[] modifierAsBytes = this.getModifierAsBytes(i);
 			rw.writeBytes(modifierAsBytes, pos);
 			pos = pos + TomeOfKnowledge.MODIFIER_LENGTH_IN_BYTES;
-		}	
+		}
 	}
 }

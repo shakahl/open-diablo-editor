@@ -2,6 +2,41 @@ package uk.me.karlsen.ode;
 
 public class UniqueMonster {
 
+	String[] monsterAIs = {
+		"Zombie",
+		"Overlord",
+		"Skeleton",
+		"Skeleton Archer",
+		"Scavenger",
+		"Horned Demon",
+		"Goat Man",
+		"Goat Man Archer",
+		"Fallen One",
+		"Magma Demon",
+		"Skeleton King",
+		"Winged Fiend",
+		"Gargoyle",
+		"The Butcher",
+		"Succubus",
+		"Hidden",
+		"Lightning Demon",
+		"Fireman",
+		"Gharbad the Weak",
+		"Spitting Terror",
+		"Fast Spitting Terror",
+		"Golem",
+		"Zhar the Mad",
+		"Snotspill",
+		"Viper",
+		"Mage",
+		"Balrog",
+		"The Dark Lord",
+		"Arch Bishop Lazarus",
+		"Unique Succubus",
+		"Lachdanan",
+		"Warlord of Blood"
+	};
+
 	private long monsterType;
 	private long namePointer;
 	private String name;
@@ -9,8 +44,8 @@ public class UniqueMonster {
 	private String trnName;
 	private int dungeonLevel;
 	private int hitPoints;
-	private int attackTypePart1;
-	private int attackTypePart2;
+	private int monsterAI;
+	private int intelligenceFactor;
 	private int minAttackDmg;
 	private int maxAttackDmg;
 	private String resistances;
@@ -18,7 +53,7 @@ public class UniqueMonster {
 	private long packSpecials;
 	private long specialSoundWav;
 	//byte[] uniqueBytes;
-	
+
 	public UniqueMonster(byte[] monsterBytes, ReaderWriter rw) {
 		//uniqueBytes = monsterBytes;
 		BinEditHelper nf = new BinEditHelper();
@@ -29,8 +64,8 @@ public class UniqueMonster {
 		trnName = nf.getNameUsingPointer(trnPointer);
 		dungeonLevel = rw.convertTwoBytesToInt(monsterBytes[12], monsterBytes[13]);
 		hitPoints = rw.convertTwoBytesToInt(monsterBytes[14], monsterBytes[15]);
-		attackTypePart1 = rw.convertUnsignedByteToInt(monsterBytes[16]);
-		attackTypePart2 = rw.convertUnsignedByteToInt(monsterBytes[17]);
+		monsterAI = rw.convertUnsignedByteToInt(monsterBytes[16]);
+		intelligenceFactor = rw.convertUnsignedByteToInt(monsterBytes[17]);
 		minAttackDmg = rw.convertUnsignedByteToInt(monsterBytes[18]);
 		maxAttackDmg = rw.convertUnsignedByteToInt(monsterBytes[19]);
 		resistances = String.format("%16s", Integer.toBinaryString(rw.convertUnsignedByteToInt(monsterBytes[20]))).replace(' ', '0') + ";" +
@@ -48,8 +83,8 @@ public class UniqueMonster {
 		System.out.println("TRN file: " + trnName);
 		System.out.println("Dungeon level: " + dungeonLevel);
 		System.out.println("HPs: " + hitPoints);
-		System.out.println("Attack type part 1: " + attackTypePart1);
-		System.out.println("Attack type part 2: " + attackTypePart2);
+		System.out.println("Monster AI: " + monsterAIs[monsterAI]);
+		System.out.println("Intelligence factor: " + intelligenceFactor);
 		System.out.println("Min attack dmg: " + minAttackDmg);
 		System.out.println("Max attack dmg: " + maxAttackDmg);
 		System.out.println("Resistances: " + resistances);
@@ -79,8 +114,8 @@ public class UniqueMonster {
 		uniqueAsBytes[13] = (byte) (dungeonLevel >>> 8);
 		uniqueAsBytes[14] = (byte) (hitPoints >>> 0);
 		uniqueAsBytes[15] = (byte) (hitPoints >>> 8);
-		uniqueAsBytes[16] = (byte) attackTypePart1;
-		uniqueAsBytes[17] = (byte) attackTypePart2;
+		uniqueAsBytes[16] = (byte) monsterAI;
+		uniqueAsBytes[17] = (byte) intelligenceFactor;
 		uniqueAsBytes[18] = (byte) minAttackDmg;
 		uniqueAsBytes[19] = (byte) maxAttackDmg;
 		String[] resistancesSplit = resistances.split(";");
@@ -96,11 +131,11 @@ public class UniqueMonster {
 		uniqueAsBytes[29] = (byte) (specialSoundWav >>> 8);
 		uniqueAsBytes[30] = (byte) (specialSoundWav >>> 16);
 		uniqueAsBytes[31] = (byte) (specialSoundWav >>> 24);
-		
+
 		//System.out.println("ORIG: " + Arrays.toString(uniqueBytes));
 		//System.out.println("BACK: " + Arrays.toString(uniqueAsBytes));
 		//System.out.println();
-		
+
 		return uniqueAsBytes;
 	}
 
@@ -160,20 +195,20 @@ public class UniqueMonster {
 		this.hitPoints = hitPoints;
 	}
 
-	public int getAttackTypePart1() {
-		return attackTypePart1;
+	public int getMonsterAI() {
+		return monsterAI;
 	}
 
-	public void setAttackTypePart1(int attackTypePart1) {
-		this.attackTypePart1 = attackTypePart1;
+	public void setMonsterAI(int monsterAI) {
+		this.monsterAI = monsterAI;
 	}
 
-	public int getAttackTypePart2() {
-		return attackTypePart2;
+	public int getIntelligenceFactor() {
+		return intelligenceFactor;
 	}
 
-	public void setAttackTypePart2(int attackTypePart2) {
-		this.attackTypePart2 = attackTypePart2;
+	public void setIntelligenceFactor(int intelligenceFactor) {
+		this.intelligenceFactor = intelligenceFactor;
 	}
 
 	public int getMinAttackDmg() {

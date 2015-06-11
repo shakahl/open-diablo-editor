@@ -63,7 +63,7 @@ public class BaseMonster {
 	private boolean changed;
 	private byte[] monsterBytesOrig;
 	int slotNumber;
-	
+
 	public BaseMonster(int slotNumber, byte[] monsterBytes, byte activationByte, ReaderWriter rw) {
 		this.slotNumber = slotNumber;
 		animationSize = rw.convertFourBytesToNumber(monsterBytes[0], monsterBytes[1], monsterBytes[2], monsterBytes[3]);
@@ -92,6 +92,12 @@ public class BaseMonster {
 		name = nf.getNameUsingPointer(namePointer);
 		minDungeonLevel = rw.convertUnsignedByteToInt(monsterBytes[84]);
 		maxDungeonLevel = rw.convertUnsignedByteToInt(monsterBytes[85]);
+		// ### [ NOTE ] ###
+		// monsterItemLevel occupies only byte monsterBytes[86]. The following
+		// byte (monsterBytes[87]) is reserved.
+		//
+		// TODO: Update the relevant code to reflect this.
+		// ### [/ NOTE ] ###
 		monsterItemLevel = rw.convertTwoBytesToInt(monsterBytes[86], monsterBytes[87]);
 		minHitPoints = rw.convertFourBytesToNumber(monsterBytes[88], monsterBytes[89], monsterBytes[90], monsterBytes[91]);
 		maxHitPoints = rw.convertFourBytesToNumber(monsterBytes[92], monsterBytes[93], monsterBytes[94], monsterBytes[95]);
@@ -125,7 +131,7 @@ public class BaseMonster {
 		changed = false;
 		this.monsterBytesOrig = monsterBytes;
 	}
-	
+
 	public MonsterAsBytes getMonsterAsBytes(){
 		byte[] monsterBytes = new byte[TomeOfKnowledge.BASE_MONSTER_LENGTH_IN_BYTES];
 		monsterBytes[0] = (byte)(animationSize >>>  0);
@@ -225,8 +231,8 @@ public class BaseMonster {
 		monsterBytes[90] = (byte)(minHitPoints >>> 16);
 		monsterBytes[91] = (byte)(minHitPoints >>> 24);
 		monsterBytes[92] = (byte)(maxHitPoints >>>  0);
-		monsterBytes[93] = (byte)(maxHitPoints >>>  8); 
-		monsterBytes[94] = (byte)(maxHitPoints >>> 16); 
+		monsterBytes[93] = (byte)(maxHitPoints >>>  8);
+		monsterBytes[94] = (byte)(maxHitPoints >>> 16);
 		monsterBytes[95] = (byte)(maxHitPoints >>> 24);
 		monsterBytes[96] = (byte) attackType1; //attackType1
 		monsterBytes[97] = (byte) attackType2; //attackType2
@@ -272,7 +278,7 @@ public class BaseMonster {
 
 	public void printMonster() {
 		System.out.println( "+--------------------------------------+" + "\n" +
-							"| Slot number: " + slotNumber + " (hex: " + Integer.toHexString(slotNumber) + ")" + "\n" + 
+							"| Slot number: " + slotNumber + " (hex: " + Integer.toHexString(slotNumber) + ")" + "\n" +
 							"| Monster name: " + name + "\n" +
 							"| Enabled: " + enabled + "\n" +
 							"| Animation size: " + animationSize + "\n" +
@@ -361,7 +367,7 @@ public class BaseMonster {
 		return animationFilePointer;
 	}
 
-	
+
 	public void setAnimationFilePointer(long animationFilePointer) {
 		if(animationFilePointer >= 1024 && animationFilePointer <= 7018496){
 			this.animationFilePointer = animationFilePointer;
@@ -435,7 +441,7 @@ public class BaseMonster {
 		} else {
 			System.err.println("Error: BaseMonster's setUsesTrnToModColor() was"
 					+ "supplied with an argument outside the supported range (0 to 1)");
-		} 
+		}
 	}
 
 	public long getTrnPointer() {
@@ -449,7 +455,7 @@ public class BaseMonster {
 		} else {
 			System.err.println("Error: BaseMonster's setUsesTrnPointer() was"
 					+ "supplied with an argument outside the supported range (1024 to 7018496)");
-		} 
+		}
 	}
 
 	public long getIdleFrameset() {
@@ -463,7 +469,7 @@ public class BaseMonster {
 		} else {
 			System.err.println("Error: BaseMonster's setIdleFrameset() was"
 					+ "supplied with an argument outside the supported range (1 to 24)");
-		} 
+		}
 	}
 
 	public long getWalkFrameset() {
@@ -477,7 +483,7 @@ public class BaseMonster {
 		} else {
 			System.err.println("Error: BaseMonster's setWalkFrameset() was"
 					+ "supplied with an argument outside the supported range (1 to 24)");
-		} 
+		}
 	}
 
 	public long getAttackFrameset() {
@@ -731,7 +737,7 @@ public class BaseMonster {
 	}
 
 	public void setAttackType2(int attackType2) {
-		if(attackType2 >= 0 && attackType2 <= 0){	
+		if(attackType2 >= 0 && attackType2 <= 0){
 			this.attackType2 = attackType2;
 			this.setChanged();
 		} else {
@@ -973,7 +979,7 @@ public class BaseMonster {
 			this.monsterType = monsterType;
 			this.setChanged();
 		} else {
-			System.err.println("Error: BaseMonster's setMonsterAc() was"
+			System.err.println("Error: BaseMonster's setMonsterType() was"
 					+ "supplied with an argument outside the supported range (0 to 3)");
 		}
 	}

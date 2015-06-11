@@ -7,7 +7,7 @@ public class UniqueMonsterStore {
 
 	ReaderWriter rw;
 	List<UniqueMonster> uniqueMonsters;
-	
+
 	public UniqueMonsterStore(ReaderWriter rw) {
 		this.rw = rw;
 		uniqueMonsters = new ArrayList<UniqueMonster>();
@@ -31,7 +31,7 @@ public class UniqueMonsterStore {
 		for(UniqueMonster um : uniqueMonsters){
 			um.printItem();
 		}
-		
+
 	}
 
 	public byte[] getUniqueAsBytes(int i) {
@@ -45,7 +45,7 @@ public class UniqueMonsterStore {
 			rw.writeBytes(uniqueAsBytes, pos);
 			pos = pos + TomeOfKnowledge.UNIQUE_MONSTER_LENGTH_IN_BYTES;
 		}
-		
+
 	}
 
 }

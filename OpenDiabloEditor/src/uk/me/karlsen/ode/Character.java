@@ -23,9 +23,9 @@ public class Character {
 	private int townWalkFrameset;
 	private int oneHandedAttackSpeed;
 	private int castingSpeed;
-	
+
 	/*
-	0 	
+	0
 	1 	Attacking frameset
 	2 	Walking frameset in dungeon
 	3 	Blocking speed
@@ -34,14 +34,14 @@ public class Character {
 	6 	Hit recovery speed
 	7 	Idle frameset in town
 	8 	Walking frameset in town
-	9 	Single handed weapon attacking speed 
+	9 	Single handed weapon attacking speed
 	10 	Spell casting speed
 	*/
-	
+
 	public Character(){
-		
+
 	}
-	
+
 	public void printCharacter() {
 		System.out.println("Class: " + className);
 		System.out.println("STR: " + initStrength + "--" + maxStrength);

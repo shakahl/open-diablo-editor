@@ -15,7 +15,7 @@ public class CharacterStore {
 	byte[] maxStats;
 	byte[] blockingBonuses;
 	byte[] bonusesAndFramesets;
-	
+
 	public CharacterStore(ReaderWriter rw) {
 		this.rw = rw;
 		characters = new ArrayList<Character>();
@@ -31,7 +31,7 @@ public class CharacterStore {
 			pos++;
 			rw.seek(pos);
 		}
-		
+
 		long initWarriorStrength = rw.convertFourBytesToNumber(startingStats[0], startingStats[1], startingStats[2], startingStats[3]);
 		long initRogueStrength = rw.convertFourBytesToNumber(startingStats[4], startingStats[5], startingStats[6], startingStats[7]);
 		long initSorcStrength = rw.convertFourBytesToNumber(startingStats[8], startingStats[9], startingStats[10], startingStats[11]);
@@ -44,7 +44,7 @@ public class CharacterStore {
 		long initWarriorVitality = rw.convertFourBytesToNumber(startingStats[36], startingStats[37], startingStats[38], startingStats[39]);
 		long initRogueVitality = rw.convertFourBytesToNumber(startingStats[40], startingStats[41], startingStats[42], startingStats[43]);
 		long initSorcVitality = rw.convertFourBytesToNumber(startingStats[44], startingStats[45], startingStats[46], startingStats[47]);
-		
+
 		pos = TomeOfKnowledge.MAX_STATS_OFFSET;
 		rw.seek(pos);
 		maxStats = new byte[48];
@@ -53,7 +53,7 @@ public class CharacterStore {
 			pos++;
 			rw.seek(pos);
 		}
-		
+
 		long maxWarriorStrength = rw.convertFourBytesToNumber(maxStats[0], maxStats[1], maxStats[2], maxStats[3]);
 		long maxWarriorMagic = rw.convertFourBytesToNumber(maxStats[4], maxStats[5], maxStats[6], maxStats[7]);
 		long maxWarriorDexterity = rw.convertFourBytesToNumber(maxStats[8], maxStats[9], maxStats[10], maxStats[11]);
@@ -66,7 +66,7 @@ public class CharacterStore {
 		long maxSorcMagic = rw.convertFourBytesToNumber(maxStats[36], maxStats[37], maxStats[38], maxStats[39]);
 		long maxSorcDexterity = rw.convertFourBytesToNumber(maxStats[40], maxStats[41], maxStats[42], maxStats[43]);
 		long maxSorcVitality = rw.convertFourBytesToNumber(maxStats[44], maxStats[45], maxStats[46], maxStats[47]);
-		
+
 		pos = TomeOfKnowledge.BLOCKING_BONUSES_OFFSET;
 		rw.seek(pos);
 		blockingBonuses = new byte[12];
@@ -75,11 +75,11 @@ public class CharacterStore {
 			pos++;
 			rw.seek(pos);
 		}
-		
+
 		long warriorBlockingBonus = rw.convertFourBytesToNumber(blockingBonuses[0], blockingBonuses[1], blockingBonuses[2], blockingBonuses[3]);
 		long rogueBlockingBonus = rw.convertFourBytesToNumber(blockingBonuses[4], blockingBonuses[5], blockingBonuses[6], blockingBonuses[7]);
 		long sorcBlockingBonus = rw.convertFourBytesToNumber(blockingBonuses[8], blockingBonuses[9], blockingBonuses[10], blockingBonuses[11]);
-		
+
 		pos = TomeOfKnowledge.BONUSES_AND_FRAMESETS_OFFSET;
 		rw.seek(pos);
 		bonusesAndFramesets = new byte[33];
@@ -88,7 +88,7 @@ public class CharacterStore {
 			pos++;
 			rw.seek(pos);
 		}
-		
+
 		/*
 		0 	Idle frameset in the dungeon
 		1 	Attacking frameset
@@ -99,10 +99,10 @@ public class CharacterStore {
 		6 	Hit recovery speed
 		7 	Idle frameset in town
 		8 	Walking frameset in town
-		9 	Single handed weapon attacking speed 
+		9 	Single handed weapon attacking speed
 		10 	Spell casting speed
 		*/
-		
+
 		int warriorDungeonIdleFrameset = rw.convertUnsignedByteToInt(bonusesAndFramesets[0]);
 		int warriorAttackingFrameset = rw.convertUnsignedByteToInt(bonusesAndFramesets[1]);
 		int warriorDungeonWalkFrameset = rw.convertUnsignedByteToInt(bonusesAndFramesets[2]);
@@ -114,7 +114,7 @@ public class CharacterStore {
 		int warriorTownWalkFrameset = rw.convertUnsignedByteToInt(bonusesAndFramesets[8]);
 		int warrior1hAttackSpeed = rw.convertUnsignedByteToInt(bonusesAndFramesets[9]);
 		int warriorCastingSpeed = rw.convertUnsignedByteToInt(bonusesAndFramesets[10]);
-		
+
 		int rogueDungeonIdleFrameset = rw.convertUnsignedByteToInt(bonusesAndFramesets[11]);
 		int rogueAttackingFrameset = rw.convertUnsignedByteToInt(bonusesAndFramesets[12]);
 		int rogueDungeonWalkFrameset = rw.convertUnsignedByteToInt(bonusesAndFramesets[13]);
@@ -126,7 +126,7 @@ public class CharacterStore {
 		int rogueTownWalkFrameset = rw.convertUnsignedByteToInt(bonusesAndFramesets[19]);
 		int rogue1hAttackSpeed = rw.convertUnsignedByteToInt(bonusesAndFramesets[20]);
 		int rogueCastingSpeed = rw.convertUnsignedByteToInt(bonusesAndFramesets[21]);
-		
+
 		int sorcDungeonIdleFrameset = rw.convertUnsignedByteToInt(bonusesAndFramesets[22]);
 		int sorcAttackingFrameset = rw.convertUnsignedByteToInt(bonusesAndFramesets[23]);
 		int sorcDungeonWalkFrameset = rw.convertUnsignedByteToInt(bonusesAndFramesets[24]);
@@ -138,7 +138,7 @@ public class CharacterStore {
 		int sorcTownWalkFrameset = rw.convertUnsignedByteToInt(bonusesAndFramesets[30]);
 		int sorc1hAttackSpeed = rw.convertUnsignedByteToInt(bonusesAndFramesets[31]);
 		int sorcCastingSpeed = rw.convertUnsignedByteToInt(bonusesAndFramesets[32]);
-		
+
 		//Creating characters
 		char0 = new Character();
 		char0.setClassName("Warrior");
@@ -162,7 +162,7 @@ public class CharacterStore {
 		char0.setTownWalkFrameset(warriorTownWalkFrameset);
 		char0.setOneHandedAttackSpeed(warrior1hAttackSpeed);
 		char0.setCastingSpeed(warriorCastingSpeed);
-		
+
 		char1 = new Character();
 		char1.setClassName("Rogue");
 		char1.setInitStrength(initRogueStrength);
@@ -185,7 +185,7 @@ public class CharacterStore {
 		char1.setTownWalkFrameset(rogueTownWalkFrameset);
 		char1.setOneHandedAttackSpeed(rogue1hAttackSpeed);
 		char1.setCastingSpeed(rogueCastingSpeed);
-		
+
 		char2 = new Character();
 		char2.setClassName("Sorceror");
 		char2.setInitStrength(initSorcStrength);
@@ -208,12 +208,12 @@ public class CharacterStore {
 		char2.setTownWalkFrameset(sorcTownWalkFrameset);
 		char2.setOneHandedAttackSpeed(sorc1hAttackSpeed);
 		char2.setCastingSpeed(sorcCastingSpeed);
-		
+
 		characters.add(char0);
 		characters.add(char1);
 		characters.add(char2);
 	}
-	
+
 	private byte[] getInitStatBytes(){
 		byte[] startingStats = new byte[48];
 		long warriorInitStrength = char0.getInitStrength();
@@ -278,7 +278,7 @@ public class CharacterStore {
 		startingStats[47] = (byte)(sorcInitVit >>> 24);
 		return startingStats;
 	}
-	
+
 	private byte[] getMaxStatBytes(){
 		byte[] maxStats = new byte[48];
 		long warriorMaxStrength = char0.getMaxStrength();
@@ -343,7 +343,7 @@ public class CharacterStore {
 		maxStats[47] = (byte)(sorcMaxVit >>> 24);
 		return maxStats;
 	}
-	
+
 	private byte[] getBlockingBonusBytes(){
 		byte[] blockingBonuses = new byte[12];
 		long warriorBlockingBonus = char0.getBlockingBonus();
@@ -363,7 +363,7 @@ public class CharacterStore {
 		blockingBonuses[11] = (byte)(sorcBlockingBonus >>> 24);
 		return blockingBonuses;
 	}
-	
+
 	private byte[] getBonusesAndFramesetBytes(){
 		byte[] bonusesAndFramesets = new byte[33];
 		bonusesAndFramesets[0] = (byte) char0.getDungeonIdleFrameset();
@@ -401,13 +401,13 @@ public class CharacterStore {
 		bonusesAndFramesets[32] = (byte) char2.getCastingSpeed();
 		return bonusesAndFramesets;
 	}
-	
+
 	public void getCharactersAsBytes(){
 		byte[] retrievedInitStatBytes = this.getInitStatBytes();
 		byte[] retrievedMaxStatBytes = this.getMaxStatBytes();
 		byte[] retrievedBlockingBonusBytes = this.getBlockingBonusBytes();
 		byte[] retrievedBonusesAndFramesetBytes = this.getBonusesAndFramesetBytes();
-		
+
 		/*
 		System.out.println("ORIG: " + Arrays.toString(startingStats));
 		System.out.println("RETR: " + Arrays.toString(retrievedInitStatBytes));
@@ -431,16 +431,16 @@ public class CharacterStore {
 	}
 
 	public void writeCharactersToEXE() {
-		
+
 		byte[] retrievedInitStatBytes = this.getInitStatBytes();
 		rw.writeBytes(retrievedInitStatBytes, TomeOfKnowledge.MIN_STATS_OFFSET);
-		
+
 		byte[] retrievedMaxStatBytes = this.getMaxStatBytes();
 		rw.writeBytes(retrievedMaxStatBytes, TomeOfKnowledge.MAX_STATS_OFFSET);
-		
+
 		byte[] retrievedBlockingBonusBytes = this.getBlockingBonusBytes();
 		rw.writeBytes(retrievedBlockingBonusBytes, TomeOfKnowledge.BLOCKING_BONUSES_OFFSET);
-		
+
 		byte[] retrievedBonusesAndFramesetBytes = this.getBonusesAndFramesetBytes();
 		rw.writeBytes(retrievedBonusesAndFramesetBytes, TomeOfKnowledge.BONUSES_AND_FRAMESETS_OFFSET);
 	}
@@ -452,14 +452,14 @@ public class CharacterStore {
 	public List<Character> getCharacters() {
 		return characters;
 	}
-	
+
 	void setAllMaxStatsTo255() {
 		for(Character c : characters){
 			c.setMaxDexterity(255);
 			c.setMaxMagic(255);
 			c.setMaxStrength(255);
 			c.setMaxVitality(255);
-		}	
+		}
 	}
 
 	public void setCharZeroStartingSkillBySpellID(int i) {
@@ -492,7 +492,7 @@ public class CharacterStore {
 		rw.writeBytes(bytesToUse, TomeOfKnowledge.CHARACTER_ONE_SKILL_LOC_1);
 		rw.writeBytes(bytesToUse, TomeOfKnowledge.CHARACTER_ONE_SKILL_LOC_2);
 		rw.writeBytes(spellID, TomeOfKnowledge.CHARACTER_ONE_SPELL_LOC_1);
-		
+
 	}
 
 	public void setCharTwoStartingSkillBySpellID(int i) {
