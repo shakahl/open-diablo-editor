@@ -398,8 +398,10 @@ public class BaseItem {
 	private long priceTwo;
 	//private byte[] itemBytes;
 	private int slotNumber;
+	private boolean changed;
 	
 	public BaseItem(int slotNumber, byte[] itemBytes, ReaderWriter rw) {
+		changed = false;
 		this.slotNumber = slotNumber;
 		//this.itemBytes = itemBytes;
 		activationTrigger = rw.convertFourBytesToNumber(itemBytes[0], itemBytes[1], itemBytes[2], itemBytes[3]);
@@ -585,7 +587,8 @@ public class BaseItem {
 
 	public void setActivationTrigger(long activationTrigger) {
 		if(activationTrigger >= 0 && activationTrigger <= 2) {
-			this.activationTrigger = activationTrigger;			
+			this.activationTrigger = activationTrigger;
+			this.setChanged();
 		} else {
 			System.err.println("Error: BaseItem's setActivationTrigger() was"
 					+ " supplied with an argument outside the supported range (0 to 2)");
@@ -598,7 +601,8 @@ public class BaseItem {
 
 	public void setItemType(int itemType) {
 		if(itemType >= 1 && itemType <= 5) {
-			this.itemType = itemType;			
+			this.itemType = itemType;
+			this.setChanged();
 		} else {
 			System.err.println("Error: BaseItem's setItemType() was"
 					+ "supplied with an argument outside the supported range (1 to 5)");
@@ -611,7 +615,8 @@ public class BaseItem {
 
 	public void setEquipLocation(int equipLocation) {
 		if(equipLocation >= 1 && equipLocation <= 7) {
-			this.equipLocation = equipLocation;			
+			this.equipLocation = equipLocation;
+			this.setChanged();
 		} else {
 			System.err.println("Error: BaseItem's setEquipLocation() was"
 					+ "supplied with an argument outside the supported range (1 to 7)");
@@ -625,7 +630,8 @@ public class BaseItem {
 	//range 0 to A8 (168)
 	public void setGraphicValue(long graphicValue) {
 		if(graphicValue >= 0 && graphicValue <= 168) {
-			this.graphicValue = graphicValue;			
+			this.graphicValue = graphicValue;
+			this.setChanged();
 		} else {
 			System.err.println("Error: BaseItem's setGraphicValue() was"
 					+ "supplied with an argument outside the supported range (0 to 168)");
@@ -639,7 +645,8 @@ public class BaseItem {
 	//range 00 to 0D (13)
 	public void setItemCode(int itemCode) {
 		if(itemCode >= 0 && itemCode <= 13){
-			this.itemCode = itemCode;			
+			this.itemCode = itemCode;
+			this.setChanged();
 		} else {
 			System.err.println("Error: BaseItem's setItemCode() was"
 					+ "supplied with an argument outside the supported range (0 to 13)");
@@ -653,7 +660,8 @@ public class BaseItem {
 	//1 to 0x44 (68)
 	public void setUniqueItemCode(int uniqueItemCode) {
 		if(uniqueItemCode >= 1 && uniqueItemCode <= 68){
-			this.uniqueItemCode = uniqueItemCode;			
+			this.uniqueItemCode = uniqueItemCode;
+			this.setChanged();
 		} else {
 			System.err.println("Error: BaseItem's setIniqueItemCode() was"
 					+ "supplied with an argument outside the supported range (0 to 68)");
@@ -667,7 +675,8 @@ public class BaseItem {
 	//1024 to 0x6B1800 (7018496)
 	public void setNamePointer(long namePointer) {
 		if(namePointer >= 1024 && namePointer <= 7018496){
-			this.namePointer = namePointer;			
+			this.namePointer = namePointer;
+			this.setChanged();
 		} else {
 			System.err.println("Error: BaseItem's setNamePointer() was"
 					+ "supplied with an argument outside the supported range (1024 to 7018496)");
@@ -690,7 +699,8 @@ public class BaseItem {
 
 	public void setMagicalNamePointer(long magicalNamePointer) {
 		if(magicalNamePointer >= 1024 && magicalNamePointer <= 7018496){
-			this.magicalNamePointer = magicalNamePointer;			
+			this.magicalNamePointer = magicalNamePointer;
+			this.setChanged();
 		} else {
 			System.err.println("Error: BaseItem's setMagicalNamePointer() was"
 					+ "supplied with an argument outside the supported range (1024 to 7018496)");
@@ -714,7 +724,8 @@ public class BaseItem {
 	//0 to 15
 	public void setQualityLevel(long qualityLevel) {
 		if(qualityLevel >= 0 && qualityLevel <= 15){
-			this.qualityLevel = qualityLevel;			
+			this.qualityLevel = qualityLevel;
+			this.setChanged();
 		} else {
 			System.err.println("Error: BaseItem's setQualityLevel() was"
 					+ "supplied with an argument outside the supported range (0 to 15)");
@@ -727,7 +738,8 @@ public class BaseItem {
 
 	public void setDurability(long durability) {
 		if(durability >= 0 && durability <= 255){
-			this.durability = durability;			
+			this.durability = durability;
+			this.setChanged();
 		} else {
 			System.err.println("Error: BaseItem's setDurability() was"
 					+ "supplied with an argument outside the supported range (0 to 255)");
@@ -740,7 +752,8 @@ public class BaseItem {
 
 	public void setMinAttackDamage(long minAttackDamage) {
 		if(minAttackDamage >= 0 && minAttackDamage <= 255){
-			this.minAttackDamage = minAttackDamage;			
+			this.minAttackDamage = minAttackDamage;
+			this.setChanged();
 		} else {
 			System.err.println("Error: BaseItem's setMinAttackDamage() was"
 					+ "supplied with an argument outside the supported range (0 to 255)");
@@ -753,7 +766,8 @@ public class BaseItem {
 
 	public void setMaxAttackDamage(long maxAttackDamage) {
 		if(maxAttackDamage >= 0 && maxAttackDamage <= 255){
-			this.maxAttackDamage = maxAttackDamage;			
+			this.maxAttackDamage = maxAttackDamage;
+			this.setChanged();
 		} else {
 			System.err.println("Error: BaseItem's setMaxAttackDamage() was"
 					+ "supplied with an argument outside the supported range (0 to 255)");
@@ -766,7 +780,8 @@ public class BaseItem {
 
 	public void setMinAc(long minAc) {
 		if(minAc >= 0 && minAc <= 255){
-			this.minAc = minAc;			
+			this.minAc = minAc;
+			this.setChanged();
 		} else {
 			System.err.println("Error: BaseItem's setMinAc() was"
 					+ "supplied with an argument outside the supported range (0 to 255)");
@@ -779,7 +794,8 @@ public class BaseItem {
 
 	public void setMaxAc(long maxAc) {
 		if(maxAc >= 0 && maxAc <= 255){
-			this.maxAc = maxAc;			
+			this.maxAc = maxAc;
+			this.setChanged();
 		} else {
 			System.err.println("Error: BaseItem's setMaxAc() was"
 					+ "supplied with an argument outside the supported range (0 to 255)");
@@ -792,7 +808,8 @@ public class BaseItem {
 
 	public void setRequiredStr(int requiredStr) {
 		if(requiredStr >= 0 && requiredStr <= 255){
-			this.requiredStr = requiredStr;			
+			this.requiredStr = requiredStr;
+			this.setChanged();
 		} else {
 			System.err.println("Error: BaseItem's setRequiredStr() was"
 					+ "supplied with an argument outside the supported range (0 to 255)");
@@ -805,7 +822,8 @@ public class BaseItem {
 
 	public void setRequiredMag(int requiredMag) {
 		if(requiredMag >= 0 && requiredMag <= 255){
-			this.requiredMag = requiredMag;			
+			this.requiredMag = requiredMag;
+			this.setChanged();
 		} else {
 			System.err.println("Error: BaseItem's setRequiredMag() was"
 					+ "supplied with an argument outside the supported range (0 to 255)");
@@ -818,7 +836,8 @@ public class BaseItem {
 
 	public void setRequiredDex(int requiredDex) {
 		if(requiredDex >= 0 && requiredDex <= 255){
-			this.requiredDex = requiredDex;			
+			this.requiredDex = requiredDex;
+			this.setChanged();
 		} else {
 			System.err.println("Error: BaseItem's setRequiredDex() was"
 					+ "supplied with an argument outside the supported range (0 to 255)");
@@ -831,7 +850,8 @@ public class BaseItem {
 
 	public void setRequiredVit(int requiredVit) {
 		if(requiredVit >= 0 && requiredVit <= 255){
-			this.requiredVit = requiredVit;			
+			this.requiredVit = requiredVit;
+			this.setChanged();
 		} else {
 			System.err.println("Error: BaseItem's setRequiredVit() was"
 					+ "supplied with an argument outside the supported range (0 to 255)");
@@ -844,7 +864,8 @@ public class BaseItem {
 
 	public void setSpecialEffects(long specialEffects) {
 		if(specialEffectCodes.contains((int) specialEffects)){
-			this.specialEffects = specialEffects;			
+			this.specialEffects = specialEffects;
+			this.setChanged();
 		} else {
 			System.err.println("Error: BaseItem's setSpecialEffects() was"
 					+ "supplied with an unsupported argument");
@@ -857,7 +878,8 @@ public class BaseItem {
 
 	public void setMagicCode(long magicCode) {
 		if(magicCode >= 0 && magicCode <= 44){
-			this.magicCode = magicCode;			
+			this.magicCode = magicCode;
+			this.setChanged();
 		} else {
 			System.err.println("Error: BaseItem's setMagicCode() was"
 					+ "supplied with an argument outside the supported range (0 to 44)");
@@ -871,7 +893,11 @@ public class BaseItem {
 	//1 to 24
 	public void setSpellNumber(long spellNumber) {
 		if(spellNumber >= 1 && spellNumber <= 24){
-			this.spellNumber = spellNumber;			
+			this.spellNumber = spellNumber;
+			this.setChanged();
+		} else {
+			System.err.println("Error: BaseItem's setSpellNumber() was"
+					+ "supplied with an argument outside the supported range (1 to 24)");
 		}
 	}
 
@@ -881,7 +907,8 @@ public class BaseItem {
 
 	public void setSingleUseFlag(long singleUseFlag) {
 		if(singleUseFlag == 0 || singleUseFlag == 1){
-			this.singleUseFlag = singleUseFlag;			
+			this.singleUseFlag = singleUseFlag;
+			this.setChanged();
 		} else {
 			System.err.println("Error: BaseItem's setSingleUseFlag() was"
 					+ "supplied with an argument outside the supported range (0 to 1)");
@@ -895,7 +922,8 @@ public class BaseItem {
 	//0 to 999999
 	public void setPriceOne(long priceOne) {
 		if(priceOne >= 0 && priceOne <= 999999){
-			this.priceOne = priceOne;			
+			this.priceOne = priceOne;
+			this.setChanged();
 		} else {
 			System.err.println("Error: BaseItem's setPriceOne() was"
 					+ "supplied with an argument outside the supported range (0 to 999999)");
@@ -908,10 +936,19 @@ public class BaseItem {
 
 	public void setPriceTwo(long priceTwo) {
 		if(priceTwo >= 0 && priceTwo <= 999999){
-			this.priceTwo = priceTwo;			
+			this.priceTwo = priceTwo;	
+			this.setChanged();
 		} else {
 			System.err.println("Error: BaseItem's setPriceTwo() was"
 					+ "supplied with an argument outside the supported range (0 to 999999)");
 		}
+	}
+
+	public boolean isChanged() {
+		return changed;
+	}
+
+	public void setChanged() {
+		this.changed = true;
 	}
 }

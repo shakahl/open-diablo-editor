@@ -83,18 +83,18 @@ public class OpenDiabloEditor {
 		//# NOW WE WRITE TO DIABLO.EXE COPY  #
 		//####################################
 		
-		writeAllData();
+		//writeAllData();
 	}	
 
 	private void writeAllData() {
-		//shrineStore.writeShrinesToEXE();
-		//questStore.writeQuestsToEXE();
-		//spellStore.writeSpellsToEXE();
-		//modifierStore.writeModifiersToEXE();
-		//uniqueItemStore.writeItemsToEXE();
-		//characterStore.writeCharactersToEXE();
-		//baseItemStore.writeItemsToEXE();
-		//baseMonsterStore.writeMonstersToEXE();
-		//uniqueMonsterStore.writeMonstersToEXE();
+		shrineStore.writeShrinesToEXE();
+		questStore.writeQuestsToEXE();
+		spellStore.writeSpellsToEXE();
+		modifierStore.writeModifiersToEXE();
+		uniqueItemStore.writeItemsToEXE();
+		characterStore.writeCharactersToEXE();
+		baseItemStore.writeItemsToEXE();
+		baseMonsterStore.writeMonstersToEXE();
+		uniqueMonsterStore.writeMonstersToEXE();
 	}	
 }
