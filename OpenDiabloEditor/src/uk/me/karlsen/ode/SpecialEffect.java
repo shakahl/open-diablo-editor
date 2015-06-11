@@ -4,7 +4,7 @@ public class SpecialEffect {
 
 	private int refCode;
 	private String description;
-	
+
 	public int getRefCode() {
 		return refCode;
 	}

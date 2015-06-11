@@ -6,7 +6,7 @@ public class ShrinesAsBytes {
 	byte[] minShrineLevelBytes = new byte[TomeOfKnowledge.NUMBER_OF_SHRINES];
 	byte[] maxShrineLevelBytes = new byte[TomeOfKnowledge.NUMBER_OF_SHRINES];
 	byte[] gameTypesInWhichPresentBytes = new byte[TomeOfKnowledge.NUMBER_OF_SHRINES];
-	
+
 	public ShrinesAsBytes(byte[] shrinePointerBytes,
 			byte[] minShrineLevelBytes, byte[] maxShrineLevelBytes,
 			byte[] gameTypesInWhichPresentBytes) {

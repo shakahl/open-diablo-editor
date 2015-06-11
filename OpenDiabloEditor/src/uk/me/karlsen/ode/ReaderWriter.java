@@ -11,7 +11,7 @@ import java.nio.channels.FileChannel;
 public class ReaderWriter {
 
 	RandomAccessFile raf = null;
-	
+
 	public ReaderWriter(boolean readOnly){
 		if(readOnly){
 			File f = new File("input/Diablo.exe");
@@ -22,7 +22,7 @@ public class ReaderWriter {
 				System.exit(-1);
 			}
 		} else {
-			
+
 		}
 			File f = new File("input/Diablo.exe");
 			File newFile = this.createNewFile(f);
@@ -33,7 +33,7 @@ public class ReaderWriter {
 				System.exit(-1);
 			}
 	}
-	
+
 	private File createNewFile(File originalFile) {
 		FileInputStream fis = null;
 		try {
@@ -84,7 +84,7 @@ public class ReaderWriter {
 			System.exit(-1);
 		}
 	}
-	
+
 	public int read(){
 		int read = -1;
 		try {
@@ -95,7 +95,7 @@ public class ReaderWriter {
 		}
 		return read;
 	}
-	
+
 	public byte readByte(){
 		byte read = -1;
 		try {
@@ -106,7 +106,7 @@ public class ReaderWriter {
 		}
 		return read;
 	}
-	
+
 	public byte[] readBytes(int numBytes){
 		byte[] bytes = new byte[numBytes];
 		try {
@@ -117,7 +117,7 @@ public class ReaderWriter {
 		}
 		return bytes;
 	}
-	
+
 	public void writeBytes(byte[] bytes, long pos){
 		try {
 			raf.seek(pos);
@@ -127,7 +127,7 @@ public class ReaderWriter {
 			System.exit(-1);
 		}
 	}
-	
+
 	public void writeOneByteMultipleTimes(byte oneByte, long pos, int numBytes){
 		try {
 			raf.seek(pos);
@@ -142,7 +142,7 @@ public class ReaderWriter {
 			System.exit(-1);
 		}
 	}
-	
+
 	public void writeByte(byte byteValue, long pos){
 		try {
 			raf.seek(pos);
@@ -152,7 +152,7 @@ public class ReaderWriter {
 			System.exit(-1);
 		}
 	}
-	
+
 	//FIXME -- this should not exist
 	public long convertThreeBytesToOffset(int... fourBytes){
 		String byte0 = Integer.toHexString(fourBytes[3] & 0xFF);
@@ -175,7 +175,7 @@ public class ReaderWriter {
 		long value = Long.parseLong(str, 16) - TomeOfKnowledge.DIABLO_POINTERS_OFFSET;
 		return value;
 	}
-	
+
 	//FIXME -- move to BinEditHelper
 	public long convertFourBytesToNumber(int... bytes){
 		String byte0 = Integer.toHexString(bytes[3] & 0xFF);
@@ -198,7 +198,7 @@ public class ReaderWriter {
 		long value = Long.parseLong(str, 16);
 		return value;
 	}
-	
+
 	//FIXME -- move to BinEditHelper
 	public long convertFourBytesToNumber(byte[] holdingArray, int offset){
 		String byte0 = Integer.toHexString(holdingArray[offset+3] & 0xFF);
@@ -221,7 +221,7 @@ public class ReaderWriter {
 		long value = Long.parseLong(str, 16);
 		return value;
 	}
-	
+
 	//FIXME -- move to BinEditHelper
 	public int convertTwoBytesToInt(int... bytes){
 		int value = -1;
@@ -237,7 +237,7 @@ public class ReaderWriter {
 		value = Integer.parseInt(str, 16);
 		return value;
 	}
-	
+
 	//FIXME -- move to BinEditHelper
 	public long convertFourBytesToOffset(int... fourBytes){
 		long value = -1;
@@ -262,7 +262,7 @@ public class ReaderWriter {
 		value = value - TomeOfKnowledge.DIABLO_POINTERS_OFFSET;
 		return value;
 	}
-	
+
 	//FIXME -- move to BinEditHelper
 	public int convertUnsignedByteToInt(byte b){
 		return (int) b & 0xFF;

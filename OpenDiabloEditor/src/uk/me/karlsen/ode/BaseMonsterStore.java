@@ -7,7 +7,7 @@ public class BaseMonsterStore {
 
 	ReaderWriter rw;
 	List<BaseMonster> baseMonsters;
-	
+
 	public BaseMonsterStore(ReaderWriter rw) {
 		this.rw = rw;
 		baseMonsters = new ArrayList<BaseMonster>();
@@ -29,16 +29,16 @@ public class BaseMonsterStore {
 			rw.seek(pos);
 		}
 	}
-	
+
 	public MonsterAsBytes getMonsterAsBytes(int index){
 		return baseMonsters.get(index).getMonsterAsBytes();
 	}
-	
+
 	public void printMonsters() {
 		for(BaseMonster bm : baseMonsters){
 			bm.printMonster();
 		}
-		
+
 	}
 
 	public void writeMonstersToEXE() {

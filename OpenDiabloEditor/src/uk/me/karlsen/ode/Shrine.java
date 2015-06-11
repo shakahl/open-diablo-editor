@@ -9,7 +9,7 @@ public class Shrine {
 	private int gameTypesInWhichPresent;
 	private int shrineIndex;
 	boolean modifiedFromDefault;
-	
+
 	public Shrine(int shrineIndex, String shrineName, long shrinePointer, int minShrineLevel, int maxShrineLevel, int gameTypesInWhichPresent){
 		this.shrineIndex = shrineIndex;
 		this.shrineName = shrineName;
@@ -19,7 +19,7 @@ public class Shrine {
 		this.gameTypesInWhichPresent = gameTypesInWhichPresent;
 		this.modifiedFromDefault = false;
 	}
-	
+
 	public void printShrine() {
 		System.out.println("Shrine index: " + shrineIndex);
 		System.out.println("Shrine name: " + shrineName);
@@ -43,7 +43,7 @@ public class Shrine {
 	public byte getMinShrineLevelByte() {
 		return (byte) minShrineLevel;
 	}
-	
+
 	public byte getMaxShrineLevelByte() {
 		return (byte) maxShrineLevel;
 	}
@@ -56,7 +56,7 @@ public class Shrine {
 		minShrineLevel = i;
 		modifiedFromDefault = true;
 	}
-	
+
 	public void setMaxShrineLevel(int i) {
 		maxShrineLevel = i;
 		modifiedFromDefault = true;

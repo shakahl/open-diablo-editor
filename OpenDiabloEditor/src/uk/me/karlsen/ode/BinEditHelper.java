@@ -5,9 +5,9 @@ import java.util.Arrays;
 public class BinEditHelper {
 
 	public BinEditHelper(){
-		
+
 	}
-	
+
 	public String getNameUsingPointer(long pointer){
 		ReaderWriter rwTemp = new ReaderWriter(true);
 		rwTemp.seek(pointer);
@@ -27,7 +27,7 @@ public class BinEditHelper {
 		}
 		return name;
 	}
-	
+
 	//TODO -- replace/simplify much content from the get<ObjectName>AsBytes methods using this method
 	public void setLongAsFourBytes(long numberToConvert, byte[] destinationArray, int firstDestinationByte){
 		byte[] bytesToSet = new byte[4];

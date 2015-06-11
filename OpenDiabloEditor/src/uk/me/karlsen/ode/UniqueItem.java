@@ -27,7 +27,7 @@ public class UniqueItem {
 	private long minValueSix;
 	private long maxValueSix;
 	//private byte[] itemBytes;
-	
+
 	public UniqueItem(byte[] readIn, ReaderWriter rw){
 		//this.itemBytes = readIn;
 		namePointer = rw.convertFourBytesToOffset(readIn[0], readIn[1], readIn[2], readIn[3]);
@@ -55,7 +55,7 @@ public class UniqueItem {
 		minValueSix = rw.convertFourBytesToNumber(readIn[76], readIn[77], readIn[78], readIn[79]);
 		maxValueSix = rw.convertFourBytesToNumber(readIn[80], readIn[81], readIn[82], readIn[83]);
 	}
-	
+
 	public void printItem() {
 		System.out.println("Name: " + name);
 		System.out.println("Name pointer: " + namePointer);
@@ -73,7 +73,7 @@ public class UniqueItem {
 		System.out.println("Effect six: " + effectsArray[(int) effectSix] +"; " + minValueSix +"; " + effectSix);
 		System.out.println();
 	}
-	
+
 	//TODO -- fix duplicate code
 	private String[] createNewItemEffectsArray() {
 		String[] itemEffects = {
@@ -160,7 +160,7 @@ public class UniqueItem {
 		};
 		return itemEffects;
 	}
-	
+
 	public static String[] createNewItemTypeArray(){
 		String[] uniqueItemTypesArray = {
 			"nullString", //0
@@ -235,7 +235,7 @@ public class UniqueItem {
 		};
 		return uniqueItemTypesArray;
 	}
-	
+
 	//TODO -- refactor duplicate code (is in Spell and ShrinesStore and ItemModifier)
 	private String getNameUsingPointer(long pointer){
 		ReaderWriter rwTemp = new ReaderWriter(true);
@@ -344,11 +344,11 @@ public class UniqueItem {
 		itemAsBytes[81] = (byte) (maxValueSix >>> 8);
 		itemAsBytes[82] = (byte) (maxValueSix >>> 16);
 		itemAsBytes[83] = (byte) (maxValueSix >>> 24);
-		
+
 		//System.out.println("ORIG: " + Arrays.toString(itemBytes));
 		//System.out.println("BACK: " + Arrays.toString(itemAsBytes));
 		//System.out.println();
-		
+
 		return itemAsBytes;
 	}
 
