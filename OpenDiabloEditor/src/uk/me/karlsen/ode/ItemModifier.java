@@ -23,9 +23,9 @@ public class ItemModifier {
 
 	public ItemModifier(byte[] readIn, ReaderWriter rw){
 		this.rw = rw;
-		namePointer = rw.convertFourBytesToOffset(readIn[0], readIn[1], readIn[2], readIn[3]);
-		BinEditHelper nf = new BinEditHelper();
-		name = nf.getNameUsingPointer(namePointer);
+		BinEditHelper beh = new BinEditHelper();
+		namePointer = beh.convertFourBytesToOffset(readIn, 0);
+		name = beh.getNameUsingPointer(namePointer);
 		itemEffects = Arrays.copyOfRange(readIn, 4, 4+TomeOfKnowledge.NUMBER_OF_ITEM_EFFECTS);
 		// ### [ NOTE ] ###
 		//
@@ -62,19 +62,19 @@ public class ItemModifier {
 		// TODO: Update the relevant code to reflect this.
 		//
 		// ### [/ NOTE ] ###
-		minimumEffectValue = rw.convertFourBytesToNumber(readIn[8], readIn[9], readIn[10], readIn[11]);
-		maximumEffectValue = rw.convertFourBytesToNumber(readIn[12], readIn[13], readIn[14], readIn[15]);
-		qualityLevel = rw.convertFourBytesToNumber(readIn[16], readIn[17], readIn[18], readIn[19]);
+		minimumEffectValue = beh.convertFourBytesToNumber(readIn, 8);
+		maximumEffectValue = beh.convertFourBytesToNumber(readIn, 12);
+		qualityLevel = beh.convertFourBytesToNumber(readIn, 16);
 		occurencePossibilities = String.format("%02X", readIn[22]) + String.format("%02X", readIn[21]) + String.format("%02X", readIn[20]);
-		byteTwentyThree = rw.convertUnsignedByteToInt(readIn[23]);
+		byteTwentyThree = beh.convertUnsignedByteToInt(readIn[23]);
 		excludedComboIndicator = String.format("%02X", readIn[31]) + ";" + String.format("%02X", readIn[30]) +
-				";" + String.format("%02X", readIn[29]) + ";" + String.format("%02X", readIn[28]) +
-				";" + String.format("%02X", readIn[27]) + ";" + String.format("%02X", readIn[26]) +
+				";" + String.format("%02X", readIn[29]) + ";" + String.format("%02X", readIn[28]) + 
+				";" + String.format("%02X", readIn[27]) + ";" + String.format("%02X", readIn[26]) + 
 				";" + String.format("%02X", readIn[25]) + ";" + String.format("%02X", readIn[24]);
-		cursedIndicator = rw.convertFourBytesToNumber(readIn[32], readIn[33], readIn[34], readIn[35]);
-		minGold = rw.convertFourBytesToNumber(readIn[36], readIn[37], readIn[38], readIn[39]);
-		maxGold = rw.convertFourBytesToNumber(readIn[40], readIn[41], readIn[42], readIn[43]);
-		valueMultiplier = rw.convertFourBytesToNumber(readIn[44], readIn[45], readIn[46], readIn[47]);
+		cursedIndicator = beh.convertFourBytesToNumber(readIn, 32);
+		minGold = beh.convertFourBytesToNumber(readIn, 36);
+		maxGold = beh.convertFourBytesToNumber(readIn, 40);
+		valueMultiplier = beh.convertFourBytesToNumber(readIn, 44);
 		itemBytes = readIn;
 	}
 

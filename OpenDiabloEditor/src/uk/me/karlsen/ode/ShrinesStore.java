@@ -22,6 +22,8 @@ public class ShrinesStore {
 
 	public void readInShrines(){
 
+		BinEditHelper beh = new BinEditHelper();
+		
 		long[] shrinePointers = new long[TomeOfKnowledge.NUMBER_OF_SHRINES];
 		int[] minShrineLevels = new int[TomeOfKnowledge.NUMBER_OF_SHRINES];
 		int[] maxShrineLevels = new int[TomeOfKnowledge.NUMBER_OF_SHRINES];
@@ -38,7 +40,7 @@ public class ShrinesStore {
 				pos++;
 				rw.seek(pos);
 			}
-			shrinePointers[i] = rw.convertThreeBytesToOffset(pointer);
+			shrinePointers[i] = beh.convertThreeBytesToOffset(pointer);
 		}
 
 		System.out.println();

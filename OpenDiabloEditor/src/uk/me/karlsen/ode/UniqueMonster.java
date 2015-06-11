@@ -56,23 +56,23 @@ public class UniqueMonster {
 
 	public UniqueMonster(byte[] monsterBytes, ReaderWriter rw) {
 		//uniqueBytes = monsterBytes;
-		BinEditHelper nf = new BinEditHelper();
-		monsterType = rw.convertFourBytesToNumber(monsterBytes[0], monsterBytes[1], monsterBytes[2], monsterBytes[3]);
-		namePointer = rw.convertFourBytesToOffset(monsterBytes[4], monsterBytes[5], monsterBytes[6], monsterBytes[7]);
-		name = nf.getNameUsingPointer(namePointer);
-		trnPointer = rw.convertFourBytesToOffset(monsterBytes[8], monsterBytes[9], monsterBytes[10], monsterBytes[11]);
-		trnName = nf.getNameUsingPointer(trnPointer);
-		dungeonLevel = rw.convertTwoBytesToInt(monsterBytes[12], monsterBytes[13]);
-		hitPoints = rw.convertTwoBytesToInt(monsterBytes[14], monsterBytes[15]);
-		monsterAI = rw.convertUnsignedByteToInt(monsterBytes[16]);
-		intelligenceFactor = rw.convertUnsignedByteToInt(monsterBytes[17]);
-		minAttackDmg = rw.convertUnsignedByteToInt(monsterBytes[18]);
-		maxAttackDmg = rw.convertUnsignedByteToInt(monsterBytes[19]);
-		resistances = String.format("%16s", Integer.toBinaryString(rw.convertUnsignedByteToInt(monsterBytes[20]))).replace(' ', '0') + ";" +
-				String.format("%16s", Integer.toBinaryString(rw.convertUnsignedByteToInt(monsterBytes[21]))).replace(' ', '0');
-		packTrigger = rw.convertTwoBytesToInt(monsterBytes[22], monsterBytes[23]);
-		packSpecials = rw.convertFourBytesToNumber(monsterBytes[24], monsterBytes[25], monsterBytes[26], monsterBytes[27]);
-		specialSoundWav = rw.convertFourBytesToNumber(monsterBytes[28], monsterBytes[29], monsterBytes[30], monsterBytes[31]);
+		BinEditHelper beh = new BinEditHelper();
+		monsterType = beh.convertFourBytesToNumber(monsterBytes, 0);
+		namePointer = beh.convertFourBytesToOffset(monsterBytes, 4);
+		name = beh.getNameUsingPointer(namePointer);
+		trnPointer = beh.convertFourBytesToOffset(monsterBytes, 8);
+		trnName = beh.getNameUsingPointer(trnPointer);
+		dungeonLevel = beh.convertTwoBytesToInt(monsterBytes[12], monsterBytes[13]);
+		hitPoints = beh.convertTwoBytesToInt(monsterBytes[14], monsterBytes[15]);
+		monsterAI = beh.convertUnsignedByteToInt(monsterBytes[16]);
+		intelligenceFactor = beh.convertUnsignedByteToInt(monsterBytes[17]);
+		minAttackDmg = beh.convertUnsignedByteToInt(monsterBytes[18]);
+		maxAttackDmg = beh.convertUnsignedByteToInt(monsterBytes[19]);
+		resistances = String.format("%16s", Integer.toBinaryString(beh.convertUnsignedByteToInt(monsterBytes[20]))).replace(' ', '0') + ";" +
+				String.format("%16s", Integer.toBinaryString(beh.convertUnsignedByteToInt(monsterBytes[21]))).replace(' ', '0');
+		packTrigger = beh.convertTwoBytesToInt(monsterBytes[22], monsterBytes[23]);
+		packSpecials = beh.convertFourBytesToNumber(monsterBytes, 24);
+		specialSoundWav = beh.convertFourBytesToNumber(monsterBytes, 28);
 	}
 
 	public void printItem() {

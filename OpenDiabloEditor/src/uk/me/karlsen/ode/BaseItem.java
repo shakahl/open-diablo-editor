@@ -410,147 +410,80 @@ public class BaseItem {
 		changed = false;
 		this.slotNumber = slotNumber;
 		//this.itemBytes = itemBytes;
-		activationTrigger = rw.convertFourBytesToNumber(itemBytes[0], itemBytes[1], itemBytes[2], itemBytes[3]);
-		itemType = rw.convertUnsignedByteToInt(itemBytes[4]);
-		equipLocation = rw.convertUnsignedByteToInt(itemBytes[5]);
-		byteSix = rw.convertUnsignedByteToInt(itemBytes[6]);
-		byteSeven = rw.convertUnsignedByteToInt(itemBytes[7]);
-		graphicValue = rw.convertFourBytesToNumber(itemBytes[8], itemBytes[9], itemBytes[10], itemBytes[11]);
-		itemCode = rw.convertUnsignedByteToInt(itemBytes[12]);
-		uniqueItemCode = rw.convertUnsignedByteToInt(itemBytes[13]);
-		byteFourteen = rw.convertUnsignedByteToInt(itemBytes[14]);
-		byteFifteen = rw.convertUnsignedByteToInt(itemBytes[15]);
-		BinEditHelper nf = new BinEditHelper();
+		BinEditHelper beh = new BinEditHelper();
+		activationTrigger = beh.convertFourBytesToNumber(itemBytes, 0);
+		itemType = beh.convertUnsignedByteToInt(itemBytes[4]);
+		equipLocation = beh.convertUnsignedByteToInt(itemBytes[5]);
+		byteSix = beh.convertUnsignedByteToInt(itemBytes[6]);
+		byteSeven = beh.convertUnsignedByteToInt(itemBytes[7]);
+		graphicValue = beh.convertFourBytesToNumber(itemBytes, 8);
+		itemCode = beh.convertUnsignedByteToInt(itemBytes[12]);
+		uniqueItemCode = beh.convertUnsignedByteToInt(itemBytes[13]);
+		byteFourteen = beh.convertUnsignedByteToInt(itemBytes[14]);
+		byteFifteen = beh.convertUnsignedByteToInt(itemBytes[15]);
 		if((itemBytes[16] + itemBytes[17] + itemBytes[18] + itemBytes[19]) == 0){
 			namePointer = 0;
 			name = "None";
 		} else {
-			namePointer = rw.convertFourBytesToOffset(itemBytes[16], itemBytes[17], itemBytes[18], itemBytes[19]);
-			name = nf.getNameUsingPointer(namePointer);
+			namePointer = beh.convertFourBytesToOffset(itemBytes, 16);
+			name = beh.getNameUsingPointer(namePointer);			
 		}
 		if((itemBytes[20] + itemBytes[21] + itemBytes[22] + itemBytes[23]) == 0){
 			magicalNamePointer = 0;
 			magicalName = "None";
 		} else {
-			magicalNamePointer = rw.convertFourBytesToOffset(itemBytes[20], itemBytes[21], itemBytes[22], itemBytes[23]);
-			magicalName = nf.getNameUsingPointer(magicalNamePointer);
+			magicalNamePointer = beh.convertFourBytesToOffset(itemBytes, 20);
+			magicalName = beh.getNameUsingPointer(magicalNamePointer);
 		}
-		// ### [ NOTE ] ###
-		// qualityLevel occupies only byte itemBytes[24]. The following three
-		// bytes (itemBytes[25], itemBytes[26], itemBytes[27]) are reserved.
-		//
-		// TODO: Update the relevant code to reflect this.
-		// ### [/ NOTE ] ###
-		qualityLevel = rw.convertFourBytesToNumber(itemBytes[24], itemBytes[25], itemBytes[26], itemBytes[27]);
-		durability = rw.convertFourBytesToNumber(itemBytes[28], itemBytes[29], itemBytes[30], itemBytes[31]);
-		minAttackDamage = rw.convertFourBytesToNumber(itemBytes[32], itemBytes[33], itemBytes[34], itemBytes[35]);
-		maxAttackDamage = rw.convertFourBytesToNumber(itemBytes[36], itemBytes[37], itemBytes[38], itemBytes[39]);
-		minAc = rw.convertFourBytesToNumber(itemBytes[40], itemBytes[41], itemBytes[42], itemBytes[43]);
-		maxAc = rw.convertFourBytesToNumber(itemBytes[44], itemBytes[45], itemBytes[46], itemBytes[47]);
-		requiredStr = rw.convertUnsignedByteToInt(itemBytes[48]);
-		requiredMag = rw.convertUnsignedByteToInt(itemBytes[49]);
-		requiredDex = rw.convertUnsignedByteToInt(itemBytes[50]);
-		requiredVit = rw.convertUnsignedByteToInt(itemBytes[51]);
-		specialEffects = rw.convertFourBytesToNumber(itemBytes[52], itemBytes[53], itemBytes[54], itemBytes[55]);
-		magicCode = rw.convertFourBytesToNumber(itemBytes[56], itemBytes[57], itemBytes[58], itemBytes[59]);
-		spellNumber = rw.convertFourBytesToNumber(itemBytes[60], itemBytes[61], itemBytes[62], itemBytes[63]);
-		singleUseFlag = rw.convertFourBytesToNumber(itemBytes[64], itemBytes[65], itemBytes[66], itemBytes[67]);
-		priceOne = rw.convertFourBytesToNumber(itemBytes[68], itemBytes[69], itemBytes[70], itemBytes[71]);
-		priceTwo = rw.convertFourBytesToNumber(itemBytes[72], itemBytes[73], itemBytes[74], itemBytes[75]);
+		qualityLevel = beh.convertFourBytesToNumber(itemBytes, 24);
+		durability = beh.convertFourBytesToNumber(itemBytes, 28);
+		minAttackDamage = beh.convertFourBytesToNumber(itemBytes, 32);
+		maxAttackDamage = beh.convertFourBytesToNumber(itemBytes, 36);
+		minAc = beh.convertFourBytesToNumber(itemBytes, 40);
+		maxAc = beh.convertFourBytesToNumber(itemBytes, 44);
+		requiredStr = beh.convertUnsignedByteToInt(itemBytes[48]);
+		requiredMag = beh.convertUnsignedByteToInt(itemBytes[49]);
+		requiredDex = beh.convertUnsignedByteToInt(itemBytes[50]);
+		requiredVit = beh.convertUnsignedByteToInt(itemBytes[51]);
+		specialEffects = beh.convertFourBytesToNumber(itemBytes, 52);
+		magicCode = beh.convertFourBytesToNumber(itemBytes, 56);
+		spellNumber = beh.convertFourBytesToNumber(itemBytes, 60);
+		singleUseFlag = beh.convertFourBytesToNumber(itemBytes, 64);
+		priceOne = beh.convertFourBytesToNumber(itemBytes, 68);
+		priceTwo = beh.convertFourBytesToNumber(itemBytes, 72);
 	}
 
 	public byte[] getItemAsBytes(){
 		byte[] bytes = new byte[TomeOfKnowledge.BASE_ITEM_LENGTH_IN_BYTES];
-		bytes[0] = (byte)(activationTrigger >>>  0);
-		bytes[1] = (byte)(activationTrigger >>>  8);
-		bytes[2] = (byte)(activationTrigger >>> 16);
-		bytes[3] = (byte)(activationTrigger >>> 24);
-		//System.out.println("Orig: " + itemBytes[0] + "; " + itemBytes[1] + "; " + itemBytes[2] + "; " + itemBytes[3]);
-		//System.out.println("Attempt: " + bytes[0] + "; " + bytes[1] + "; " + bytes[2] + "; " + bytes[3]);
+		BinEditHelper beh = new BinEditHelper();
+		beh.setLongAsFourBytes(activationTrigger, bytes, 0);
 		bytes[4] = (byte) itemType;
 		bytes[5] = (byte) equipLocation;
 		bytes[6] = (byte) byteSix;
 		bytes[7] = (byte) byteSeven;
-		bytes[8] = (byte)(graphicValue >>>  0);
-		bytes[9] = (byte)(graphicValue >>>  8);
-		bytes[10] = (byte)(graphicValue >>> 16);
-		bytes[11] = (byte)(graphicValue >>> 24);
+		beh.setLongAsFourBytes(graphicValue, bytes, 8);
 		bytes[12] = (byte) itemCode;
 		bytes[13] = (byte) uniqueItemCode;
 		bytes[14] = (byte) byteFourteen;
 		bytes[15] = (byte) byteFifteen;
-		long namePointerReverse;
-		if(namePointer == 0){
-			namePointerReverse = 0;
-		} else {
-			namePointerReverse = namePointer + TomeOfKnowledge.DIABLO_POINTERS_OFFSET;
-		}
-		bytes[16] = (byte)(namePointerReverse >>>  0);
-		bytes[17] = (byte)(namePointerReverse >>>  8);
-		bytes[18] = (byte)(namePointerReverse >>> 16);
-		bytes[19] = (byte)(namePointerReverse >>> 24);
-		long magPointerReverse;
-		if(magicalNamePointer == 0){
-			magPointerReverse = 0;
-		} else {
-			magPointerReverse = magicalNamePointer + TomeOfKnowledge.DIABLO_POINTERS_OFFSET;
-		}
-		bytes[20] = (byte)(magPointerReverse >>>  0);
-		bytes[21] = (byte)(magPointerReverse >>>  8);
-		bytes[22] = (byte)(magPointerReverse >>> 16);
-		bytes[23] = (byte)(magPointerReverse >>> 24);
-		bytes[24] = (byte)(qualityLevel >>>  0);
-		bytes[25] = (byte)(qualityLevel >>>  8);
-		bytes[26] = (byte)(qualityLevel >>> 16);
-		bytes[27] = (byte)(qualityLevel >>> 24);
-		bytes[28] = (byte)(durability >>>  0);
-		bytes[29] = (byte)(durability >>>  8);
-		bytes[30] = (byte)(durability >>> 16);
-		bytes[31] = (byte)(durability >>> 24);
-		bytes[32] = (byte)(minAttackDamage >>>  0);
-		bytes[33] = (byte)(minAttackDamage >>>  8);
-		bytes[34] = (byte)(minAttackDamage >>> 16);
-		bytes[35] = (byte)(minAttackDamage >>> 24);
-		bytes[36] = (byte)(maxAttackDamage >>>  0);
-		bytes[37] = (byte)(maxAttackDamage >>>  8);
-		bytes[38] = (byte)(maxAttackDamage >>> 16);
-		bytes[39] = (byte)(maxAttackDamage >>> 24);
-		bytes[40] = (byte)(minAc >>>  0);
-		bytes[41] = (byte)(minAc >>>  8);
-		bytes[42] = (byte)(minAc >>> 16);
-		bytes[43] = (byte)(minAc >>> 24);
-		bytes[44] = (byte)(maxAc >>>  0);
-		bytes[45] = (byte)(maxAc >>>  8);
-		bytes[46] = (byte)(maxAc >>> 16);
-		bytes[47] = (byte)(maxAc >>> 24);
+		beh.setPointerAsFourBytes(namePointer, bytes, 16);
+		beh.setPointerAsFourBytes(magicalNamePointer, bytes, 20);
+		beh.setLongAsFourBytes(qualityLevel, bytes, 24);
+		beh.setLongAsFourBytes(durability, bytes, 28);
+		beh.setLongAsFourBytes(minAttackDamage, bytes, 32);
+		beh.setLongAsFourBytes(maxAttackDamage, bytes, 36);
+		beh.setLongAsFourBytes(minAc, bytes, 40);
+		beh.setLongAsFourBytes(maxAc, bytes, 44);
 		bytes[48] = (byte) requiredStr;
 		bytes[49] = (byte) requiredMag;
 		bytes[50] = (byte) requiredDex;
 		bytes[51] = (byte) requiredVit;
-		bytes[52] = (byte)(specialEffects >>>  0);
-		bytes[53] = (byte)(specialEffects >>>  8);
-		bytes[54] = (byte)(specialEffects >>> 16);
-		bytes[55] = (byte)(specialEffects >>> 24);
-		bytes[56] = (byte)(magicCode >>>  0);
-		bytes[57] = (byte)(magicCode >>>  8);
-		bytes[58] = (byte)(magicCode >>> 16);
-		bytes[59] = (byte)(magicCode >>> 24);
-		bytes[60] = (byte)(spellNumber >>>  0);
-		bytes[61] = (byte)(spellNumber >>>  8);
-		bytes[62] = (byte)(spellNumber >>> 16);
-		bytes[63] = (byte)(spellNumber >>> 24);
-		bytes[64] = (byte)(singleUseFlag >>>  0);
-		bytes[65] = (byte)(singleUseFlag >>>  8);
-		bytes[66] = (byte)(singleUseFlag >>> 16);
-		bytes[67] = (byte)(singleUseFlag >>> 24);
-		bytes[68] = (byte)(priceOne >>>  0);
-		bytes[69] = (byte)(priceOne >>>  8);
-		bytes[70] = (byte)(priceOne >>> 16);
-		bytes[71] = (byte)(priceOne >>> 24);
-		bytes[72] = (byte)(priceTwo >>>  0);
-		bytes[73] = (byte)(priceTwo >>>  8);
-		bytes[74] = (byte)(priceTwo >>> 16);
-		bytes[75] = (byte)(priceTwo >>> 24);
+		beh.setLongAsFourBytes(specialEffects, bytes, 52);
+		beh.setLongAsFourBytes(magicCode, bytes, 56);
+		beh.setLongAsFourBytes(spellNumber, bytes, 60);
+		beh.setLongAsFourBytes(singleUseFlag, bytes, 64);
+		beh.setLongAsFourBytes(priceOne, bytes, 68);
+		beh.setLongAsFourBytes(priceTwo, bytes, 72);
 		//System.out.println("ORIG: " + Arrays.toString(itemBytes));
 		//System.out.println("BACK: " + Arrays.toString(bytes));
 		//System.out.println();

@@ -30,36 +30,37 @@ public class UniqueItem {
 
 	public UniqueItem(byte[] readIn, ReaderWriter rw){
 		//this.itemBytes = readIn;
-		namePointer = rw.convertFourBytesToOffset(readIn[0], readIn[1], readIn[2], readIn[3]);
+		BinEditHelper beh = new BinEditHelper();
+		namePointer = beh.convertFourBytesToOffset(readIn, 0);
 		name = this.getNameUsingPointer(namePointer);
-		itemType = rw.convertUnsignedByteToInt(readIn[4]);
-		qualityLevel = rw.convertUnsignedByteToInt(readIn[5]);
-		numberOfEffects = rw.convertTwoBytesToInt(readIn[6], readIn[7]);
-		goldValue = rw.convertFourBytesToNumber(readIn[8], readIn[9], readIn[10], readIn[11]);
-		effectOne = rw.convertFourBytesToNumber(readIn[12], readIn[13], readIn[14], readIn[15]);
-		minValueOne = rw.convertFourBytesToNumber(readIn[16], readIn[17], readIn[18], readIn[19]);
-		maxValueOne = rw.convertFourBytesToNumber(readIn[20], readIn[21], readIn[22], readIn[23]);
-		effectTwo = rw.convertFourBytesToNumber(readIn[24], readIn[25], readIn[26], readIn[27]);
-		minValueTwo = rw.convertFourBytesToNumber(readIn[28], readIn[29], readIn[30], readIn[31]);
-		maxValueTwo = rw.convertFourBytesToNumber(readIn[32], readIn[33], readIn[34], readIn[35]);
-		effectThree = rw.convertFourBytesToNumber(readIn[36], readIn[37], readIn[38], readIn[39]);
-		minValueThree = rw.convertFourBytesToNumber(readIn[40], readIn[41], readIn[42], readIn[43]);
-		maxValueThree = rw.convertFourBytesToNumber(readIn[44], readIn[45], readIn[46], readIn[47]);
-		effectFour = rw.convertFourBytesToNumber(readIn[48], readIn[49], readIn[50], readIn[51]);
-		minValueFour = rw.convertFourBytesToNumber(readIn[52], readIn[53], readIn[54], readIn[55]);
-		maxValueFour = rw.convertFourBytesToNumber(readIn[56], readIn[57], readIn[58], readIn[59]);
-		effectFive = rw.convertFourBytesToNumber(readIn[60], readIn[61], readIn[62], readIn[63]);
-		minValueFive = rw.convertFourBytesToNumber(readIn[64], readIn[65], readIn[66], readIn[67]);
-		maxValueFive = rw.convertFourBytesToNumber(readIn[68], readIn[69], readIn[70], readIn[71]);
-		effectSix = rw.convertFourBytesToNumber(readIn[72], readIn[73], readIn[74], readIn[75]);
-		minValueSix = rw.convertFourBytesToNumber(readIn[76], readIn[77], readIn[78], readIn[79]);
-		maxValueSix = rw.convertFourBytesToNumber(readIn[80], readIn[81], readIn[82], readIn[83]);
+		itemType = beh.convertUnsignedByteToInt(readIn[4]);
+		qualityLevel = beh.convertUnsignedByteToInt(readIn[5]);
+		numberOfEffects = beh.convertTwoBytesToInt(readIn[6], readIn[7]);
+		goldValue = beh.convertFourBytesToNumber(readIn, 8);
+		effectOne = beh.convertFourBytesToNumber(readIn, 12);
+		minValueOne = beh.convertFourBytesToNumber(readIn, 16);
+		maxValueOne = beh.convertFourBytesToNumber(readIn, 20);
+		effectTwo = beh.convertFourBytesToNumber(readIn, 24);
+		minValueTwo = beh.convertFourBytesToNumber(readIn, 28);
+		maxValueTwo = beh.convertFourBytesToNumber(readIn, 32);
+		effectThree = beh.convertFourBytesToNumber(readIn, 36);
+		minValueThree = beh.convertFourBytesToNumber(readIn, 40);
+		maxValueThree = beh.convertFourBytesToNumber(readIn, 44);
+		effectFour = beh.convertFourBytesToNumber(readIn, 48);
+		minValueFour = beh.convertFourBytesToNumber(readIn, 52);
+		maxValueFour = beh.convertFourBytesToNumber(readIn, 56);
+		effectFive = beh.convertFourBytesToNumber(readIn, 60);
+		minValueFive = beh.convertFourBytesToNumber(readIn, 64);
+		maxValueFive = beh.convertFourBytesToNumber(readIn, 68);
+		effectSix = beh.convertFourBytesToNumber(readIn, 72);
+		minValueSix = beh.convertFourBytesToNumber(readIn, 76);
+		maxValueSix = beh.convertFourBytesToNumber(readIn, 80);
 	}
 
 	public void printItem() {
 		System.out.println("Name: " + name);
 		System.out.println("Name pointer: " + namePointer);
-		String[] itemTypesArray = this.createNewItemTypeArray();
+		String[] itemTypesArray = UniqueItem.createNewItemTypeArray();
 		System.out.println("Item type: " + itemTypesArray[itemType]);
 		System.out.println("Quality level: " + qualityLevel);
 		System.out.println("Number of effects: " + numberOfEffects);

@@ -305,16 +305,17 @@ public class Quest {
 
 	public Quest(int indexValue, byte[] questBytes, ReaderWriter rw){
 		this.slotNumber = indexValue;
-		dungeonLevelSingle = rw.convertUnsignedByteToInt(questBytes[0]);
-		dungeonLevelMulti = rw.convertUnsignedByteToInt(questBytes[1]);
-		dungeonType = rw.convertUnsignedByteToInt(questBytes[2]);
-		questNumber = rw.convertUnsignedByteToInt(questBytes[3]);
-		byteFourValue = rw.convertUnsignedByteToInt(questBytes[4]);
-		specialLevel = rw.convertUnsignedByteToInt(questBytes[5]); //SP only
-		zeroOne = rw.convertUnsignedByteToInt(questBytes[6]);
-		zeroTwo = rw.convertUnsignedByteToInt(questBytes[7]);
-		mpTriggerFlag = rw.convertFourBytesToNumber(questBytes[8], questBytes[9], questBytes[10], questBytes[11]);
-		textEntryIDX = rw.convertFourBytesToNumber(questBytes[12], questBytes[13], questBytes[14], questBytes[15]);
+		BinEditHelper beh = new BinEditHelper();
+		dungeonLevelSingle = beh.convertUnsignedByteToInt(questBytes[0]);
+		dungeonLevelMulti = beh.convertUnsignedByteToInt(questBytes[1]);
+		dungeonType = beh.convertUnsignedByteToInt(questBytes[2]);
+		questNumber = beh.convertUnsignedByteToInt(questBytes[3]);
+		byteFourValue = beh.convertUnsignedByteToInt(questBytes[4]);
+		specialLevel = beh.convertUnsignedByteToInt(questBytes[5]); //SP only
+		zeroOne = beh.convertUnsignedByteToInt(questBytes[6]);
+		zeroTwo = beh.convertUnsignedByteToInt(questBytes[7]);
+		mpTriggerFlag = beh.convertFourBytesToNumber(questBytes, 8);
+		textEntryIDX = beh.convertFourBytesToNumber(questBytes, 12);
 		this.questBytes = questBytes;
 	}
 

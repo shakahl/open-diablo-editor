@@ -34,19 +34,20 @@ public class Spell {
 	int index;
 
 	public Spell(int index, byte[] byteArray, ReaderWriter rw) {
-		this.index = index+1; //spell index starts from 1, loop in SpellsStore starts from 0
 		if(byteArray.length != 56){
 			System.err.println("byteArray supplied to Spell constructor of incorrect length (not 56).");
 			System.exit(-1);
 		}
+		this.index = index+1; //spell index starts from 1, loop in SpellsStore starts from 0
+		BinEditHelper beh = new BinEditHelper();
 		//this.spellBytes = byteArray;
-		unmoddedSpellIndex = rw.convertUnsignedByteToInt(byteArray[0]);
-		manaToCast = rw.convertUnsignedByteToInt(byteArray[1]);
-		animationWhenCasting = rw.convertTwoBytesToInt(byteArray[2], byteArray[3]);
-		pointerToNameAsSpell = rw.convertFourBytesToOffset(byteArray[4], byteArray[5], byteArray[6], byteArray[7]);
+		unmoddedSpellIndex = beh.convertUnsignedByteToInt(byteArray[0]);
+		manaToCast = beh.convertUnsignedByteToInt(byteArray[1]);
+		animationWhenCasting = beh.convertTwoBytesToInt(byteArray[2], byteArray[3]);
+		pointerToNameAsSpell = beh.convertFourBytesToOffset(byteArray, 4);
 		nameAsSpell = getNameUsingPointer(pointerToNameAsSpell);
 		if(byteArray[8] + byteArray[9] + byteArray[10] + byteArray[11] > 0){
-			pointerToNameAsSkill = rw.convertFourBytesToOffset(byteArray[8], byteArray[9], byteArray[10], byteArray[11]);
+			pointerToNameAsSkill = beh.convertFourBytesToOffset(byteArray, 8);
 		} else {
 			pointerToNameAsSkill = 0; //sometimes pointer is 00000000 and therefore useless
 		}
@@ -61,27 +62,27 @@ public class Spell {
 		if((pointerToNameAsSpell == 0) && (pointerToNameAsSkill != 0)){
 			pointerToNameAsSpell = pointerToNameAsSkill;
 		}
-		spellbookQuality = rw.convertFourBytesToNumber(byteArray[12], byteArray[13], byteArray[14], byteArray[15]);
-		staffQuality = rw.convertFourBytesToNumber(byteArray[16], byteArray[17], byteArray[18], byteArray[19]);
-		byteTwenty = rw.convertUnsignedByteToInt(byteArray[20]);
-		byteTwentyone = rw.convertUnsignedByteToInt(byteArray[21]);
-		byteTwentytwo = rw.convertUnsignedByteToInt(byteArray[22]);
-		byteTwentythree = rw.convertUnsignedByteToInt(byteArray[23]);
-		spellActiveInTown = rw.convertFourBytesToNumber(byteArray[24], byteArray[25], byteArray[26], byteArray[27]);
-		baseRequiredMagic = rw.convertFourBytesToNumber(byteArray[28], byteArray[29], byteArray[30], byteArray[31]);
-		castingSound = rw.convertUnsignedByteToInt(byteArray[32]);
+		spellbookQuality = beh.convertFourBytesToNumber(byteArray, 12);
+		staffQuality = beh.convertFourBytesToNumber(byteArray, 16);
+		byteTwenty = beh.convertUnsignedByteToInt(byteArray[20]);
+		byteTwentyone = beh.convertUnsignedByteToInt(byteArray[21]);
+		byteTwentytwo = beh.convertUnsignedByteToInt(byteArray[22]);
+		byteTwentythree = beh.convertUnsignedByteToInt(byteArray[23]);
+		spellActiveInTown = beh.convertFourBytesToNumber(byteArray, 24);
+		baseRequiredMagic = beh.convertFourBytesToNumber(byteArray, 28);
+		castingSound = beh.convertUnsignedByteToInt(byteArray[32]);
 		spellEffects = new byte[3];
 		spellEffects[0] = byteArray[33];
 		spellEffects[1] = byteArray[34];
 		spellEffects[2] = byteArray[35];
-		manaStep = rw.convertUnsignedByteToInt(byteArray[36]);
-		minCastingCost = rw.convertUnsignedByteToInt(byteArray[37]);
-		byteThirtyEight = rw.convertUnsignedByteToInt(byteArray[38]);
-		byteThirtyNine = rw.convertUnsignedByteToInt(byteArray[39]);
-		minCharges = rw.convertFourBytesToNumber(byteArray[40], byteArray[41], byteArray[42], byteArray[43]);
-		maxCharges = rw.convertFourBytesToNumber(byteArray[44], byteArray[45], byteArray[46], byteArray[47]);
-		bookCost = rw.convertFourBytesToNumber(byteArray[48], byteArray[49], byteArray[50], byteArray[51]);
-		staffCostMultiplier = rw.convertFourBytesToNumber(byteArray[52], byteArray[53], byteArray[54], byteArray[55]);
+		manaStep = beh.convertUnsignedByteToInt(byteArray[36]);
+		minCastingCost = beh.convertUnsignedByteToInt(byteArray[37]);
+		byteThirtyEight = beh.convertUnsignedByteToInt(byteArray[38]);
+		byteThirtyNine = beh.convertUnsignedByteToInt(byteArray[39]);
+		minCharges = beh.convertFourBytesToNumber(byteArray, 40);
+		maxCharges = beh.convertFourBytesToNumber(byteArray, 44);
+		bookCost = beh.convertFourBytesToNumber(byteArray, 48);
+		staffCostMultiplier = beh.convertFourBytesToNumber(byteArray, 52);
 	}
 
 	//TODO -- refactor duplicate code (is in Spell and ShrinesStore)

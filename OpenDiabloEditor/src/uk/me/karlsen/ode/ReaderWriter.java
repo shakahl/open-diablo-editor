@@ -128,6 +128,7 @@ public class ReaderWriter {
 		}
 	}
 
+	/*TODO: Transferred to BinEditHelper in my edit -- confirm no conflict with mewmew's edit...
 	public void writeOneByteMultipleTimes(byte oneByte, long pos, int numBytes){
 		try {
 			raf.seek(pos);
@@ -267,4 +268,5 @@ public class ReaderWriter {
 	public int convertUnsignedByteToInt(byte b){
 		return (int) b & 0xFF;
 	}
+	*/
 }
