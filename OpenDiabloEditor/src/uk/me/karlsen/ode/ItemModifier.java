@@ -5,7 +5,7 @@ import java.util.Arrays;
 public class ItemModifier {
 
 	ReaderWriter rw = null;
-	
+
 	private long namePointer;
 	private String name;
 	private byte[] itemEffects;
@@ -20,21 +20,56 @@ public class ItemModifier {
 	private long maxGold;
 	private long valueMultiplier;
 	private byte[] itemBytes;
-	
+
 	public ItemModifier(byte[] readIn, ReaderWriter rw){
 		this.rw = rw;
 		namePointer = rw.convertFourBytesToOffset(readIn[0], readIn[1], readIn[2], readIn[3]);
 		BinEditHelper nf = new BinEditHelper();
 		name = nf.getNameUsingPointer(namePointer);
 		itemEffects = Arrays.copyOfRange(readIn, 4, 4+TomeOfKnowledge.NUMBER_OF_ITEM_EFFECTS);
+		// ### [ NOTE ] ###
+		//
+		// Each item effect has a dedicated minimum and maximum value. It would
+		// make sence to create a dedicated class (perhaps called ItemEffect)
+		// which contained the following three fields:
+		//
+		//    itemEffect
+		//    minimumEffectValue
+		//    maximumEffectValue
+		//
+		// The reason for creating a dedicated class for this, is that it is used
+		// by other parts of the game; e.g. UniqueItem contains the following:
+		//
+		//    private long effectOne;
+		//    private long minValueOne;
+		//    private long maxValueOne;
+		//    private long effectTwo;
+		//    private long minValueTwo;
+		//    private long maxValueTwo;
+		//    private long effectThree;
+		//    private long minValueThree;
+		//    private long maxValueThree;
+		//    private long effectFour;
+		//    private long minValueFour;
+		//    private long maxValueFour;
+		//    private long effectFive;
+		//    private long minValueFive;
+		//    private long maxValueFive;
+		//    private long effectSix;
+		//    private long minValueSix;
+		//    private long maxValueSix;
+		//
+		// TODO: Update the relevant code to reflect this.
+		//
+		// ### [/ NOTE ] ###
 		minimumEffectValue = rw.convertFourBytesToNumber(readIn[8], readIn[9], readIn[10], readIn[11]);
 		maximumEffectValue = rw.convertFourBytesToNumber(readIn[12], readIn[13], readIn[14], readIn[15]);
 		qualityLevel = rw.convertFourBytesToNumber(readIn[16], readIn[17], readIn[18], readIn[19]);
 		occurencePossibilities = String.format("%02X", readIn[22]) + String.format("%02X", readIn[21]) + String.format("%02X", readIn[20]);
 		byteTwentyThree = rw.convertUnsignedByteToInt(readIn[23]);
 		excludedComboIndicator = String.format("%02X", readIn[31]) + ";" + String.format("%02X", readIn[30]) +
-				";" + String.format("%02X", readIn[29]) + ";" + String.format("%02X", readIn[28]) + 
-				";" + String.format("%02X", readIn[27]) + ";" + String.format("%02X", readIn[26]) + 
+				";" + String.format("%02X", readIn[29]) + ";" + String.format("%02X", readIn[28]) +
+				";" + String.format("%02X", readIn[27]) + ";" + String.format("%02X", readIn[26]) +
 				";" + String.format("%02X", readIn[25]) + ";" + String.format("%02X", readIn[24]);
 		cursedIndicator = rw.convertFourBytesToNumber(readIn[32], readIn[33], readIn[34], readIn[35]);
 		minGold = rw.convertFourBytesToNumber(readIn[36], readIn[37], readIn[38], readIn[39]);
@@ -42,7 +77,7 @@ public class ItemModifier {
 		valueMultiplier = rw.convertFourBytesToNumber(readIn[44], readIn[45], readIn[46], readIn[47]);
 		itemBytes = readIn;
 	}
-	
+
 	public byte[] getModifierAsBytes(){
 		byte[] modifierAsBytes = new byte[48];
 		long namePointerRev = namePointer + TomeOfKnowledge.DIABLO_POINTERS_OFFSET;
@@ -98,14 +133,14 @@ public class ItemModifier {
 		modifierAsBytes[45] = (byte)(valueMultiplier >>> 8);
 		modifierAsBytes[46] = (byte)(valueMultiplier >>> 16);
 		modifierAsBytes[47] = (byte)(valueMultiplier >>> 24);
-		
+
 		//System.out.println("ORIG: " + Arrays.toString(itemBytes));
 		//System.out.println("BACK: " + Arrays.toString(modifierAsBytes));
 		//System.out.println();
-		
+
 		return modifierAsBytes;
 	}
-	
+
 	public void printModifier(){
 		System.out.println("Modifier name: " + name);
 		System.out.println("Modifier name pointer: " + namePointer);
