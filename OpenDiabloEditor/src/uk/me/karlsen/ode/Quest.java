@@ -18,7 +18,7 @@ public class Quest {
 		"Caves",     // 3
 		"Hell"       // 4
 		             // -1 (0xFF) = "None"
-	}
+	};
 
 	String[] textEntries = {
 		// ### [ NOTE ] ###
@@ -288,7 +288,7 @@ public class Quest {
 		"Glory And Approbation To Diablo Lord Of Terror And Leader Of T",
 		"Hail And Sacrifice To Diablo Lord Of Terror And Destroyer Of S",
 		"Thank Goodness You Ve Returned Much Has Changed Since You Lived"
-	}
+	};
 
 	private int dungeonLevelSingle;
 	private int dungeonLevelMulti;
@@ -331,7 +331,7 @@ public class Quest {
 		System.out.println("Zero: " + zeroOne);
 		System.out.println("Zero: " + zeroTwo);
 		System.out.println("Multi player trigger flag: " + mpTriggerFlag);
-		System.out.println("Text entry IDX: `" + textEntries[textEntryIDX] + "`");
+		System.out.println("Text entry IDX: `" + textEntries[(int) textEntryIDX] + "`");
 		System.out.println();
 	}
 

@@ -35,7 +35,7 @@ public class UniqueMonster {
 		"Unique Succubus",
 		"Lachdanan",
 		"Warlord of Blood"
-	}
+	};
 
 	private long monsterType;
 	private long namePointer;

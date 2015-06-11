@@ -574,7 +574,7 @@ public class BaseItem {
 		System.out.println("Unique item code: " + uniqueItemCodes[uniqueItemCode]);
 		System.out.println("Byte fourteen: " + byteFourteen);
 		System.out.println("Byte fifteen: " + byteFifteen);
-		System.out.println("Quality level: " + qualityLevels[qualityLevel]);
+		System.out.println("Quality level: " + qualityLevels[(int) qualityLevel]);
 		System.out.println("Durability: " + durability);
 		System.out.println("Min attack damage: " + minAttackDamage);
 		System.out.println("Max attack damage: " + maxAttackDamage);

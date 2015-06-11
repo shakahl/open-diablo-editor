@@ -7,7 +7,7 @@ public class Spell {
 
 	private int unmoddedSpellIndex;
 	private int manaToCast;
-	private int animatiyonWhenCasting;
+	private int animationWhenCasting;
 	private long pointerToNameAsSpell;
 	private String nameAsSpell;
 	private long pointerToNameAsSkill;
@@ -216,9 +216,9 @@ public class Spell {
 			"Resurrect (sun ray)", //3E
 			"Bone Spirit", // 3F
 			"charged bolt..small...on caster..no damage", //40
-			"Unholy Altar portal (no effect)"//41
-			"Apocalypse Fireplar?"//42
-			"Apocalypse Fireplar?"//43
+			"Unholy Altar portal (no effect)",//41
+			"Apocalypse Fireplar?",//42
+			"Apocalypse Fireplar?" //43
 		};
 		return spellEffects;
 	}
