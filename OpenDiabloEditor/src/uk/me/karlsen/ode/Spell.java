@@ -45,14 +45,14 @@ public class Spell {
 		manaToCast = beh.convertUnsignedByteToInt(byteArray[1]);
 		animationWhenCasting = beh.convertTwoBytesToInt(byteArray[2], byteArray[3]);
 		pointerToNameAsSpell = beh.convertFourBytesToOffset(byteArray, 4);
-		nameAsSpell = getNameUsingPointer(pointerToNameAsSpell);
+		nameAsSpell = beh.getNameUsingPointer(pointerToNameAsSpell);
 		if(byteArray[8] + byteArray[9] + byteArray[10] + byteArray[11] > 0){
 			pointerToNameAsSkill = beh.convertFourBytesToOffset(byteArray, 8);
 		} else {
 			pointerToNameAsSkill = 0; //sometimes pointer is 00000000 and therefore useless
 		}
 		if(pointerToNameAsSkill != 0){
-			nameAsSkill = getNameUsingPointer(pointerToNameAsSkill);
+			nameAsSkill = beh.getNameUsingPointer(pointerToNameAsSkill);
 		} else {
 			nameAsSkill = "not set";
 		}
@@ -90,22 +90,6 @@ public class Spell {
 		if((pointerToNameAsSpell == 0) && (pointerToNameAsSkill != 0)){
 			pointerToNameAsSpell = pointerToNameAsSkill;
 		}
-	}
-
-	//TODO -- refactor duplicate code (is in Spell and ShrinesStore)
-	private String getNameUsingPointer(long pointer){
-		ReaderWriter rwTemp = new ReaderWriter(true);
-		rwTemp.seek(pointer);
-		byte[] bytes = rwTemp.readBytes(20);
-		int endByte = -1;
-		for(int i = 0; i < bytes.length; i++){
-			if(bytes[i] == 0){
-				endByte = i;
-				break;
-			}
-		}
-		String name = new String(bytes, 0, endByte);
-		return name;
 	}
 
 	//Important note: Gap bytes are 32, whereas end-of-strings are 0

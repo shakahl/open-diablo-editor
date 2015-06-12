@@ -20,7 +20,7 @@ public class UniqueItem {
 		BinEditHelper beh = new BinEditHelper();
 		itemEffects = new ArrayList<ItemEffect>();
 		namePointer = beh.convertFourBytesToOffset(readIn, 0);
-		name = this.getNameUsingPointer(namePointer);
+		name = beh.getNameUsingPointer(namePointer);
 		itemType = beh.convertUnsignedByteToInt(readIn[4]);
 		qualityLevel = beh.convertUnsignedByteToInt(readIn[5]);
 		numberOfEffects = beh.convertTwoBytesToInt(readIn[6], readIn[7]);
@@ -207,27 +207,6 @@ public class UniqueItem {
 			"Staff of Lazarus" //44
 		};
 		return uniqueItemTypesArray;
-	}
-
-	//TODO -- refactor duplicate code (is in Spell and ShrinesStore and ItemModifier)
-	private String getNameUsingPointer(long pointer){
-		ReaderWriter rwTemp = new ReaderWriter(true);
-		rwTemp.seek(pointer);
-		byte[] bytes = rwTemp.readBytes(20);
-		int endByte = -1;
-		for(int i = 0; i < bytes.length; i++){
-			if(bytes[i] == 0){
-				endByte = i;
-				break;
-			}
-		}
-		String name;
-		if(endByte == -1){
-			name = "";
-		} else {
-			name = new String(bytes, 0, endByte);
-		}
-		return name;
 	}
 
 	public byte[] getItemAsBytes() {
