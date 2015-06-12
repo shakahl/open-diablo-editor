@@ -49,9 +49,9 @@ public class OpenDiabloEditor {
 		//spellStore.printSpells();
 		//shrineStore.printShrines();
 		//modifierStore.printModifiers();
-		uniqueItemStore.printItems();
+		//uniqueItemStore.printItems();
 		//characterStore.printCharacters();
-		//baseItemStore.printItems();
+		baseItemStore.printItems();
 		//baseMonsterStore.printMonsters();
 		//uniqueMonsterStore.printUniques();
 

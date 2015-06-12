@@ -7,21 +7,24 @@ public class BinEditHelper {
 	}
 
 	public String getNameUsingPointer(long pointer){
-		ReaderWriter rwTemp = new ReaderWriter(true);
-		rwTemp.seek(pointer);
-		byte[] bytes = rwTemp.readBytes(40);
-		int endByte = -1;
-		for(int i = 0; i < bytes.length; i++){
-			if(bytes[i] == 0){
-				endByte = i;
-				break;
+		String name = "Unnamed";
+		if(pointer > 0){
+			ReaderWriter rwTemp = new ReaderWriter(true);
+			rwTemp.seek(pointer);
+			byte[] bytes = rwTemp.readBytes(40);
+			int endByte = -1;
+			for(int i = 0; i < bytes.length; i++){
+				if(bytes[i] == 0){
+					endByte = i;
+					break;
+				}
 			}
-		}
-		String name;
-		if(endByte == -1){
-			name = "nullString";
-		} else {
-			name = new String(bytes, 0, endByte);
+			
+			if(endByte == -1){
+				name = "Could Not Retrieve Name String";
+			} else {
+				name = new String(bytes, 0, endByte);
+			}
 		}
 		return name;
 	}
@@ -138,7 +141,9 @@ public class BinEditHelper {
 	//FIXME -- move to BinEditHelper
 	public long convertFourBytesToOffset(byte[] holdingArray, int offset){
 		long value = this.convertFourBytesToNumber(holdingArray, offset);
-		value = value - TomeOfKnowledge.DIABLO_POINTERS_OFFSET;
+		if(value != 0){
+			value = value - TomeOfKnowledge.DIABLO_POINTERS_OFFSET;			
+		}
 		return value;
 	}
 	

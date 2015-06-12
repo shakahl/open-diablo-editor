@@ -59,45 +59,46 @@ public class TomeOfKnowledge {
 
 	static String[] createSpellNamesArray(){
 		String[] spellNames = new String[37];
-		spellNames[0] = "none";
-		spellNames[1] = "Firebolt";
-		spellNames[2] = "Healing";
-		spellNames[3] = "Lightning";
-		spellNames[4] = "Flash";
-		spellNames[5] = "Identify";
-		spellNames[6] = "Fire Wall";
-		spellNames[7] = "Town Portal";
-		spellNames[8] = "Stone Curse";
-		spellNames[9] = "Infravision";
-		spellNames[10] = "Phasing";
-		spellNames[11] = "Mana Shield";
-		spellNames[12] = "Fireball";
-		spellNames[13] = "Guardian";
-		spellNames[14] = "Chain Lightning";
-		spellNames[15] = "Flame Wave";
-		spellNames[16] = "Doom Serpents";
-		spellNames[17] = "Blood Ritual";
-		spellNames[18] = "Nova";
-		spellNames[19] = "Invisibility";
-		spellNames[20] = "Inferno";
-		spellNames[21] = "Golem";
-		spellNames[22] = "Blood Boil";
-		spellNames[23] = "Teleport";
-		spellNames[24] = "Apocalypse";
-		spellNames[25] = "Etherealize";
-		spellNames[26] = "Item Repair";
-		spellNames[27] = "Staff recharge";
-		spellNames[28] = "Trap Disarm";
-		spellNames[29] = "Elemental";
-		spellNames[30] = "Charged Bolt";
-		spellNames[31] = "Holy Bolt";
-		spellNames[32] = "Resurrect";
-		spellNames[33] = "Telekinesis";
-		spellNames[34] = "Heal Other";
-		spellNames[35] = "Blood Star";
-		spellNames[36] = "Bone Spirit";
+		spellNames[0] = "none";				//00
+		spellNames[1] = "Firebolt";			//01
+		spellNames[2] = "Healing";			//02
+		spellNames[3] = "Lightning";		//03
+		spellNames[4] = "Flash";			//04
+		spellNames[5] = "Identify";			//05
+		spellNames[6] = "Fire Wall";		//06
+		spellNames[7] = "Town Portal";		//07
+		spellNames[8] = "Stone Curse";		//08
+		spellNames[9] = "Infravision";		//09
+		spellNames[10] = "Phasing";			//0A
+		spellNames[11] = "Mana Shield";		//0B
+		spellNames[12] = "Fireball";		//0C
+		spellNames[13] = "Guardian";		//0D
+		spellNames[14] = "Chain Lightning";	//0E
+		spellNames[15] = "Flame Wave";		//0F
+		spellNames[16] = "Doom Serpents";	//10
+		spellNames[17] = "Blood Ritual";	//11
+		spellNames[18] = "Nova";			//12
+		spellNames[19] = "Invisibility";	//13
+		spellNames[20] = "Inferno";			//14
+		spellNames[21] = "Golem";			//15
+		spellNames[22] = "Blood Boil";		//16
+		spellNames[23] = "Teleport";		//17
+		spellNames[24] = "Apocalypse";		//18
+		spellNames[25] = "Etherealize";		//19
+		spellNames[26] = "Item Repair";		//1A
+		spellNames[27] = "Staff recharge";	//1B
+		spellNames[28] = "Trap Disarm";		//1C
+		spellNames[29] = "Elemental";		//1D
+		spellNames[30] = "Charged Bolt";	//1E
+		spellNames[31] = "Holy Bolt";		//1F
+		spellNames[32] = "Resurrect";		//20
+		spellNames[33] = "Telekinesis";		//21
+		spellNames[34] = "Heal Other";		//22
+		spellNames[35] = "Blood Star";		//23
+		spellNames[36] = "Bone Spirit";		//24
 		return spellNames;
 	}
+	
 
 	/* Skill numbers:
 	Firebolt....... 	0100 0000 	Infravision........... 	0001 0000
