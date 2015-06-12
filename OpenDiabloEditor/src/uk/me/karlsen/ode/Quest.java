@@ -338,6 +338,7 @@ public class Quest {
 
 	public byte[] getQuestAsBytes() {
 		byte[] questAsBytes = new byte[16];
+		BinEditHelper beh = new BinEditHelper();
 		questAsBytes[0] = (byte) dungeonLevelSingle;
 		questAsBytes[1] = (byte) dungeonLevelMulti;
 		questAsBytes[2] = (byte) dungeonType;
@@ -346,14 +347,8 @@ public class Quest {
 		questAsBytes[5] = (byte) specialLevel;
 		questAsBytes[6] = (byte) zeroOne;
 		questAsBytes[7] = (byte) zeroTwo;
-		questAsBytes[8] = (byte) (mpTriggerFlag >>>  0);;
-		questAsBytes[9] = (byte) (mpTriggerFlag >>>  8);;
-		questAsBytes[10] = (byte) (mpTriggerFlag >>>  16);;
-		questAsBytes[11] = (byte) (mpTriggerFlag >>>  24);;
-		questAsBytes[12] = (byte) (textEntryIDX >>>  0);;
-		questAsBytes[13] = (byte) (textEntryIDX >>>  8);;
-		questAsBytes[14] = (byte) (textEntryIDX >>>  16);;
-		questAsBytes[15] = (byte) (textEntryIDX >>>  24);;
+		beh.setLongAsFourBytes(mpTriggerFlag, questAsBytes, 8);
+		beh.setLongAsFourBytes(textEntryIDX, questAsBytes, 12);
 		//System.out.println("ORIG: " + Arrays.toString(questBytes));
 		//System.out.println("BACK: " + Arrays.toString(questAsBytes));
 		//System.out.println();
