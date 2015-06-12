@@ -79,28 +79,16 @@ public class ItemModifier {
 	}
 
 	public byte[] getModifierAsBytes(){
+		BinEditHelper beh = new BinEditHelper();
 		byte[] modifierAsBytes = new byte[48];
-		long namePointerRev = namePointer + TomeOfKnowledge.DIABLO_POINTERS_OFFSET;
-		modifierAsBytes[0] = (byte)(namePointerRev >>> 0);
-		modifierAsBytes[1] = (byte)(namePointerRev >>> 8);
-		modifierAsBytes[2] = (byte)(namePointerRev >>> 16);
-		modifierAsBytes[3] = (byte)(namePointerRev >>> 24);
+		beh.setPointerAsFourBytes(namePointer, modifierAsBytes, 0);
 		modifierAsBytes[4] = itemEffects[0];
 		modifierAsBytes[5] = itemEffects[1];
 		modifierAsBytes[6] = itemEffects[2];
 		modifierAsBytes[7] = itemEffects[3];
-		modifierAsBytes[8] = (byte)(minimumEffectValue >>> 0);
-		modifierAsBytes[9] = (byte)(minimumEffectValue >>> 8);
-		modifierAsBytes[10] = (byte)(minimumEffectValue >>> 16);
-		modifierAsBytes[11] = (byte)(minimumEffectValue >>> 24);
-		modifierAsBytes[12] = (byte)(maximumEffectValue >>> 0);
-		modifierAsBytes[13] = (byte)(maximumEffectValue >>> 8);
-		modifierAsBytes[14] = (byte)(maximumEffectValue >>> 16);
-		modifierAsBytes[15] = (byte)(maximumEffectValue >>> 24);
-		modifierAsBytes[16] = (byte)(qualityLevel >>> 0);
-		modifierAsBytes[17] = (byte)(qualityLevel >>> 8);
-		modifierAsBytes[18] = (byte)(qualityLevel >>> 16);
-		modifierAsBytes[19] = (byte)(qualityLevel >>> 24);
+		beh.setLongAsFourBytes(minimumEffectValue, modifierAsBytes, 8);
+		beh.setLongAsFourBytes(maximumEffectValue, modifierAsBytes, 12);
+		beh.setLongAsFourBytes(qualityLevel, modifierAsBytes, 16);
 		String occurencePossibilitiesOne = occurencePossibilities.substring(0, 2);
 		String occurencePossibilitiesTwo = occurencePossibilities.substring(2, 4);
 		String occurencePossibilitiesThree = occurencePossibilities.substring(4, 6);
@@ -117,22 +105,10 @@ public class ItemModifier {
 		modifierAsBytes[29] = Byte.parseByte(split[2], 16);
 		modifierAsBytes[30] = Byte.parseByte(split[1], 16);
 		modifierAsBytes[31] = Byte.parseByte(split[0], 16);
-		modifierAsBytes[32] = (byte)(cursedIndicator >>> 0);
-		modifierAsBytes[33] = (byte)(cursedIndicator >>> 8);
-		modifierAsBytes[34] = (byte)(cursedIndicator >>> 16);
-		modifierAsBytes[35] = (byte)(cursedIndicator >>> 24);
-		modifierAsBytes[36] = (byte)(minGold >>> 0);
-		modifierAsBytes[37] = (byte)(minGold >>> 8);
-		modifierAsBytes[38] = (byte)(minGold >>> 16);
-		modifierAsBytes[39] = (byte)(minGold >>> 24);
-		modifierAsBytes[40] = (byte)(maxGold >>> 0);
-		modifierAsBytes[41] = (byte)(maxGold >>> 8);
-		modifierAsBytes[42] = (byte)(maxGold >>> 16);
-		modifierAsBytes[43] = (byte)(maxGold >>> 24);
-		modifierAsBytes[44] = (byte)(valueMultiplier >>> 0);
-		modifierAsBytes[45] = (byte)(valueMultiplier >>> 8);
-		modifierAsBytes[46] = (byte)(valueMultiplier >>> 16);
-		modifierAsBytes[47] = (byte)(valueMultiplier >>> 24);
+		beh.setLongAsFourBytes(cursedIndicator, modifierAsBytes, 32);
+		beh.setLongAsFourBytes(minGold, modifierAsBytes, 36);
+		beh.setLongAsFourBytes(maxGold, modifierAsBytes, 40);
+		beh.setLongAsFourBytes(valueMultiplier, modifierAsBytes, 44);
 
 		//System.out.println("ORIG: " + Arrays.toString(itemBytes));
 		//System.out.println("BACK: " + Arrays.toString(modifierAsBytes));
