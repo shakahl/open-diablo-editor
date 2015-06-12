@@ -96,20 +96,10 @@ public class UniqueMonster {
 
 	public byte[] getUniqueAsBytes() {
 		byte[] uniqueAsBytes = new byte[32];
-		uniqueAsBytes[0] = (byte) (monsterType >>> 0);
-		uniqueAsBytes[1] = (byte) (monsterType >>> 8);
-		uniqueAsBytes[2] = (byte) (monsterType >>> 16);
-		uniqueAsBytes[3] = (byte) (monsterType >>> 24);
-		long namePointerRev = namePointer + TomeOfKnowledge.DIABLO_POINTERS_OFFSET;
-		uniqueAsBytes[4] = (byte) (namePointerRev >>> 0);
-		uniqueAsBytes[5] = (byte) (namePointerRev >>> 8);
-		uniqueAsBytes[6] = (byte) (namePointerRev >>> 16);
-		uniqueAsBytes[7] = (byte) (namePointerRev >>> 24);
-		long trnPointerRev = trnPointer + TomeOfKnowledge.DIABLO_POINTERS_OFFSET;
-		uniqueAsBytes[8] = (byte) (trnPointerRev >>> 0);
-		uniqueAsBytes[9] = (byte) (trnPointerRev >>> 8);
-		uniqueAsBytes[10] = (byte) (trnPointerRev >>> 16);
-		uniqueAsBytes[11] = (byte) (trnPointerRev >>> 24);
+		BinEditHelper beh = new BinEditHelper();
+		beh.setLongAsFourBytes(monsterType, uniqueAsBytes, 0);
+		beh.setPointerAsFourBytes(namePointer, uniqueAsBytes, 4);
+		beh.setPointerAsFourBytes(trnPointer, uniqueAsBytes, 8);
 		uniqueAsBytes[12] = (byte) (dungeonLevel >>> 0);
 		uniqueAsBytes[13] = (byte) (dungeonLevel >>> 8);
 		uniqueAsBytes[14] = (byte) (hitPoints >>> 0);
@@ -123,14 +113,8 @@ public class UniqueMonster {
 		uniqueAsBytes[21] = (byte) Byte.parseByte(resistancesSplit[1], 2);
 		uniqueAsBytes[22] = (byte) (packTrigger >>> 0);
 		uniqueAsBytes[23] = (byte) (packTrigger >>> 8);
-		uniqueAsBytes[24] = (byte) (packSpecials >>> 0);
-		uniqueAsBytes[25] = (byte) (packSpecials >>> 8);
-		uniqueAsBytes[26] = (byte) (packSpecials >>> 16);
-		uniqueAsBytes[27] = (byte) (packSpecials >>> 24);
-		uniqueAsBytes[28] = (byte) (specialSoundWav >>> 0);
-		uniqueAsBytes[29] = (byte) (specialSoundWav >>> 8);
-		uniqueAsBytes[30] = (byte) (specialSoundWav >>> 16);
-		uniqueAsBytes[31] = (byte) (specialSoundWav >>> 24);
+		beh.setLongAsFourBytes(packSpecials, uniqueAsBytes, 24);
+		beh.setLongAsFourBytes(specialSoundWav, uniqueAsBytes, 28);
 
 		//System.out.println("ORIG: " + Arrays.toString(uniqueBytes));
 		//System.out.println("BACK: " + Arrays.toString(uniqueAsBytes));
