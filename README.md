@@ -12,13 +12,13 @@ At present it is usable but will require a little knowledge of Java coding. In a
 Authors/Contributors
 ====================
 
-Name: Matthew R. Karlsen
-Email: firstname at lastname dot me dot uk
-Alias 1: quixotic-cynic
-Alias 2: quixoticynic (some sites do not allow "-" in usernames)
+    Name: Matthew R. Karlsen
+    Email: firstname at lastname dot me dot uk
+    Alias 1: quixotic-cynic
+    Alias 2: quixoticynic (some sites do not allow "-" in usernames)
 
-Name:  Robin Eklind
-Alias 1: mewmew 
+    Name:  Robin Eklind
+    Alias 1: mewmew 
 
 
 ========================
