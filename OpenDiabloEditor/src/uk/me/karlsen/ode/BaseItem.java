@@ -5,8 +5,18 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Each BaseItem object acts as a repository for the information
+ * pertaining to a particular in-game item. This is for
+ * base items only (i.e. the item before it is affected by
+ * any prefixes or suffixes).
+ */
 public class BaseItem {
 
+	/**
+	 * Textual descriptions for each item type.
+	 * Item type ranges from 01 to 05.
+	 */
 	String[] itemTypes = {
 		"invalid",					//00
 		"Weapons",					//01
@@ -16,6 +26,14 @@ public class BaseItem {
 		"Novelty items"				//05
 	};
 
+	/**
+	 * Equip location determines whether the item is equippable
+	 * and, if so, in which location it may be equipped. An
+	 * equip location of 07 indicates the item is unequippable.
+	 * Equip location values of 01 to 06 indicate the item
+	 * may be equipped in the relevant slot shown below. Items
+	 * given an equip location value of 02 occupy both hand slots.
+	 */
 	String[] equipLocations = {
 		"invalid",										//00
 		"One handed (weapons and shields)",				//01
@@ -24,9 +42,14 @@ public class BaseItem {
 		"Head",											//04
 		"Ring",											//05
 		"Amulet",										//06
-		"Unequipable"									//07
+		"Unequippable"									//07
 	};
 
+	/**
+	 * The item's graphic value is taken from the range
+	 * 00 to 168 (0xA8) and indicates how the item appears
+	 * in the character's inventory.
+	 */
 	String[] graphicValues = {
 		"Potion of Full Mana",				//00 (00)
 		"White Scroll",						//01 (01)
@@ -199,6 +222,10 @@ public class BaseItem {
 		"Gold"								//168 (A8)
 	};
 
+	/**
+	 * Contains textual descriptions for each item code
+	 * (in the range 00 to 13 (0x0D).
+	 */
 	String[] itemCodes = {
 		"All other items",					//00 (00) -- (novelties, potions, scrolls, books, etc)
 		"Swords",							//01 (01)
@@ -216,6 +243,7 @@ public class BaseItem {
 		"Amulets"							//13 (0D)
 	};
 
+	//TODO -- investigate this property and comment
 	String[] baseItemActivationTriggers = {
 		"Item will never be found",		//00
 		"Item will be findable",		//01
@@ -229,6 +257,10 @@ public class BaseItem {
 		"Unique",	// 02
 	};
 
+	/**
+	 * A list of special effect codes used to validate
+	 * the argument supplied to setSpecialEffects().
+	 */
 	List<Integer> specialEffectCodes = Arrays.asList(
 		0x01000000,
 		0x02000000,
@@ -427,6 +459,8 @@ public class BaseItem {
 
 	public void printItem() {
 		String[] uniqueItemCodes = UniqueItem.createNewItemTypeArray();
+		String[] spellNumbers = TomeOfKnowledge.createSpellNamesArray();
+		Map<Integer,String> specialEffectMap = this.getSpecialEffectMap();
 		System.out.println("Slot number: " + slotNumber + " (hex: " + Integer.toHexString(slotNumber) + ")" + "\n" +
 			"Name: " + name + "\n" +
 			"Name pointer: " + namePointer + "\n" +
@@ -452,10 +486,10 @@ public class BaseItem {
 			"Required Mag: " + requiredMag + "\n" +
 			"Required Dex: " + requiredDex + "\n" +
 			"Required Vit: " + requiredVit + "\n" +
-			"Special effects: " + specialEffects + "\n" +
-			"Magic code: " + magicCode + "\n" +
-			"Spell number: " + spellNumber + "\n" +
-			"Single use flag: " + singleUseFlag + "\n" +
+			"Special effects: " + Long.toHexString(specialEffects) + "\n" + //specialEffectMap.get()
+			"Magic code: " + magicCodes[(int) magicCode] + "\n" +
+			"Spell number: " + spellNumbers[(int) spellNumber] + "\n" +
+			"Single use flag: " + useCountStrings[(int) singleUseFlag] + "\n" +
 			"Price one: " + priceOne + "\n" +
 			"Price two: " + priceTwo + "\n"
 		);
