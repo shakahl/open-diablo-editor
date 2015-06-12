@@ -1,7 +1,5 @@
 package uk.me.karlsen.ode;
 
-import java.util.Arrays;
-
 public class BinEditHelper {
 
 	public BinEditHelper(){
