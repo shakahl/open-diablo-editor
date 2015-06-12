@@ -49,10 +49,10 @@ public class OpenDiabloEditor {
 		//spellStore.printSpells();
 		//shrineStore.printShrines();
 		//modifierStore.printModifiers();
-		//uniqueItemStore.printItems();
+		uniqueItemStore.printItems();
 		//characterStore.printCharacters();
 		//baseItemStore.printItems();
-		baseMonsterStore.printMonsters();
+		//baseMonsterStore.printMonsters();
 		//uniqueMonsterStore.printUniques();
 
 
@@ -83,7 +83,7 @@ public class OpenDiabloEditor {
 		//# NOW WE WRITE TO DIABLO.EXE COPY  #
 		//####################################
 
-		//writeAllData();
+		writeAllData();
 	}
 
 	private void writeAllData() {

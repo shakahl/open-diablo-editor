@@ -1,5 +1,9 @@
 package uk.me.karlsen.ode;
 
+import java.util.ArrayList;
+//import java.util.Arrays;
+import java.util.List;
+
 public class UniqueItem {
 
 	private long namePointer;
@@ -8,53 +12,23 @@ public class UniqueItem {
 	private int qualityLevel;
 	private int numberOfEffects;
 	private long goldValue;
-	private long effectOne;
-	private long minValueOne;
-	private long maxValueOne;
-	private long effectTwo;
-	private long minValueTwo;
-	private long maxValueTwo;
-	private long effectThree;
-	private long minValueThree;
-	private long maxValueThree;
-	private long effectFour;
-	private long minValueFour;
-	private long maxValueFour;
-	private long effectFive;
-	private long minValueFive;
-	private long maxValueFive;
-	private long effectSix;
-	private long minValueSix;
-	private long maxValueSix;
+	private List<ItemEffect> itemEffects;
 	//private byte[] itemBytes;
 
 	public UniqueItem(byte[] readIn, ReaderWriter rw){
 		//this.itemBytes = readIn;
 		BinEditHelper beh = new BinEditHelper();
+		itemEffects = new ArrayList<ItemEffect>();
 		namePointer = beh.convertFourBytesToOffset(readIn, 0);
 		name = this.getNameUsingPointer(namePointer);
 		itemType = beh.convertUnsignedByteToInt(readIn[4]);
 		qualityLevel = beh.convertUnsignedByteToInt(readIn[5]);
 		numberOfEffects = beh.convertTwoBytesToInt(readIn[6], readIn[7]);
 		goldValue = beh.convertFourBytesToNumber(readIn, 8);
-		effectOne = beh.convertFourBytesToNumber(readIn, 12);
-		minValueOne = beh.convertFourBytesToNumber(readIn, 16);
-		maxValueOne = beh.convertFourBytesToNumber(readIn, 20);
-		effectTwo = beh.convertFourBytesToNumber(readIn, 24);
-		minValueTwo = beh.convertFourBytesToNumber(readIn, 28);
-		maxValueTwo = beh.convertFourBytesToNumber(readIn, 32);
-		effectThree = beh.convertFourBytesToNumber(readIn, 36);
-		minValueThree = beh.convertFourBytesToNumber(readIn, 40);
-		maxValueThree = beh.convertFourBytesToNumber(readIn, 44);
-		effectFour = beh.convertFourBytesToNumber(readIn, 48);
-		minValueFour = beh.convertFourBytesToNumber(readIn, 52);
-		maxValueFour = beh.convertFourBytesToNumber(readIn, 56);
-		effectFive = beh.convertFourBytesToNumber(readIn, 60);
-		minValueFive = beh.convertFourBytesToNumber(readIn, 64);
-		maxValueFive = beh.convertFourBytesToNumber(readIn, 68);
-		effectSix = beh.convertFourBytesToNumber(readIn, 72);
-		minValueSix = beh.convertFourBytesToNumber(readIn, 76);
-		maxValueSix = beh.convertFourBytesToNumber(readIn, 80);
+		for(int offset = 12; offset < 84; offset = offset + 12){
+			ItemEffect ie = new ItemEffect(readIn, offset);
+			itemEffects.add(ie);
+		}
 	}
 
 	public void printItem() {
@@ -66,12 +40,10 @@ public class UniqueItem {
 		System.out.println("Number of effects: " + numberOfEffects);
 		System.out.println("Gold value: " + goldValue);
 		String[] effectsArray = this.createNewItemEffectsArray();
-		System.out.println("Effect one: " + effectsArray[(int) effectOne] +"; " + minValueOne + "; " + maxValueOne);
-		System.out.println("Effect two: " + effectsArray[(int) effectTwo] +"; " + minValueTwo + "; " + maxValueTwo);
-		System.out.println("Effect three: " + effectsArray[(int) effectThree] +"; " + minValueThree +"; " + maxValueThree);
-		System.out.println("Effect four: " + effectsArray[(int) effectFour] +"; " + minValueFour +"; " + effectFour);
-		System.out.println("Effect five: " + effectsArray[(int) effectFive] +"; " + minValueFive +"; " + effectFive);
-		System.out.println("Effect six: " + effectsArray[(int) effectSix] +"; " + minValueSix +"; " + effectSix);
+		for(ItemEffect ie : itemEffects){
+			System.out.println("Effect " + ie.getEffectNumber() + ": " + 
+					effectsArray[(int) ie.getEffect()] +"; " + ie.getMinValue() + "; " + ie.getMaxValue());
+		}
 		System.out.println();
 	}
 
@@ -267,24 +239,12 @@ public class UniqueItem {
 		itemAsBytes[6] = (byte) (numberOfEffects >>> 0);
 		itemAsBytes[7] = (byte) (numberOfEffects >>> 8);
 		beh.setLongAsFourBytes(goldValue, itemAsBytes, 8);
-		beh.setLongAsFourBytes(effectOne, itemAsBytes, 12);
-		beh.setLongAsFourBytes(minValueOne, itemAsBytes, 16);
-		beh.setLongAsFourBytes(maxValueOne, itemAsBytes, 20);
-		beh.setLongAsFourBytes(effectTwo, itemAsBytes, 24);
-		beh.setLongAsFourBytes(minValueTwo, itemAsBytes, 28);
-		beh.setLongAsFourBytes(maxValueTwo, itemAsBytes, 32);
-		beh.setLongAsFourBytes(effectThree, itemAsBytes, 36);
-		beh.setLongAsFourBytes(minValueThree, itemAsBytes, 40);
-		beh.setLongAsFourBytes(maxValueThree, itemAsBytes, 44);
-		beh.setLongAsFourBytes(effectFour, itemAsBytes, 48);
-		beh.setLongAsFourBytes(minValueFour, itemAsBytes, 52);
-		beh.setLongAsFourBytes(maxValueFour, itemAsBytes, 56);
-		beh.setLongAsFourBytes(effectFive, itemAsBytes, 60);
-		beh.setLongAsFourBytes(minValueFive, itemAsBytes, 64);
-		beh.setLongAsFourBytes(maxValueFive, itemAsBytes, 68);
-		beh.setLongAsFourBytes(effectSix, itemAsBytes, 72);
-		beh.setLongAsFourBytes(minValueSix, itemAsBytes, 76);
-		beh.setLongAsFourBytes(maxValueSix, itemAsBytes, 80);
+		for(int offset = 12; offset < 84; offset = offset + 12){
+			ItemEffect ie = itemEffects.get( (offset / 12 ) - 1);
+			beh.setLongAsFourBytes(ie.getEffect(), itemAsBytes, offset);
+			beh.setLongAsFourBytes(ie.getMinValue(), itemAsBytes, offset+4);
+			beh.setLongAsFourBytes(ie.getMaxValue(), itemAsBytes, offset+8);
+		}
 
 		//System.out.println("ORIG: " + Arrays.toString(itemBytes));
 		//System.out.println("BACK: " + Arrays.toString(itemAsBytes));
@@ -341,147 +301,30 @@ public class UniqueItem {
 		this.goldValue = goldValue;
 	}
 
-	public long getEffectOne() {
-		return effectOne;
+	public long getEffect(int i) {
+		return itemEffects.get(i-1).getEffect();
 	}
 
-	public void setEffectOne(long effectOne) {
-		this.effectOne = effectOne;
+	public void setEffect(long effect, int i) {
+		ItemEffect ie = itemEffects.get(i);
+		ie.setEffect(effect);
 	}
 
-	public long getMinValueOne() {
-		return minValueOne;
+	public long getMinValue(int i) {
+		return itemEffects.get(i-1).getMinValue();
 	}
 
-	public void setMinValueOne(long minValueOne) {
-		this.minValueOne = minValueOne;
+	public void setMinValue(long minValue, int i) {
+		ItemEffect ie = itemEffects.get(i);
+		ie.setMinValue(minValue);
 	}
 
-	public long getMaxValueOne() {
-		return maxValueOne;
+	public long getMaxValue(int i) {
+		return itemEffects.get(i-1).getMaxValue();
 	}
 
-	public void setMaxValueOne(long maxValueOne) {
-		this.maxValueOne = maxValueOne;
-	}
-
-	public long getEffectTwo() {
-		return effectTwo;
-	}
-
-	public void setEffectTwo(long effectTwo) {
-		this.effectTwo = effectTwo;
-	}
-
-	public long getMinValueTwo() {
-		return minValueTwo;
-	}
-
-	public void setMinValueTwo(long minValueTwo) {
-		this.minValueTwo = minValueTwo;
-	}
-
-	public long getMaxValueTwo() {
-		return maxValueTwo;
-	}
-
-	public void setMaxValueTwo(long maxValueTwo) {
-		this.maxValueTwo = maxValueTwo;
-	}
-
-	public long getEffectThree() {
-		return effectThree;
-	}
-
-	public void setEffectThree(long effectThree) {
-		this.effectThree = effectThree;
-	}
-
-	public long getMinValueThree() {
-		return minValueThree;
-	}
-
-	public void setMinValueThree(long minValueThree) {
-		this.minValueThree = minValueThree;
-	}
-
-	public long getMaxValueThree() {
-		return maxValueThree;
-	}
-
-	public void setMaxValueThree(long maxValueThree) {
-		this.maxValueThree = maxValueThree;
-	}
-
-	public long getEffectFour() {
-		return effectFour;
-	}
-
-	public void setEffectFour(long effectFour) {
-		this.effectFour = effectFour;
-	}
-
-	public long getMinValueFour() {
-		return minValueFour;
-	}
-
-	public void setMinValueFour(long minValueFour) {
-		this.minValueFour = minValueFour;
-	}
-
-	public long getMaxValueFour() {
-		return maxValueFour;
-	}
-
-	public void setMaxValueFour(long maxValueFour) {
-		this.maxValueFour = maxValueFour;
-	}
-
-	public long getEffectFive() {
-		return effectFive;
-	}
-
-	public void setEffectFive(long effectFive) {
-		this.effectFive = effectFive;
-	}
-
-	public long getMinValueFive() {
-		return minValueFive;
-	}
-
-	public void setMinValueFive(long minValueFive) {
-		this.minValueFive = minValueFive;
-	}
-
-	public long getMaxValueFive() {
-		return maxValueFive;
-	}
-
-	public void setMaxValueFive(long maxValueFive) {
-		this.maxValueFive = maxValueFive;
-	}
-
-	public long getEffectSix() {
-		return effectSix;
-	}
-
-	public void setEffectSix(long effectSix) {
-		this.effectSix = effectSix;
-	}
-
-	public long getMinValueSix() {
-		return minValueSix;
-	}
-
-	public void setMinValueSix(long minValueSix) {
-		this.minValueSix = minValueSix;
-	}
-
-	public long getMaxValueSix() {
-		return maxValueSix;
-	}
-
-	public void setMaxValueSix(long maxValueSix) {
-		this.maxValueSix = maxValueSix;
+	public void setMaxValue(long maxValue, int i) {
+		ItemEffect ie = itemEffects.get(i);
+		ie.setMaxValue(maxValue);
 	}
 }
