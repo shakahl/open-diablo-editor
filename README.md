@@ -8,17 +8,17 @@ This is an MIT-licensed Diablo editor, written in Java. At present it is very pr
 
 At present it is usable but will require a little knowledge of Java coding. In a future revision (or revisions) I will add a GUI.
 
-======
-Author
-======
+====================
+Authors/Contributors
+====================
 
 Name: Matthew R. Karlsen
-
 Email: firstname at lastname dot me dot uk
-
 Alias 1: quixotic-cynic
-
 Alias 2: quixoticynic (some sites do not allow "-" in usernames)
+
+Name:  Robin Eklind
+Alias 1: mewmew 
 
 
 ========================
