@@ -31,19 +31,19 @@ public class CharacterStore {
 			rw.seek(pos);
 		}
 
-		BinEditHelper bih = new BinEditHelper();
-		long initWarriorStrength = bih.convertFourBytesToNumber(startingStats, 0);
-		long initRogueStrength = bih.convertFourBytesToNumber(startingStats, 4);
-		long initSorcStrength = bih.convertFourBytesToNumber(startingStats, 8);
-		long initWarriorMagic = bih.convertFourBytesToNumber(startingStats, 12);
-		long initRogueMagic = bih.convertFourBytesToNumber(startingStats, 16);
-		long initSorcMagic = bih.convertFourBytesToNumber(startingStats, 20);
-		long initWarriorDexterity = bih.convertFourBytesToNumber(startingStats, 24);
-		long initRogueDexterity = bih.convertFourBytesToNumber(startingStats, 28);
-		long initSorcDexterity = bih.convertFourBytesToNumber(startingStats, 32);
-		long initWarriorVitality = bih.convertFourBytesToNumber(startingStats, 36);
-		long initRogueVitality = bih.convertFourBytesToNumber(startingStats, 40);
-		long initSorcVitality = bih.convertFourBytesToNumber(startingStats, 44);
+		BinEditHelper beh = new BinEditHelper();
+		long initWarriorStrength = beh.convertFourBytesToNumber(startingStats, 0);
+		long initRogueStrength = beh.convertFourBytesToNumber(startingStats, 4);
+		long initSorcStrength = beh.convertFourBytesToNumber(startingStats, 8);
+		long initWarriorMagic = beh.convertFourBytesToNumber(startingStats, 12);
+		long initRogueMagic = beh.convertFourBytesToNumber(startingStats, 16);
+		long initSorcMagic = beh.convertFourBytesToNumber(startingStats, 20);
+		long initWarriorDexterity = beh.convertFourBytesToNumber(startingStats, 24);
+		long initRogueDexterity = beh.convertFourBytesToNumber(startingStats, 28);
+		long initSorcDexterity = beh.convertFourBytesToNumber(startingStats, 32);
+		long initWarriorVitality = beh.convertFourBytesToNumber(startingStats, 36);
+		long initRogueVitality = beh.convertFourBytesToNumber(startingStats, 40);
+		long initSorcVitality = beh.convertFourBytesToNumber(startingStats, 44);
 
 		pos = TomeOfKnowledge.MAX_STATS_OFFSET;
 		rw.seek(pos);
@@ -54,18 +54,18 @@ public class CharacterStore {
 			rw.seek(pos);
 		}
 
-		long maxWarriorStrength = bih.convertFourBytesToNumber(maxStats, 0);
-		long maxWarriorMagic = bih.convertFourBytesToNumber(maxStats, 4);
-		long maxWarriorDexterity = bih.convertFourBytesToNumber(maxStats, 8);
-		long maxWarriorVitality = bih.convertFourBytesToNumber(maxStats, 12);
-		long maxRogueStrength = bih.convertFourBytesToNumber(maxStats, 16);
-		long maxRogueMagic = bih.convertFourBytesToNumber(maxStats, 20);
-		long maxRogueDexterity = bih.convertFourBytesToNumber(maxStats, 24);
-		long maxRogueVitality = bih.convertFourBytesToNumber(maxStats, 28);
-		long maxSorcStrength = bih.convertFourBytesToNumber(maxStats, 32);
-		long maxSorcMagic = bih.convertFourBytesToNumber(maxStats, 36);
-		long maxSorcDexterity = bih.convertFourBytesToNumber(maxStats, 40);
-		long maxSorcVitality = bih.convertFourBytesToNumber(maxStats, 44);
+		long maxWarriorStrength = beh.convertFourBytesToNumber(maxStats, 0);
+		long maxWarriorMagic = beh.convertFourBytesToNumber(maxStats, 4);
+		long maxWarriorDexterity = beh.convertFourBytesToNumber(maxStats, 8);
+		long maxWarriorVitality = beh.convertFourBytesToNumber(maxStats, 12);
+		long maxRogueStrength = beh.convertFourBytesToNumber(maxStats, 16);
+		long maxRogueMagic = beh.convertFourBytesToNumber(maxStats, 20);
+		long maxRogueDexterity = beh.convertFourBytesToNumber(maxStats, 24);
+		long maxRogueVitality = beh.convertFourBytesToNumber(maxStats, 28);
+		long maxSorcStrength = beh.convertFourBytesToNumber(maxStats, 32);
+		long maxSorcMagic = beh.convertFourBytesToNumber(maxStats, 36);
+		long maxSorcDexterity = beh.convertFourBytesToNumber(maxStats, 40);
+		long maxSorcVitality = beh.convertFourBytesToNumber(maxStats, 44);
 
 		pos = TomeOfKnowledge.BLOCKING_BONUSES_OFFSET;
 		rw.seek(pos);
@@ -76,9 +76,9 @@ public class CharacterStore {
 			rw.seek(pos);
 		}
 
-		long warriorBlockingBonus = bih.convertFourBytesToNumber(blockingBonuses, 0);
-		long rogueBlockingBonus = bih.convertFourBytesToNumber(blockingBonuses, 4);
-		long sorcBlockingBonus = bih.convertFourBytesToNumber(blockingBonuses, 8);
+		long warriorBlockingBonus = beh.convertFourBytesToNumber(blockingBonuses, 0);
+		long rogueBlockingBonus = beh.convertFourBytesToNumber(blockingBonuses, 4);
+		long sorcBlockingBonus = beh.convertFourBytesToNumber(blockingBonuses, 8);
 
 		pos = TomeOfKnowledge.BONUSES_AND_FRAMESETS_OFFSET;
 		rw.seek(pos);
@@ -103,41 +103,41 @@ public class CharacterStore {
 		10 	Spell casting speed
 		*/
 
-		int warriorDungeonIdleFrameset = bih.convertUnsignedByteToInt(bonusesAndFramesets[0]);
-		int warriorAttackingFrameset = bih.convertUnsignedByteToInt(bonusesAndFramesets[1]);
-		int warriorDungeonWalkFrameset = bih.convertUnsignedByteToInt(bonusesAndFramesets[2]);
-		int warriorBlockSpeed = bih.convertUnsignedByteToInt(bonusesAndFramesets[3]);
-		int warriorDeathFrameset = bih.convertUnsignedByteToInt(bonusesAndFramesets[4]);
-		int warriorCastingFrameset = bih.convertUnsignedByteToInt(bonusesAndFramesets[5]);
-		int warriorHitRecoverySpeed = bih.convertUnsignedByteToInt(bonusesAndFramesets[6]);
-		int warriorTownIdleFrameset = bih.convertUnsignedByteToInt(bonusesAndFramesets[7]);
-		int warriorTownWalkFrameset = bih.convertUnsignedByteToInt(bonusesAndFramesets[8]);
-		int warrior1hAttackSpeed = bih.convertUnsignedByteToInt(bonusesAndFramesets[9]);
-		int warriorCastingSpeed = bih.convertUnsignedByteToInt(bonusesAndFramesets[10]);
+		int warriorDungeonIdleFrameset = beh.convertUnsignedByteToInt(bonusesAndFramesets[0]);
+		int warriorAttackingFrameset = beh.convertUnsignedByteToInt(bonusesAndFramesets[1]);
+		int warriorDungeonWalkFrameset = beh.convertUnsignedByteToInt(bonusesAndFramesets[2]);
+		int warriorBlockSpeed = beh.convertUnsignedByteToInt(bonusesAndFramesets[3]);
+		int warriorDeathFrameset = beh.convertUnsignedByteToInt(bonusesAndFramesets[4]);
+		int warriorCastingFrameset = beh.convertUnsignedByteToInt(bonusesAndFramesets[5]);
+		int warriorHitRecoverySpeed = beh.convertUnsignedByteToInt(bonusesAndFramesets[6]);
+		int warriorTownIdleFrameset = beh.convertUnsignedByteToInt(bonusesAndFramesets[7]);
+		int warriorTownWalkFrameset = beh.convertUnsignedByteToInt(bonusesAndFramesets[8]);
+		int warrior1hAttackSpeed = beh.convertUnsignedByteToInt(bonusesAndFramesets[9]);
+		int warriorCastingSpeed = beh.convertUnsignedByteToInt(bonusesAndFramesets[10]);
 		
-		int rogueDungeonIdleFrameset = bih.convertUnsignedByteToInt(bonusesAndFramesets[11]);
-		int rogueAttackingFrameset = bih.convertUnsignedByteToInt(bonusesAndFramesets[12]);
-		int rogueDungeonWalkFrameset = bih.convertUnsignedByteToInt(bonusesAndFramesets[13]);
-		int rogueBlockSpeed = bih.convertUnsignedByteToInt(bonusesAndFramesets[14]);
-		int rogueDeathFrameset = bih.convertUnsignedByteToInt(bonusesAndFramesets[15]);
-		int rogueCastingFrameset = bih.convertUnsignedByteToInt(bonusesAndFramesets[16]);
-		int rogueHitRecoverySpeed = bih.convertUnsignedByteToInt(bonusesAndFramesets[17]);
-		int rogueTownIdleFrameset = bih.convertUnsignedByteToInt(bonusesAndFramesets[18]);
-		int rogueTownWalkFrameset = bih.convertUnsignedByteToInt(bonusesAndFramesets[19]);
-		int rogue1hAttackSpeed = bih.convertUnsignedByteToInt(bonusesAndFramesets[20]);
-		int rogueCastingSpeed = bih.convertUnsignedByteToInt(bonusesAndFramesets[21]);
+		int rogueDungeonIdleFrameset = beh.convertUnsignedByteToInt(bonusesAndFramesets[11]);
+		int rogueAttackingFrameset = beh.convertUnsignedByteToInt(bonusesAndFramesets[12]);
+		int rogueDungeonWalkFrameset = beh.convertUnsignedByteToInt(bonusesAndFramesets[13]);
+		int rogueBlockSpeed = beh.convertUnsignedByteToInt(bonusesAndFramesets[14]);
+		int rogueDeathFrameset = beh.convertUnsignedByteToInt(bonusesAndFramesets[15]);
+		int rogueCastingFrameset = beh.convertUnsignedByteToInt(bonusesAndFramesets[16]);
+		int rogueHitRecoverySpeed = beh.convertUnsignedByteToInt(bonusesAndFramesets[17]);
+		int rogueTownIdleFrameset = beh.convertUnsignedByteToInt(bonusesAndFramesets[18]);
+		int rogueTownWalkFrameset = beh.convertUnsignedByteToInt(bonusesAndFramesets[19]);
+		int rogue1hAttackSpeed = beh.convertUnsignedByteToInt(bonusesAndFramesets[20]);
+		int rogueCastingSpeed = beh.convertUnsignedByteToInt(bonusesAndFramesets[21]);
 		
-		int sorcDungeonIdleFrameset = bih.convertUnsignedByteToInt(bonusesAndFramesets[22]);
-		int sorcAttackingFrameset = bih.convertUnsignedByteToInt(bonusesAndFramesets[23]);
-		int sorcDungeonWalkFrameset = bih.convertUnsignedByteToInt(bonusesAndFramesets[24]);
-		int sorcBlockSpeed = bih.convertUnsignedByteToInt(bonusesAndFramesets[25]);
-		int sorcDeathFrameset = bih.convertUnsignedByteToInt(bonusesAndFramesets[26]);
-		int sorcCastingFrameset = bih.convertUnsignedByteToInt(bonusesAndFramesets[27]);
-		int sorcHitRecoverySpeed = bih.convertUnsignedByteToInt(bonusesAndFramesets[28]);
-		int sorcTownIdleFrameset = bih.convertUnsignedByteToInt(bonusesAndFramesets[29]);
-		int sorcTownWalkFrameset = bih.convertUnsignedByteToInt(bonusesAndFramesets[30]);
-		int sorc1hAttackSpeed = bih.convertUnsignedByteToInt(bonusesAndFramesets[31]);
-		int sorcCastingSpeed = bih.convertUnsignedByteToInt(bonusesAndFramesets[32]);
+		int sorcDungeonIdleFrameset = beh.convertUnsignedByteToInt(bonusesAndFramesets[22]);
+		int sorcAttackingFrameset = beh.convertUnsignedByteToInt(bonusesAndFramesets[23]);
+		int sorcDungeonWalkFrameset = beh.convertUnsignedByteToInt(bonusesAndFramesets[24]);
+		int sorcBlockSpeed = beh.convertUnsignedByteToInt(bonusesAndFramesets[25]);
+		int sorcDeathFrameset = beh.convertUnsignedByteToInt(bonusesAndFramesets[26]);
+		int sorcCastingFrameset = beh.convertUnsignedByteToInt(bonusesAndFramesets[27]);
+		int sorcHitRecoverySpeed = beh.convertUnsignedByteToInt(bonusesAndFramesets[28]);
+		int sorcTownIdleFrameset = beh.convertUnsignedByteToInt(bonusesAndFramesets[29]);
+		int sorcTownWalkFrameset = beh.convertUnsignedByteToInt(bonusesAndFramesets[30]);
+		int sorc1hAttackSpeed = beh.convertUnsignedByteToInt(bonusesAndFramesets[31]);
+		int sorcCastingSpeed = beh.convertUnsignedByteToInt(bonusesAndFramesets[32]);
 
 		//Creating characters
 		char0 = new Character();
@@ -215,152 +215,74 @@ public class CharacterStore {
 	}
 
 	private byte[] getInitStatBytes(){
+		BinEditHelper beh = new BinEditHelper();
 		byte[] startingStats = new byte[48];
 		long warriorInitStrength = char0.getInitStrength();
-		startingStats[0] = (byte)(warriorInitStrength >>>  0);
-		startingStats[1] = (byte)(warriorInitStrength >>>  8);
-		startingStats[2] = (byte)(warriorInitStrength >>> 16);
-		startingStats[3] = (byte)(warriorInitStrength >>> 24);
+		beh.setLongAsFourBytes(warriorInitStrength, startingStats, 0);
 		long rogueInitStrength = char1.getInitStrength();
-		startingStats[4] = (byte)(rogueInitStrength >>>  0);
-		startingStats[5] = (byte)(rogueInitStrength >>>  8);
-		startingStats[6] = (byte)(rogueInitStrength >>> 16);
-		startingStats[7] = (byte)(rogueInitStrength >>> 24);
+		beh.setLongAsFourBytes(rogueInitStrength, startingStats, 4);
 		long sorcInitStrength = char2.getInitStrength();
-		startingStats[8] = (byte)(sorcInitStrength >>>  0);
-		startingStats[9] = (byte)(sorcInitStrength >>>  8);
-		startingStats[10] = (byte)(sorcInitStrength >>> 16);
-		startingStats[11] = (byte)(sorcInitStrength >>> 24);
+		beh.setLongAsFourBytes(sorcInitStrength, startingStats, 8);
 		long warriorInitMagic = char0.getInitMagic();
-		startingStats[12] = (byte)(warriorInitMagic >>>  0);
-		startingStats[13] = (byte)(warriorInitMagic >>>  8);
-		startingStats[14] = (byte)(warriorInitMagic >>> 16);
-		startingStats[15] = (byte)(warriorInitMagic >>> 24);
+		beh.setLongAsFourBytes(warriorInitMagic, startingStats, 12);
 		long rogueInitMagic = char1.getInitMagic();
-		startingStats[16] = (byte)(rogueInitMagic >>>  0);
-		startingStats[17] = (byte)(rogueInitMagic >>>  8);
-		startingStats[18] = (byte)(rogueInitMagic >>> 16);
-		startingStats[19] = (byte)(rogueInitMagic >>> 24);
+		beh.setLongAsFourBytes(rogueInitMagic, startingStats, 16);
 		long sorcInitMagic = char2.getInitMagic();
-		startingStats[20] = (byte)(sorcInitMagic >>>  0);
-		startingStats[21] = (byte)(sorcInitMagic >>>  8);
-		startingStats[22] = (byte)(sorcInitMagic >>> 16);
-		startingStats[23] = (byte)(sorcInitMagic >>> 24);
+		beh.setLongAsFourBytes(sorcInitMagic, startingStats, 20);
 		long warriorInitDex = char0.getInitDexterity();
-		startingStats[24] = (byte)(warriorInitDex >>>  0);
-		startingStats[25] = (byte)(warriorInitDex >>>  8);
-		startingStats[26] = (byte)(warriorInitDex >>> 16);
-		startingStats[27] = (byte)(warriorInitDex >>> 24);
+		beh.setLongAsFourBytes(warriorInitDex, startingStats, 24);
 		long rogueInitDex = char1.getInitDexterity();
-		startingStats[28] = (byte)(rogueInitDex >>>  0);
-		startingStats[29] = (byte)(rogueInitDex >>>  8);
-		startingStats[30] = (byte)(rogueInitDex >>> 16);
-		startingStats[31] = (byte)(rogueInitDex >>> 24);
+		beh.setLongAsFourBytes(rogueInitDex, startingStats, 28);
 		long sorcInitDex = char2.getInitDexterity();
-		startingStats[32] = (byte)(sorcInitDex >>>  0);
-		startingStats[33] = (byte)(sorcInitDex >>> 8);
-		startingStats[34] = (byte)(sorcInitDex >>> 16);
-		startingStats[35] = (byte)(sorcInitDex >>> 24);
+		beh.setLongAsFourBytes(sorcInitDex, startingStats, 32);
 		long warriorInitVit = char0.getInitVitality();
-		startingStats[36] = (byte)(warriorInitVit >>>  0);
-		startingStats[37] = (byte)(warriorInitVit >>>  8);
-		startingStats[38] = (byte)(warriorInitVit >>> 16);
-		startingStats[39] = (byte)(warriorInitVit >>> 24);
+		beh.setLongAsFourBytes(warriorInitVit, startingStats, 36);
 		long rogueInitVit = char1.getInitVitality();
-		startingStats[40] = (byte)(rogueInitVit >>>  0);
-		startingStats[41] = (byte)(rogueInitVit >>>  8);
-		startingStats[42] = (byte)(rogueInitVit >>> 16);
-		startingStats[43] = (byte)(rogueInitVit >>> 24);
+		beh.setLongAsFourBytes(rogueInitVit, startingStats, 40);
 		long sorcInitVit = char2.getInitVitality();
-		startingStats[44] = (byte)(sorcInitVit >>>  0);
-		startingStats[45] = (byte)(sorcInitVit >>>  8);
-		startingStats[46] = (byte)(sorcInitVit >>> 16);
-		startingStats[47] = (byte)(sorcInitVit >>> 24);
+		beh.setLongAsFourBytes(sorcInitVit, startingStats, 44);
 		return startingStats;
 	}
 
 	private byte[] getMaxStatBytes(){
+		BinEditHelper beh = new BinEditHelper();
 		byte[] maxStats = new byte[48];
 		long warriorMaxStrength = char0.getMaxStrength();
-		maxStats[0] = (byte)(warriorMaxStrength >>>  0);
-		maxStats[1] = (byte)(warriorMaxStrength >>>  8);
-		maxStats[2] = (byte)(warriorMaxStrength >>> 16);
-		maxStats[3] = (byte)(warriorMaxStrength >>> 24);
+		beh.setLongAsFourBytes(warriorMaxStrength, startingStats, 0);
 		long warriorMaxMagic = char0.getMaxMagic();
-		maxStats[4] = (byte)(warriorMaxMagic >>>  0);
-		maxStats[5] = (byte)(warriorMaxMagic >>>  8);
-		maxStats[6] = (byte)(warriorMaxMagic >>> 16);
-		maxStats[7] = (byte)(warriorMaxMagic >>> 24);
+		beh.setLongAsFourBytes(warriorMaxMagic, startingStats, 4);
 		long warriorMaxDex = char0.getMaxDexterity();
-		maxStats[8] = (byte)(warriorMaxDex >>>  0);
-		maxStats[9] = (byte)(warriorMaxDex >>>  8);
-		maxStats[10] = (byte)(warriorMaxDex >>> 16);
-		maxStats[11] = (byte)(warriorMaxDex >>> 24);
+		beh.setLongAsFourBytes(warriorMaxDex, startingStats, 8);
 		long warriorMaxVit = char0.getMaxVitality();
-		maxStats[12] = (byte)(warriorMaxVit >>>  0);
-		maxStats[13] = (byte)(warriorMaxVit >>>  8);
-		maxStats[14] = (byte)(warriorMaxVit >>> 16);
-		maxStats[15] = (byte)(warriorMaxVit >>> 24);
+		beh.setLongAsFourBytes(warriorMaxVit, startingStats, 12);
 		long rogueMaxStrength = char1.getMaxStrength();
-		maxStats[16] = (byte)(rogueMaxStrength >>>  0);
-		maxStats[17] = (byte)(rogueMaxStrength >>>  8);
-		maxStats[18] = (byte)(rogueMaxStrength >>> 16);
-		maxStats[19] = (byte)(rogueMaxStrength >>> 24);
+		beh.setLongAsFourBytes(rogueMaxStrength, startingStats, 16);
 		long rogueMaxMagic = char1.getMaxMagic();
-		maxStats[20] = (byte)(rogueMaxMagic >>>  0);
-		maxStats[21] = (byte)(rogueMaxMagic >>>  8);
-		maxStats[22] = (byte)(rogueMaxMagic >>> 16);
-		maxStats[23] = (byte)(rogueMaxMagic >>> 24);
+		beh.setLongAsFourBytes(rogueMaxMagic, startingStats, 20);
 		long rogueMaxDex = char1.getMaxDexterity();
-		maxStats[24] = (byte)(rogueMaxDex >>>  0);
-		maxStats[25] = (byte)(rogueMaxDex >>>  8);
-		maxStats[26] = (byte)(rogueMaxDex >>> 16);
-		maxStats[27] = (byte)(rogueMaxDex >>> 24);
+		beh.setLongAsFourBytes(rogueMaxDex, startingStats, 24);
 		long rogueMaxVit = char1.getMaxVitality();
-		maxStats[28] = (byte)(rogueMaxVit >>>  0);
-		maxStats[29] = (byte)(rogueMaxVit >>>  8);
-		maxStats[30] = (byte)(rogueMaxVit >>> 16);
-		maxStats[31] = (byte)(rogueMaxVit >>> 24);
+		beh.setLongAsFourBytes(rogueMaxVit, startingStats, 28);
 		long sorcMaxStrength = char2.getMaxStrength();
-		maxStats[32] = (byte)(sorcMaxStrength >>>  0);
-		maxStats[33] = (byte)(sorcMaxStrength >>>  8);
-		maxStats[34] = (byte)(sorcMaxStrength >>> 16);
-		maxStats[35] = (byte)(sorcMaxStrength >>> 24);
+		beh.setLongAsFourBytes(sorcMaxStrength, startingStats, 32);
 		long sorcMaxMagic = char2.getMaxMagic();
-		maxStats[36] = (byte)(sorcMaxMagic >>>  0);
-		maxStats[37] = (byte)(sorcMaxMagic >>>  8);
-		maxStats[38] = (byte)(sorcMaxMagic >>> 16);
-		maxStats[39] = (byte)(sorcMaxMagic >>> 24);
+		beh.setLongAsFourBytes(sorcMaxMagic, startingStats, 36);
 		long sorcMaxDex = char2.getMaxDexterity();
-		maxStats[40] = (byte)(sorcMaxDex >>>  0);
-		maxStats[41] = (byte)(sorcMaxDex >>> 8);
-		maxStats[42] = (byte)(sorcMaxDex >>> 16);
-		maxStats[43] = (byte)(sorcMaxDex >>> 24);
+		beh.setLongAsFourBytes(sorcMaxDex, startingStats, 40);
 		long sorcMaxVit = char2.getMaxVitality();
-		maxStats[44] = (byte)(sorcMaxVit >>>  0);
-		maxStats[45] = (byte)(sorcMaxVit >>>  8);
-		maxStats[46] = (byte)(sorcMaxVit >>> 16);
-		maxStats[47] = (byte)(sorcMaxVit >>> 24);
+		beh.setLongAsFourBytes(sorcMaxVit, startingStats, 44);
 		return maxStats;
 	}
 
 	private byte[] getBlockingBonusBytes(){
+		BinEditHelper beh = new BinEditHelper();
 		byte[] blockingBonuses = new byte[12];
 		long warriorBlockingBonus = char0.getBlockingBonus();
-		blockingBonuses[0] = (byte)(warriorBlockingBonus >>>  0);
-		blockingBonuses[1] = (byte)(warriorBlockingBonus >>>  8);
-		blockingBonuses[2] = (byte)(warriorBlockingBonus >>> 16);
-		blockingBonuses[3] = (byte)(warriorBlockingBonus >>> 24);
+		beh.setLongAsFourBytes(warriorBlockingBonus, startingStats, 0);
 		long rogueBlockingBonus = char1.getBlockingBonus();
-		blockingBonuses[4] = (byte)(rogueBlockingBonus >>>  0);
-		blockingBonuses[5] = (byte)(rogueBlockingBonus >>>  8);
-		blockingBonuses[6] = (byte)(rogueBlockingBonus >>> 16);
-		blockingBonuses[7] = (byte)(rogueBlockingBonus >>> 24);
+		beh.setLongAsFourBytes(rogueBlockingBonus, startingStats, 4);
 		long sorcBlockingBonus = char2.getBlockingBonus();
-		blockingBonuses[8] = (byte)(sorcBlockingBonus >>>  0);
-		blockingBonuses[9] = (byte)(sorcBlockingBonus >>>  8);
-		blockingBonuses[10] = (byte)(sorcBlockingBonus >>> 16);
-		blockingBonuses[11] = (byte)(sorcBlockingBonus >>> 24);
+		beh.setLongAsFourBytes(sorcBlockingBonus, startingStats, 8);
 		return blockingBonuses;
 	}
 
@@ -402,6 +324,7 @@ public class CharacterStore {
 		return bonusesAndFramesets;
 	}
 
+	//FIXME -- move printlns to writeCharactersToEXE() and remove this method
 	public void getCharactersAsBytes(){
 		byte[] retrievedInitStatBytes = this.getInitStatBytes();
 		byte[] retrievedMaxStatBytes = this.getMaxStatBytes();
