@@ -83,6 +83,13 @@ public class Spell {
 		maxCharges = beh.convertFourBytesToNumber(byteArray, 44);
 		bookCost = beh.convertFourBytesToNumber(byteArray, 48);
 		staffCostMultiplier = beh.convertFourBytesToNumber(byteArray, 52);
+		
+		if((pointerToNameAsSkill == 0) && (pointerToNameAsSpell != 0)){
+			pointerToNameAsSkill = pointerToNameAsSpell;
+		}
+		if((pointerToNameAsSpell == 0) && (pointerToNameAsSkill != 0)){
+			pointerToNameAsSpell = pointerToNameAsSkill;
+		}
 	}
 
 	//TODO -- refactor duplicate code (is in Spell and ShrinesStore)
@@ -225,53 +232,22 @@ public class Spell {
 	}
 
 	public byte[] getSpellAsBytes() {
+		BinEditHelper beh = new BinEditHelper();
 		byte[] spellAsBytes = new byte[56];
 		spellAsBytes[0] = (byte) unmoddedSpellIndex;
 		spellAsBytes[1] = (byte) manaToCast;
 		spellAsBytes[2] = (byte) (animationWhenCasting >>> 0);
 		spellAsBytes[3] = (byte) (animationWhenCasting >>> 8);
-		long spellNamePonterRev = 0;
-		if(pointerToNameAsSpell > 0){
-			spellNamePonterRev = pointerToNameAsSpell + TomeOfKnowledge.DIABLO_POINTERS_OFFSET;
-		}
-		spellAsBytes[4] = (byte) (spellNamePonterRev >>> 0);
-		spellAsBytes[5] = (byte) (spellNamePonterRev >>> 8);
-		spellAsBytes[6] = (byte) (spellNamePonterRev >>> 16);
-		spellAsBytes[7] = (byte) (spellNamePonterRev >>> 24);
-		long skillNamePointerRev = 0;
-		if(pointerToNameAsSkill > 0){
-			skillNamePointerRev = pointerToNameAsSkill + TomeOfKnowledge.DIABLO_POINTERS_OFFSET;
-		}
-		if((pointerToNameAsSkill == 0) && (pointerToNameAsSpell != 0)){
-			pointerToNameAsSkill = pointerToNameAsSpell;
-		}
-		if((pointerToNameAsSpell == 0) && (pointerToNameAsSkill != 0)){
-			pointerToNameAsSpell = pointerToNameAsSkill;
-		}
-		spellAsBytes[8] = (byte) (skillNamePointerRev >>> 0);
-		spellAsBytes[9] = (byte) (skillNamePointerRev >>> 8);
-		spellAsBytes[10] = (byte) (skillNamePointerRev >>> 16);
-		spellAsBytes[11] = (byte) (skillNamePointerRev >>> 24);
-		spellAsBytes[12] = (byte) (spellbookQuality >>> 0); //spellbookQuality
-		spellAsBytes[13] = (byte) (spellbookQuality >>> 8); //spellbookQuality
-		spellAsBytes[14] = (byte) (spellbookQuality >>> 16); //spellbookQuality
-		spellAsBytes[15] = (byte) (spellbookQuality >>> 24); //spellbookQuality
-		spellAsBytes[16] = (byte) (staffQuality >>> 0); //staffQuality
-		spellAsBytes[17] = (byte) (staffQuality >>> 8); //staffQuality
-		spellAsBytes[18] = (byte) (staffQuality >>> 16); //staffQuality
-		spellAsBytes[19] = (byte) (staffQuality >>> 24); //staffQuality
+		beh.setPointerAsFourBytes(pointerToNameAsSpell, spellAsBytes, 4);
+		beh.setPointerAsFourBytes(pointerToNameAsSkill, spellAsBytes, 8);
+		beh.setLongAsFourBytes(spellbookQuality, spellAsBytes, 12);
+		beh.setLongAsFourBytes(staffQuality, spellAsBytes, 16);
 		spellAsBytes[20] = (byte) byteTwenty;
 		spellAsBytes[21] = (byte) byteTwentyone;
 		spellAsBytes[22] = (byte) byteTwentytwo;
 		spellAsBytes[23] = (byte) byteTwentythree;
-		spellAsBytes[24] = (byte) (spellActiveInTown >>> 0); //spellActiveInTown
-		spellAsBytes[25] = (byte) (spellActiveInTown >>> 8); //spellActiveInTown
-		spellAsBytes[26] = (byte) (spellActiveInTown >>> 16); //spellActiveInTown
-		spellAsBytes[27] = (byte) (spellActiveInTown >>> 24); //spellActiveInTown
-		spellAsBytes[28] = (byte) (baseRequiredMagic >>> 0); //baseRequiredMagic
-		spellAsBytes[29] = (byte) (baseRequiredMagic >>> 8); //baseRequiredMagic
-		spellAsBytes[30] = (byte) (baseRequiredMagic >>> 16); //baseRequiredMagic
-		spellAsBytes[31] = (byte) (baseRequiredMagic >>> 24); //baseRequiredMagic
+		beh.setLongAsFourBytes(spellActiveInTown, spellAsBytes, 24);
+		beh.setLongAsFourBytes(baseRequiredMagic, spellAsBytes, 28);
 		spellAsBytes[32] = (byte) castingSound;
 		spellAsBytes[33] = (byte) spellEffects[0];
 		spellAsBytes[34] = (byte) spellEffects[1];
@@ -280,22 +256,10 @@ public class Spell {
 		spellAsBytes[37] = (byte) minCastingCost;
 		spellAsBytes[38] = (byte) byteThirtyEight;
 		spellAsBytes[39] = (byte) byteThirtyNine;
-		spellAsBytes[40] = (byte) (minCharges >>> 0); //minCharges
-		spellAsBytes[41] = (byte) (minCharges >>> 8); //minCharges
-		spellAsBytes[42] = (byte) (minCharges >>> 16); //minCharges
-		spellAsBytes[43] = (byte) (minCharges >>> 24); //minCharges
-		spellAsBytes[44] = (byte) (maxCharges >>> 0); //maxCharges
-		spellAsBytes[45] = (byte) (maxCharges >>> 8); //maxCharges
-		spellAsBytes[46] = (byte) (maxCharges >>> 16); //maxCharges
-		spellAsBytes[47] = (byte) (maxCharges >>> 24); //maxCharges
-		spellAsBytes[48] = (byte) (bookCost >>> 0); //bookCost
-		spellAsBytes[49] = (byte) (bookCost >>> 8); //bookCost
-		spellAsBytes[50] = (byte) (bookCost >>> 16); //bookCost
-		spellAsBytes[51] = (byte) (bookCost >>> 24); //bookCost
-		spellAsBytes[52] = (byte) (staffCostMultiplier >>> 0); //staffCostMultiplier
-		spellAsBytes[53] = (byte) (staffCostMultiplier >>> 8); //staffCostMultiplier
-		spellAsBytes[54] = (byte) (staffCostMultiplier >>> 16); //staffCostMultiplier
-		spellAsBytes[55] = (byte) (staffCostMultiplier >>> 24); //staffCostMultiplier
+		beh.setLongAsFourBytes(minCharges, spellAsBytes, 40);
+		beh.setLongAsFourBytes(maxCharges, spellAsBytes, 44);
+		beh.setLongAsFourBytes(bookCost, spellAsBytes, 48);
+		beh.setLongAsFourBytes(staffCostMultiplier, spellAsBytes, 52);
 
 		//System.out.println("ORIG: " + Arrays.toString(spellBytes));
 		//System.out.println("BACK: " + Arrays.toString(spellAsBytes));
