@@ -59,7 +59,6 @@ public class BaseMonster {
 	private long experiencePoints;
 	private int enabled;
 	private boolean changed;
-	private byte[] monsterBytesOrig;
 	int slotNumber;
 
 	public BaseMonster(int slotNumber, byte[] monsterBytes, byte activationByte, ReaderWriter rw) {
@@ -121,7 +120,6 @@ public class BaseMonster {
 		experiencePoints = bih.convertFourBytesToNumber(monsterBytes, 124);
 		enabled = bih.convertUnsignedByteToInt(activationByte);
 		changed = false;
-		this.monsterBytesOrig = monsterBytes;
 	}
 
 	public MonsterAsBytes getMonsterAsBytes(){
@@ -188,8 +186,6 @@ public class BaseMonster {
 		monsterBytes[123] = (byte)(monsterSelectionOutline >>>  8);
 		beh.setLongAsFourBytes(experiencePoints, monsterBytes, 124);
 		MonsterAsBytes mab = new MonsterAsBytes(monsterBytes, (byte) enabled);
-		//System.out.println("ORIG: " + Arrays.toString(monsterBytesOrig));
-		//System.out.println("BACK: " + Arrays.toString(monsterBytes) + "\n");
 		return mab;
 	}
 
@@ -993,13 +989,4 @@ public class BaseMonster {
 	public void setChanged() {
 		this.changed = true;
 	}
-
-	public byte[] getMonsterBytesOrig() {
-		return monsterBytesOrig;
-	}
-
-	public void setMonsterBytesOrig(byte[] monsterBytesOrig) {
-		this.monsterBytesOrig = monsterBytesOrig;
-	}
-
 }

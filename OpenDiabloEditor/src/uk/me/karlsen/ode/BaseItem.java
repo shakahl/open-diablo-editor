@@ -381,12 +381,10 @@ public class BaseItem {
 	private long priceTwo;
 	private int slotNumber;
 	private boolean changed;
-	//private byte[] itemBytes;
 
 	public BaseItem(int slotNumber, byte[] itemBytes, ReaderWriter rw) {
 		changed = false;
 		this.slotNumber = slotNumber;
-		//this.itemBytes = itemBytes;
 		BinEditHelper beh = new BinEditHelper();
 		activationTrigger = beh.convertFourBytesToNumber(itemBytes, 0);
 		itemType = beh.convertUnsignedByteToInt(itemBytes[4]);
@@ -451,9 +449,6 @@ public class BaseItem {
 		beh.setLongAsFourBytes(singleUseFlag, bytes, 64);
 		beh.setLongAsFourBytes(priceOne, bytes, 68);
 		beh.setLongAsFourBytes(priceTwo, bytes, 72);
-		//System.out.println("ORIG: " + Arrays.toString(itemBytes));
-		//System.out.println("BACK: " + Arrays.toString(bytes));
-		//System.out.println();
 		return bytes;
 	}
 
