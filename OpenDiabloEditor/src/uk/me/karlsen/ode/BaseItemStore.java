@@ -3,10 +3,17 @@ package uk.me.karlsen.ode;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * A store for base item objects belonging 
+ * to the BaseItem class. Interfaces with
+ * ReaderWriter for the purposes of reading
+ * in items to the store and writing out
+ * items back to the EXE. 
+ */
 public class BaseItemStore {
 
-	ReaderWriter rw;
-	List<BaseItem> baseItems;
+	private ReaderWriter rw;
+	private List<BaseItem> baseItems;
 
 	public BaseItemStore(ReaderWriter rw) {
 		this.rw = rw;
@@ -14,7 +21,7 @@ public class BaseItemStore {
 		this.readInItems();
 	}
 
-	public void readInItems() {
+	private void readInItems() {
 		long pos = TomeOfKnowledge.BASE_ITEMS_OFFSET;
 		rw.seek(pos);
 		for(int i = 0; i < TomeOfKnowledge.NUMBER_OF_BASE_ITEMS; i++){
@@ -28,10 +35,6 @@ public class BaseItemStore {
 
 	}
 
-	public byte[] getItemAsBytes(int index){
-		return baseItems.get(index).getItemAsBytes();
-	}
-
 	public void printItems() {
 		for(BaseItem bi : baseItems){
 			bi.printItem();
@@ -40,8 +43,8 @@ public class BaseItemStore {
 
 	public void writeItemsToEXE() {
 		long pos = TomeOfKnowledge.BASE_ITEMS_OFFSET;
-		for(int i = 0; i < TomeOfKnowledge.NUMBER_OF_BASE_ITEMS; i++){
-			byte[] itemAsBytes = this.getItemAsBytes(i);
+		for(BaseItem bi : baseItems){
+			byte[] itemAsBytes = bi.getItemAsBytes();
 			rw.writeBytes(itemAsBytes, pos);
 			pos = pos + TomeOfKnowledge.BASE_ITEM_LENGTH_IN_BYTES;
 		}
