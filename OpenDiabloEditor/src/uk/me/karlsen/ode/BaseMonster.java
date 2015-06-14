@@ -59,66 +59,68 @@ public class BaseMonster {
 	private long experiencePoints;
 	private int enabled;
 	private boolean changed;
-	int slotNumber;
+	private int slotNumber;
 
 	public BaseMonster(int slotNumber, byte[] monsterBytes, byte activationByte, ReaderWriter rw) {
 		this.slotNumber = slotNumber;
-		BinEditHelper bih = new BinEditHelper();
-		animationSize = bih.convertFourBytesToNumber(monsterBytes, 0);
-		seedingSize = bih.convertFourBytesToNumber(monsterBytes, 4);
-		animationFilePointer = bih.convertFourBytesToOffset(monsterBytes, 8);
-		animationFileName = bih.getNameUsingPointer(animationFilePointer);
-		secondAttack = bih.convertFourBytesToNumber(monsterBytes, 12);
-		soundPointer = bih.convertFourBytesToOffset(monsterBytes, 16);
-		hasSecondAttackSound = bih.convertFourBytesToNumber(monsterBytes, 20);
-		usesTrnToModColor = bih.convertFourBytesToNumber(monsterBytes, 24);
-		trnPointer = bih.convertFourBytesToOffset(monsterBytes, 28);
-		idleFrameset = bih.convertFourBytesToNumber(monsterBytes, 32);
-		walkFrameset = bih.convertFourBytesToNumber(monsterBytes, 36);
-		attackFrameset = bih.convertFourBytesToNumber(monsterBytes, 40);
-		hitRecoveryFrameset = bih.convertFourBytesToNumber(monsterBytes, 44);
-		deathFrameset = bih.convertFourBytesToNumber(monsterBytes, 48);
-		secondAttackFrameset = bih.convertFourBytesToNumber(monsterBytes, 52);
-		idlePlaybackSpeed = bih.convertFourBytesToNumber(monsterBytes, 56);
-		walkPlaybackSpeed = bih.convertFourBytesToNumber(monsterBytes, 60);
-		attackPlaybackSpeed = bih.convertFourBytesToNumber(monsterBytes, 64);
-		hitRecoverySpeed = bih.convertFourBytesToNumber(monsterBytes, 68);
-		deathPlaybackSpeed = bih.convertFourBytesToNumber(monsterBytes, 72);
-		secondAttackSpeed = bih.convertFourBytesToNumber(monsterBytes, 76);
-		namePointer = bih.convertFourBytesToOffset(monsterBytes, 80);
-		name = bih.getNameUsingPointer(namePointer);
-		minDungeonLevel = bih.convertUnsignedByteToInt(monsterBytes[84]);
-		maxDungeonLevel = bih.convertUnsignedByteToInt(monsterBytes[85]);
-		monsterItemLevel = bih.convertTwoBytesToInt(monsterBytes[86], monsterBytes[87]);
-		minHitPoints = bih.convertFourBytesToNumber(monsterBytes, 88);
-		maxHitPoints = bih.convertFourBytesToNumber(monsterBytes, 92);
-		attackType1 = bih.convertUnsignedByteToInt(monsterBytes[96]);
-		attackType2 = bih.convertUnsignedByteToInt(monsterBytes[97]);
-		attackType3 = bih.convertUnsignedByteToInt(monsterBytes[98]);
-		attackType4 = bih.convertUnsignedByteToInt(monsterBytes[99]);
-		attackType5 = bih.convertUnsignedByteToInt(monsterBytes[100]);
-		monsterIntelligence = bih.convertUnsignedByteToInt(monsterBytes[101]);
-		attackType7 = bih.convertUnsignedByteToInt(monsterBytes[102]);
-		attackType8 = bih.convertUnsignedByteToInt(monsterBytes[103]);
-		subType = bih.convertUnsignedByteToInt(monsterBytes[104]);
-		monsterPriChanceToHit = bih.convertUnsignedByteToInt(monsterBytes[105]);
-		priToHitFrame = bih.convertUnsignedByteToInt(monsterBytes[106]);
-		priMinAttackDamage = bih.convertUnsignedByteToInt(monsterBytes[107]);
-		priMaxAttackDamage = bih.convertUnsignedByteToInt(monsterBytes[108]);
-		secToHitChance = bih.convertUnsignedByteToInt(monsterBytes[109]);
-		secToHitFrame = bih.convertUnsignedByteToInt(monsterBytes[110]);
-		secMinAttackDamage = bih.convertUnsignedByteToInt(monsterBytes[111]);
-		secMaxAttackDamage = bih.convertUnsignedByteToInt(monsterBytes[112]);
-		monsterAc = bih.convertUnsignedByteToInt(monsterBytes[113]);
-		monsterType = bih.convertTwoBytesToInt(monsterBytes[114], monsterBytes[115]);
-		resistancesNormAndNightmare = String.format("%16s", Integer.toBinaryString(bih.convertUnsignedByteToInt(monsterBytes[116]))).replace(' ', '0') +
-				String.format("%16s", Integer.toBinaryString(bih.convertUnsignedByteToInt(monsterBytes[117]))).replace(' ', '0');
-		resistancesHell = String.format("%16s", Integer.toBinaryString(bih.convertUnsignedByteToInt(monsterBytes[118]))).replace(' ', '0') +
-				String.format("%16s", Integer.toBinaryString(bih.convertUnsignedByteToInt(monsterBytes[119]))).replace(' ', '0');
-		itemDropSpecials = bih.convertTwoBytesToInt(monsterBytes[120], monsterBytes[121]);
-		monsterSelectionOutline = bih.convertTwoBytesToInt(monsterBytes[122], monsterBytes[123]);
-		experiencePoints = bih.convertFourBytesToNumber(monsterBytes, 124);
-		enabled = bih.convertUnsignedByteToInt(activationByte);
+		BinEditHelper beh = new BinEditHelper();
+		animationSize = beh.convertFourBytesToNumber(monsterBytes, 0);
+		seedingSize = beh.convertFourBytesToNumber(monsterBytes, 4);
+		animationFilePointer = beh.convertFourBytesToOffset(monsterBytes, 8);
+		animationFileName = beh.getNameUsingPointer(animationFilePointer);
+		secondAttack = beh.convertFourBytesToNumber(monsterBytes, 12);
+		soundPointer = beh.convertFourBytesToOffset(monsterBytes, 16);
+		hasSecondAttackSound = beh.convertFourBytesToNumber(monsterBytes, 20);
+		usesTrnToModColor = beh.convertFourBytesToNumber(monsterBytes, 24);
+		trnPointer = beh.convertFourBytesToOffset(monsterBytes, 28);
+		idleFrameset = beh.convertFourBytesToNumber(monsterBytes, 32);
+		walkFrameset = beh.convertFourBytesToNumber(monsterBytes, 36);
+		attackFrameset = beh.convertFourBytesToNumber(monsterBytes, 40);
+		hitRecoveryFrameset = beh.convertFourBytesToNumber(monsterBytes, 44);
+		deathFrameset = beh.convertFourBytesToNumber(monsterBytes, 48);
+		secondAttackFrameset = beh.convertFourBytesToNumber(monsterBytes, 52);
+		idlePlaybackSpeed = beh.convertFourBytesToNumber(monsterBytes, 56);
+		walkPlaybackSpeed = beh.convertFourBytesToNumber(monsterBytes, 60);
+		attackPlaybackSpeed = beh.convertFourBytesToNumber(monsterBytes, 64);
+		hitRecoverySpeed = beh.convertFourBytesToNumber(monsterBytes, 68);
+		deathPlaybackSpeed = beh.convertFourBytesToNumber(monsterBytes, 72);
+		secondAttackSpeed = beh.convertFourBytesToNumber(monsterBytes, 76);
+		namePointer = beh.convertFourBytesToOffset(monsterBytes, 80);
+		name = beh.getNameUsingPointer(namePointer);
+		minDungeonLevel = beh.convertUnsignedByteToInt(monsterBytes[84]);
+		maxDungeonLevel = beh.convertUnsignedByteToInt(monsterBytes[85]);
+		monsterItemLevel = beh.convertTwoBytesToInt(monsterBytes[86], monsterBytes[87]);
+		minHitPoints = beh.convertFourBytesToNumber(monsterBytes, 88);
+		maxHitPoints = beh.convertFourBytesToNumber(monsterBytes, 92);
+		attackType1 = beh.convertUnsignedByteToInt(monsterBytes[96]);
+		attackType2 = beh.convertUnsignedByteToInt(monsterBytes[97]);
+		attackType3 = beh.convertUnsignedByteToInt(monsterBytes[98]);
+		attackType4 = beh.convertUnsignedByteToInt(monsterBytes[99]);
+		attackType5 = beh.convertUnsignedByteToInt(monsterBytes[100]);
+		monsterIntelligence = beh.convertUnsignedByteToInt(monsterBytes[101]);
+		attackType7 = beh.convertUnsignedByteToInt(monsterBytes[102]);
+		attackType8 = beh.convertUnsignedByteToInt(monsterBytes[103]);
+		subType = beh.convertUnsignedByteToInt(monsterBytes[104]);
+		monsterPriChanceToHit = beh.convertUnsignedByteToInt(monsterBytes[105]);
+		priToHitFrame = beh.convertUnsignedByteToInt(monsterBytes[106]);
+		priMinAttackDamage = beh.convertUnsignedByteToInt(monsterBytes[107]);
+		priMaxAttackDamage = beh.convertUnsignedByteToInt(monsterBytes[108]);
+		secToHitChance = beh.convertUnsignedByteToInt(monsterBytes[109]);
+		secToHitFrame = beh.convertUnsignedByteToInt(monsterBytes[110]);
+		secMinAttackDamage = beh.convertUnsignedByteToInt(monsterBytes[111]);
+		secMaxAttackDamage = beh.convertUnsignedByteToInt(monsterBytes[112]);
+		monsterAc = beh.convertUnsignedByteToInt(monsterBytes[113]);
+		monsterType = beh.convertTwoBytesToInt(monsterBytes[114], monsterBytes[115]);
+		String normalResistances = beh.convertByteToBinaryString(monsterBytes[116]);
+		String nightmareResistances = beh.convertByteToBinaryString(monsterBytes[117]);
+		resistancesNormAndNightmare = normalResistances + nightmareResistances;
+		String hellResistancesPartOne = beh.convertByteToBinaryString(monsterBytes[118]);
+		String hellResistancesPartTwo = beh.convertByteToBinaryString(monsterBytes[119]);
+		resistancesHell = hellResistancesPartOne + hellResistancesPartTwo;
+		itemDropSpecials = beh.convertTwoBytesToInt(monsterBytes[120], monsterBytes[121]);
+		monsterSelectionOutline = beh.convertTwoBytesToInt(monsterBytes[122], monsterBytes[123]);
+		experiencePoints = beh.convertFourBytesToNumber(monsterBytes, 124);
+		enabled = beh.convertUnsignedByteToInt(activationByte);
 		changed = false;
 	}
 
@@ -148,108 +150,104 @@ public class BaseMonster {
 		beh.setPointerAsFourBytes(namePointer, monsterBytes, 80);
 		monsterBytes[84] = (byte) minDungeonLevel;
 		monsterBytes[85] = (byte) maxDungeonLevel;
-		monsterBytes[86] = (byte) monsterItemLevel;
-		monsterBytes[87] = (byte) 0;
+		beh.setIntAsTwoBytes(monsterItemLevel, monsterBytes, 86);
 		beh.setLongAsFourBytes(minHitPoints, monsterBytes, 88);
 		beh.setLongAsFourBytes(maxHitPoints, monsterBytes, 92);
-		monsterBytes[96] = (byte) attackType1; //attackType1
-		monsterBytes[97] = (byte) attackType2; //attackType2
-		monsterBytes[98] = (byte) attackType3; //attackType3
-		monsterBytes[99] = (byte) attackType4; //attackType4
-		monsterBytes[100] = (byte) attackType5; //attackType5
-  		monsterBytes[101] = (byte) monsterIntelligence; //monsterIntelligence
-		monsterBytes[102] = (byte) attackType7; //attackType7
-		monsterBytes[103] = (byte) attackType8; //attackType8
-		monsterBytes[104] = (byte) subType; //subType
-		monsterBytes[105] = (byte) monsterPriChanceToHit; //monsterPriChanceToHit
-		monsterBytes[106] = (byte) priToHitFrame; //priToHitFrame
-		monsterBytes[107] = (byte) priMinAttackDamage; //priMinAttackDamage
-		monsterBytes[108] = (byte) priMaxAttackDamage; //priMaxAttackDamage
-		monsterBytes[109] = (byte) secToHitChance; //secToHitChance
-		monsterBytes[110] = (byte) secToHitFrame; //secToHitFrame
-		monsterBytes[111] = (byte) secMinAttackDamage; //secMinAttackDamage
-		monsterBytes[112] = (byte) secMaxAttackDamage; //secMaxAttackDamage
-		monsterBytes[113] = (byte) monsterAc; //monsterAc
-		monsterBytes[114] = (byte)(monsterType >>>  0); //monsterType
-		monsterBytes[115] = (byte)(monsterType >>>  8);
-		String res1 = resistancesNormAndNightmare.substring(0, 8);
-		String res2 = resistancesNormAndNightmare.substring(8, 16);
+		monsterBytes[96] = (byte) attackType1;
+		monsterBytes[97] = (byte) attackType2;
+		monsterBytes[98] = (byte) attackType3;
+		monsterBytes[99] = (byte) attackType4;
+		monsterBytes[100] = (byte) attackType5;
+  		monsterBytes[101] = (byte) monsterIntelligence;
+		monsterBytes[102] = (byte) attackType7;
+		monsterBytes[103] = (byte) attackType8;
+		monsterBytes[104] = (byte) subType;
+		monsterBytes[105] = (byte) monsterPriChanceToHit;
+		monsterBytes[106] = (byte) priToHitFrame;
+		monsterBytes[107] = (byte) priMinAttackDamage;
+		monsterBytes[108] = (byte) priMaxAttackDamage;
+		monsterBytes[109] = (byte) secToHitChance;
+		monsterBytes[110] = (byte) secToHitFrame;
+		monsterBytes[111] = (byte) secMinAttackDamage;
+		monsterBytes[112] = (byte) secMaxAttackDamage;
+		monsterBytes[113] = (byte) monsterAc;
+		beh.setIntAsTwoBytes(monsterType, monsterBytes, 114);
+		String res1 = resistancesNormAndNightmare.substring(8, 16);
+		String res2 = resistancesNormAndNightmare.substring(0, 8); //FIXME -- next 8 lines can be improved using a new method
 		monsterBytes[116] = (byte) Integer.parseInt(res2, 2);
 		monsterBytes[117] = (byte) Integer.parseInt(res1, 2);
-		String res3 = resistancesHell.substring(0, 8);
-		String res4 = resistancesHell.substring(8, 16);
-		monsterBytes[118] = (byte) Integer.parseInt(res4, 2); //resistancesHell
+		String res3 = resistancesHell.substring(8, 16);
+		String res4 = resistancesHell.substring(0, 8);
+		monsterBytes[118] = (byte) Integer.parseInt(res4, 2);
 		monsterBytes[119] = (byte) Integer.parseInt(res3, 2);
-		monsterBytes[120] = (byte)(itemDropSpecials >>>  0); //itemDropSpecials
-		monsterBytes[121] = (byte)(itemDropSpecials >>>  8);
-		monsterBytes[122] = (byte)(monsterSelectionOutline >>>  0); //monsterSelectionOutline
-		monsterBytes[123] = (byte)(monsterSelectionOutline >>>  8);
+		beh.setIntAsTwoBytes(itemDropSpecials, monsterBytes, 120);
+		beh.setIntAsTwoBytes(monsterSelectionOutline, monsterBytes, 122);
 		beh.setLongAsFourBytes(experiencePoints, monsterBytes, 124);
 		MonsterAsBytes mab = new MonsterAsBytes(monsterBytes, (byte) enabled);
 		return mab;
 	}
 
 	public void printMonster() {
-		System.out.println( "+--------------------------------------+" + "\n" +
-							"| Slot number: " + slotNumber + " (hex: " + Integer.toHexString(slotNumber) + ")" + "\n" +
-							"| Monster name: " + name + "\n" +
-							"| Enabled: " + enabled + "\n" +
-							"| Animation size: " + animationSize + "\n" +
-							"| Seeding size: " + seedingSize + "\n" +
-							"| Animation file pointer: " + animationFilePointer + "\n" +
-							"| Animation file name: " + animationFileName + "\n" +
-							"| Second attack: " + secondAttack + "\n" +
-							"| Sound pointer: " + soundPointer + "\n" +
-							"| Has second attack sound: " + hasSecondAttackSound + "\n" +
-							"| Uses TRN to mod color: " + usesTrnToModColor + "\n" +
-							"| TRN pointer: " + trnPointer + "\n" +
-							"| Idle frameset: " + idleFrameset + "\n" +
-							"| Walk frameset: " + walkFrameset + "\n" +
-							"| Attack frameset: " + attackFrameset + "\n" +
-							"| Hit recovery frameset: " + hitRecoveryFrameset + "\n" +
-							"| Death frameset: " + deathFrameset + "\n" +
-							"| Second attack frameset: " + secondAttackFrameset + "\n" +
-							"| Idle playback speed: " + idlePlaybackSpeed + "\n" +
-							"| Walk playback speed: " + walkPlaybackSpeed + "\n" +
-							"| Attack playback speed: " + attackPlaybackSpeed + "\n" +
-							"| Hit recovery speed: " + hitRecoverySpeed + "\n" +
-							"| Death playback speed: " + deathPlaybackSpeed + "\n" +
-							"| Second attack speed: " + secondAttackSpeed + "\n" +
-							"| Name pointer: " + namePointer + "\n" +
-							"| Min dungeon level: " + minDungeonLevel + "\n" +
-							"| Max dungeon level: " + maxDungeonLevel + "\n" +
-							"| Monster item level: " + monsterItemLevel + "\n" +
-							"| HPs: " + minHitPoints + "--" + maxHitPoints + "\n" +
-							"| Attack type (byte 1): " + attackType1 + "\n" +
-							"| Attack type (byte 2): " + attackType2 + "\n" +
-							"| Attack type (byte 3): " + attackType3 + "\n" +
-							"| Attack type (byte 4): " + attackType4 + "\n" +
-							"| Attack type (byte 5): " + attackType5 + "\n" +
-							"| Monster intelligence: " + monsterIntelligence + "\n" +
-							"| Attack type (byte 7): " + attackType7 + "\n" +
-							"| Attack type (byte 8): " + attackType8 + "\n" +
-							"| Monster sub-type: " + subType + "\n" +
-							"| Primary attack % hit: " + monsterPriChanceToHit + "\n" +
-							"| Primary to-hit frame: " + priToHitFrame + "\n" +
-							"| Primary damage: " + priMinAttackDamage + "--" + priMaxAttackDamage + "\n" +
-							"| Sec. attack % hit: " + secToHitChance + "\n" +
-							"| Sec. to-hit frame: " + secToHitFrame + "\n" +
-							"| Secondary damage: " + secMinAttackDamage + "--" + secMaxAttackDamage + "\n" +
-							"| Monster AC: " + monsterAc + "\n" +
-							"| Monster type: " + monsterType + "\n" +
-							"| Resistances (norm. and nightmare): " + resistancesNormAndNightmare + "\n" +
-							"| Resistances (hell mode): " + resistancesHell + "\n" +
-							"| Item drop specials: " + itemDropSpecials + "\n" +
-							"| Monster selection outline: " + monsterSelectionOutline + "\n" +
-							"| XP: " + experiencePoints + "\n" +
-							"+--------------------------------------+" + "\n" );
+		System.out.println(
+		"+--------------------------------------+" + "\n" +
+		"| Slot number: " + slotNumber + " (hex: " + Integer.toHexString(slotNumber) + ")" + "\n" +
+		"| Monster name: " + name + "\n" +
+		"| Enabled: " + enabled + "\n" +
+		"| Animation size: " + animationSize + "\n" +
+		"| Seeding size: " + seedingSize + "\n" +
+		"| Animation file pointer: " + animationFilePointer + "\n" +
+		"| Animation file name: " + animationFileName + "\n" +
+		"| Second attack: " + secondAttack + "\n" +
+		"| Sound pointer: " + soundPointer + "\n" +
+		"| Has second attack sound: " + hasSecondAttackSound + "\n" +
+		"| Uses TRN to mod color: " + usesTrnToModColor + "\n" +
+		"| TRN pointer: " + trnPointer + "\n" +
+		"| Idle frameset: " + idleFrameset + "\n" +
+		"| Walk frameset: " + walkFrameset + "\n" +
+		"| Attack frameset: " + attackFrameset + "\n" +
+		"| Hit recovery frameset: " + hitRecoveryFrameset + "\n" +
+		"| Death frameset: " + deathFrameset + "\n" +
+		"| Second attack frameset: " + secondAttackFrameset + "\n" +
+		"| Idle playback speed: " + idlePlaybackSpeed + "\n" +
+		"| Walk playback speed: " + walkPlaybackSpeed + "\n" +
+		"| Attack playback speed: " + attackPlaybackSpeed + "\n" +
+		"| Hit recovery speed: " + hitRecoverySpeed + "\n" +
+		"| Death playback speed: " + deathPlaybackSpeed + "\n" +
+		"| Second attack speed: " + secondAttackSpeed + "\n" +
+		"| Name pointer: " + namePointer + "\n" +
+		"| Min dungeon level: " + minDungeonLevel + "\n" +
+		"| Max dungeon level: " + maxDungeonLevel + "\n" +
+		"| Monster item level: " + monsterItemLevel + "\n" +
+		"| HPs: " + minHitPoints + "--" + maxHitPoints + "\n" +
+		"| Attack type (byte 1): " + attackType1 + "\n" +
+		"| Attack type (byte 2): " + attackType2 + "\n" +
+		"| Attack type (byte 3): " + attackType3 + "\n" +
+		"| Attack type (byte 4): " + attackType4 + "\n" +
+		"| Attack type (byte 5): " + attackType5 + "\n" +
+		"| Monster intelligence: " + monsterIntelligence + "\n" +
+		"| Attack type (byte 7): " + attackType7 + "\n" +
+		"| Attack type (byte 8): " + attackType8 + "\n" +
+		"| Monster sub-type: " + subType + "\n" +
+		"| Primary attack % hit: " + monsterPriChanceToHit + "\n" +
+		"| Primary to-hit frame: " + priToHitFrame + "\n" +
+		"| Primary damage: " + priMinAttackDamage + "--" + priMaxAttackDamage + "\n" +
+		"| Sec. attack % hit: " + secToHitChance + "\n" +
+		"| Sec. to-hit frame: " + secToHitFrame + "\n" +
+		"| Secondary damage: " + secMinAttackDamage + "--" + secMaxAttackDamage + "\n" +
+		"| Monster AC: " + monsterAc + "\n" +
+		"| Monster type: " + monsterType + "\n" +
+		"| Resistances (norm. and nightmare): " + resistancesNormAndNightmare + "\n" +
+		"| Resistances (hell mode): " + resistancesHell + "\n" +
+		"| Item drop specials: " + itemDropSpecials + "\n" +
+		"| Monster selection outline: " + monsterSelectionOutline + "\n" +
+		"| XP: " + experiencePoints + "\n" +
+		"+--------------------------------------+" + "\n" );
 	}
 
 	public long getAnimationSize() {
 		return animationSize;
 	}
 
-	//128, 160, 96
 	public void setAnimationSize(long animationSize) {
 		Integer[] animationSizes = {96, 128, 160};
 		List<Integer> animationSizeList = Arrays.asList(animationSizes);

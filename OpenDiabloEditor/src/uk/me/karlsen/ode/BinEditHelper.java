@@ -29,7 +29,6 @@ public class BinEditHelper {
 		return name;
 	}
 
-	//TODO -- replace/simplify much content from the get<ObjectName>AsBytes methods using this method
 	public void setLongAsFourBytes(long numberToConvert, byte[] destinationArray, int firstDestinationByte){
 		byte[] bytesToSet = new byte[4];
 		bytesToSet[0] = (byte)(numberToConvert >>>  0);
@@ -39,7 +38,13 @@ public class BinEditHelper {
 		System.arraycopy(bytesToSet, 0, destinationArray, firstDestinationByte, bytesToSet.length);
 	}
 	
-	//TODO -- replace/simplify much content from the get<ObjectName>AsBytes methods using this method
+	public void setIntAsTwoBytes(int numberToConvert, byte[] destinationArray, int firstDestinationByte){
+		byte[] bytesToSet = new byte[2];
+		bytesToSet[0] = (byte)(numberToConvert >>>  0);
+		bytesToSet[1] = (byte)(numberToConvert >>>  8);
+		System.arraycopy(bytesToSet, 0, destinationArray, firstDestinationByte, bytesToSet.length);
+	}
+	
 	public void setPointerAsFourBytes(long numberToConvert, byte[] destinationArray, int firstDestinationByte){
 		long numberToConvertModified = 0;
 		if(numberToConvert != 0){
@@ -76,7 +81,6 @@ public class BinEditHelper {
 		return value;
 	}
 	
-	//FIXME -- move to BinEditHelper
 	private long convertFourBytesToNumber(int... bytes){
 		String byte0 = Integer.toHexString(bytes[3] & 0xFF);
 		String byte1 = Integer.toHexString(bytes[2] & 0xFF);
@@ -137,7 +141,6 @@ public class BinEditHelper {
 		return value;
 	}
 	
-	//FIXME -- move to BinEditHelper
 	public long convertFourBytesToOffset(byte[] holdingArray, int offset){
 		long value = this.convertFourBytesToNumber(holdingArray, offset);
 		if(value != 0){
@@ -146,7 +149,6 @@ public class BinEditHelper {
 		return value;
 	}
 	
-	//FIXME -- move to BinEditHelper
 	private long convertFourBytesToOffset(int... fourBytes){
 		long value = -1;
 		String byte0 = Integer.toHexString(fourBytes[3] & 0xFF);
@@ -171,8 +173,13 @@ public class BinEditHelper {
 		return value;
 	}
 	
-	//FIXME -- move to BinEditHelper
 	public int convertUnsignedByteToInt(byte b){
 		return (int) b & 0xFF;
+	}
+	
+	public String convertByteToBinaryString(byte b){
+		int i = this.convertUnsignedByteToInt(b);
+		String s = Integer.toBinaryString(i);
+		return String.format("%8s", s).replace(' ', '0');
 	}
 }
