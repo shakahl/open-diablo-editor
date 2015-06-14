@@ -50,4 +50,8 @@ public class BaseItemStore {
 		}
 
 	}
+
+	public byte[] getItemAsBytes(int i) {
+		return baseItems.get(i).getItemAsBytes();
+	}
 }
