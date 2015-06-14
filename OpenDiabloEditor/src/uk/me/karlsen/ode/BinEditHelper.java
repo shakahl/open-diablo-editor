@@ -2,9 +2,7 @@ package uk.me.karlsen.ode;
 
 public class BinEditHelper {
 
-	public BinEditHelper(){
-
-	}
+	public BinEditHelper(){}
 
 	public String getNameUsingPointer(long pointer){
 		String name = "Unnamed";
@@ -58,12 +56,11 @@ public class BinEditHelper {
 		System.arraycopy(bytesToSet, 0, destinationArray, firstDestinationByte, bytesToSet.length);
 	}
 
-	//FIXME -- this should not exist
+	//FIXME -- this should not exist -- the "correct" method is convertFourBytesToOffset()
 	long convertThreeBytesToOffset(int... fourBytes){
 		String byte0 = Integer.toHexString(fourBytes[3] & 0xFF);
 		String byte1 = Integer.toHexString(fourBytes[2] & 0xFF);
 		String byte2 = Integer.toHexString(fourBytes[1] & 0xFF);
-		//String byte3 = Integer.toHexString(fourBytes[0]);
 		if(byte0.length() < 2){
 			byte0 = "0" + byte0;
 		}
@@ -73,33 +70,8 @@ public class BinEditHelper {
 		if(byte2.length() < 2){
 			byte2 = "0" + byte2;
 		}
-		//if(byte3.length() < 2){
-		//	byte3 = "0" + byte3;
-		//}
 		String str = byte0 + byte1 + byte2; //+ byte3;
 		long value = Long.parseLong(str, 16) - TomeOfKnowledge.DIABLO_POINTERS_OFFSET;
-		return value;
-	}
-	
-	private long convertFourBytesToNumber(int... bytes){
-		String byte0 = Integer.toHexString(bytes[3] & 0xFF);
-		String byte1 = Integer.toHexString(bytes[2] & 0xFF);
-		String byte2 = Integer.toHexString(bytes[1] & 0xFF);
-		String byte3 = Integer.toHexString(bytes[0] & 0xFF);
-		if(byte0.length() < 2){
-			byte0 = "0" + byte0;
-		}
-		if(byte1.length() < 2){
-			byte1 = "0" + byte1;
-		}
-		if(byte2.length() < 2){
-			byte2 = "0" + byte2;
-		}
-		if(byte3.length() < 2){
-			byte3 = "0" + byte3;
-		}
-		String str = byte0 + byte1 + byte2 + byte3;
-		long value = Long.parseLong(str, 16);
 		return value;
 	}
 	
@@ -141,35 +113,11 @@ public class BinEditHelper {
 		return value;
 	}
 	
-	public long convertFourBytesToOffset(byte[] holdingArray, int offset){
-		long value = this.convertFourBytesToNumber(holdingArray, offset);
+	public long convertFourBytesToOffset(byte[] holdingArray, int holdingArrayOffset){
+		long value = this.convertFourBytesToNumber(holdingArray, holdingArrayOffset);
 		if(value != 0){
 			value = value - TomeOfKnowledge.DIABLO_POINTERS_OFFSET;			
 		}
-		return value;
-	}
-	
-	private long convertFourBytesToOffset(int... fourBytes){
-		long value = -1;
-		String byte0 = Integer.toHexString(fourBytes[3] & 0xFF);
-		String byte1 = Integer.toHexString(fourBytes[2] & 0xFF);
-		String byte2 = Integer.toHexString(fourBytes[1] & 0xFF);
-		String byte3 = Integer.toHexString(fourBytes[0] & 0xFF);
-		if(byte0.length() < 2){
-			byte0 = "0" + byte0;
-		}
-		if(byte1.length() < 2){
-			byte1 = "0" + byte1;
-		}
-		if(byte2.length() < 2){
-			byte2 = "0" + byte2;
-		}
-		if(byte3.length() < 2){
-			byte3 = "0" + byte3;
-		}
-		String str = byte0 + byte1 + byte2 + byte3;
-		value = Long.parseLong(str, 16);
-		value = value - TomeOfKnowledge.DIABLO_POINTERS_OFFSET;
 		return value;
 	}
 	
