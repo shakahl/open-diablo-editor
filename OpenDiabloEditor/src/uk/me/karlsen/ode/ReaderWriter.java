@@ -127,6 +127,16 @@ public class ReaderWriter {
 			System.exit(-1);
 		}
 	}
+	
+	public void writeByte(byte b, long pos){
+		try {
+			raf.seek(pos);
+			raf.write(b);
+		} catch (IOException e) {
+			e.printStackTrace();
+			System.exit(-1);
+		}
+	}
 
 	/*TODO: Transferred to BinEditHelper in my edit -- confirm no conflict with mewmew's edit...
 	public void writeOneByteMultipleTimes(byte oneByte, long pos, int numBytes){
