@@ -29,9 +29,13 @@ public class TomeOfKnowledge {
 	public static final int NUMBER_OF_UNIQUE_ITEMS = 50;
 
 	public static final long MIN_STATS_OFFSET = 650716;
+	public static final int MIN_STATS_LENGTH_IN_BYTES = 48;
 	public static final long MAX_STATS_OFFSET = 650788;
+	public static final int MAX_STATS_LENGTH_IN_BYTES = 48;
 	public static final long BLOCKING_BONUSES_OFFSET = 650764;
+	public static final int BLOCKING_BONUSES_LENGTH_IN_BYTES = 12;
 	public static final int BONUSES_AND_FRAMESETS_OFFSET = 650632;
+	public static final int BONUSES_AND_FRAMESETS_LENGTH_IN_BYTES = 33;
 
 	public static final long CHARACTER_ZERO_SKILL_LOC_1 = 305285; //1024 (hex editor) <=> 4198400 (asm) [-s 4197376 or 0x0400C00]
 	public static final long CHARACTER_ZERO_SKILL_LOC_2 = 306884;

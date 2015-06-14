@@ -5,15 +5,15 @@ import java.util.List;
 
 public class CharacterStore {
 
-	ReaderWriter rw;
-	Character char0;
-	Character char1;
-	Character char2;
-	List<Character> characters;
-	byte[] startingStats;
-	byte[] maxStats;
-	byte[] blockingBonuses;
-	byte[] bonusesAndFramesets;
+	private ReaderWriter rw;
+	private Character char0;
+	private Character char1;
+	private Character char2;
+	private List<Character> characters;
+	private byte[] startingStats;
+	private byte[] maxStats;
+	private byte[] blockingBonuses;
+	private byte[] bonusesAndFramesets;
 
 	public CharacterStore(ReaderWriter rw) {
 		this.rw = rw;
@@ -21,11 +21,12 @@ public class CharacterStore {
 		this.readInCharacters();
 	}
 
+	//TODO -- make this code more concise
 	public void readInCharacters() {
 		long pos = TomeOfKnowledge.MIN_STATS_OFFSET;
 		rw.seek(pos);
-		startingStats = new byte[48];
-		for(int j = 0; j < 48; j++){
+		startingStats = new byte[TomeOfKnowledge.MIN_STATS_LENGTH_IN_BYTES];
+		for(int j = 0; j < TomeOfKnowledge.MIN_STATS_LENGTH_IN_BYTES; j++){
 			startingStats[j] = rw.readByte();
 			pos++;
 			rw.seek(pos);
@@ -47,8 +48,8 @@ public class CharacterStore {
 
 		pos = TomeOfKnowledge.MAX_STATS_OFFSET;
 		rw.seek(pos);
-		maxStats = new byte[48];
-		for(int j = 0; j < 48; j++){
+		maxStats = new byte[TomeOfKnowledge.MAX_STATS_LENGTH_IN_BYTES];
+		for(int j = 0; j < TomeOfKnowledge.MAX_STATS_LENGTH_IN_BYTES; j++){
 			maxStats[j] = rw.readByte();
 			pos++;
 			rw.seek(pos);
@@ -69,8 +70,8 @@ public class CharacterStore {
 
 		pos = TomeOfKnowledge.BLOCKING_BONUSES_OFFSET;
 		rw.seek(pos);
-		blockingBonuses = new byte[12];
-		for(int j = 0; j < 12; j++){
+		blockingBonuses = new byte[TomeOfKnowledge.BLOCKING_BONUSES_LENGTH_IN_BYTES];
+		for(int j = 0; j < TomeOfKnowledge.BLOCKING_BONUSES_LENGTH_IN_BYTES; j++){
 			blockingBonuses[j] = rw.readByte();
 			pos++;
 			rw.seek(pos);
@@ -82,8 +83,8 @@ public class CharacterStore {
 
 		pos = TomeOfKnowledge.BONUSES_AND_FRAMESETS_OFFSET;
 		rw.seek(pos);
-		bonusesAndFramesets = new byte[33];
-		for(int j = 0; j < 33; j++){
+		bonusesAndFramesets = new byte[TomeOfKnowledge.BONUSES_AND_FRAMESETS_LENGTH_IN_BYTES];
+		for(int j = 0; j < TomeOfKnowledge.BONUSES_AND_FRAMESETS_LENGTH_IN_BYTES; j++){
 			bonusesAndFramesets[j] = rw.readByte();
 			pos++;
 			rw.seek(pos);
@@ -214,6 +215,7 @@ public class CharacterStore {
 		characters.add(char2);
 	}
 
+	//TODO -- make this code more concise
 	private byte[] getInitStatBytes(){
 		BinEditHelper beh = new BinEditHelper();
 		byte[] startingStats = new byte[48];
@@ -244,6 +246,7 @@ public class CharacterStore {
 		return startingStats;
 	}
 
+	//TODO -- make this code more concise
 	private byte[] getMaxStatBytes(){
 		BinEditHelper beh = new BinEditHelper();
 		byte[] maxStats = new byte[48];
@@ -274,6 +277,7 @@ public class CharacterStore {
 		return maxStats;
 	}
 
+	//TODO -- make this code more concise
 	private byte[] getBlockingBonusBytes(){
 		BinEditHelper beh = new BinEditHelper();
 		byte[] blockingBonuses = new byte[12];
@@ -286,6 +290,7 @@ public class CharacterStore {
 		return blockingBonuses;
 	}
 
+	//TODO -- make this code more concise
 	private byte[] getBonusesAndFramesetBytes(){
 		byte[] bonusesAndFramesets = new byte[33];
 		bonusesAndFramesets[0] = (byte) char0.getDungeonIdleFrameset();
@@ -324,29 +329,6 @@ public class CharacterStore {
 		return bonusesAndFramesets;
 	}
 
-	//FIXME -- move printlns to writeCharactersToEXE() and remove this method
-	public void getCharactersAsBytes(){
-		byte[] retrievedInitStatBytes = this.getInitStatBytes();
-		byte[] retrievedMaxStatBytes = this.getMaxStatBytes();
-		byte[] retrievedBlockingBonusBytes = this.getBlockingBonusBytes();
-		byte[] retrievedBonusesAndFramesetBytes = this.getBonusesAndFramesetBytes();
-
-		/*
-		System.out.println("ORIG: " + Arrays.toString(startingStats));
-		System.out.println("RETR: " + Arrays.toString(retrievedInitStatBytes));
-		System.out.println();
-		System.out.println("ORIG: " + Arrays.toString(maxStats));
-		System.out.println("RETR: " + Arrays.toString(retrievedMaxStatBytes));
-		System.out.println();
-		System.out.println("ORIG: " + Arrays.toString(blockingBonuses));
-		System.out.println("RETR: " + Arrays.toString(retrievedBlockingBonusBytes));
-		System.out.println();
-		System.out.println("ORIG: " + Arrays.toString(bonusesAndFramesets));
-		System.out.println("RETR: " + Arrays.toString(retrievedBonusesAndFramesetBytes));
-		System.out.println();
-		*/
-	}
-
 	public void printCharacters() {
 		for(Character c : characters){
 			c.printCharacter();
@@ -366,17 +348,28 @@ public class CharacterStore {
 
 		byte[] retrievedBonusesAndFramesetBytes = this.getBonusesAndFramesetBytes();
 		rw.writeBytes(retrievedBonusesAndFramesetBytes, TomeOfKnowledge.BONUSES_AND_FRAMESETS_OFFSET);
+
+		/*
+		System.out.println("ORIG: " + Arrays.toString(startingStats));
+		System.out.println("RETR: " + Arrays.toString(retrievedInitStatBytes));
+		System.out.println();
+		System.out.println("ORIG: " + Arrays.toString(maxStats));
+		System.out.println("RETR: " + Arrays.toString(retrievedMaxStatBytes));
+		System.out.println();
+		System.out.println("ORIG: " + Arrays.toString(blockingBonuses));
+		System.out.println("RETR: " + Arrays.toString(retrievedBlockingBonusBytes));
+		System.out.println();
+		System.out.println("ORIG: " + Arrays.toString(bonusesAndFramesets));
+		System.out.println("RETR: " + Arrays.toString(retrievedBonusesAndFramesetBytes));
+		System.out.println();
+		*/
 	}
 
 	public Character getCharacter(int i) {
 		return characters.get(i);
 	}
 
-	public List<Character> getCharacters() {
-		return characters;
-	}
-
-	void setAllMaxStatsTo255() {
+	public void setAllMaxStatsTo255() {
 		for(Character c : characters){
 			c.setMaxDexterity(255);
 			c.setMaxMagic(255);
@@ -385,6 +378,7 @@ public class CharacterStore {
 		}
 	}
 
+	//TODO -- The 3 methods below are "tacked on". Integrate them better.
 	public void setCharZeroStartingSkillBySpellID(int i) {
 		long l = i;
 		byte[] spellID = new byte[4];

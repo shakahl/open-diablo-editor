@@ -24,43 +24,28 @@ public class Character {
 	private int oneHandedAttackSpeed;
 	private int castingSpeed;
 
-	/*
-	0
-	1 	Attacking frameset
-	2 	Walking frameset in dungeon
-	3 	Blocking speed
-	4 	Death frameset
-	5 	Frameset for magic casting
-	6 	Hit recovery speed
-	7 	Idle frameset in town
-	8 	Walking frameset in town
-	9 	Single handed weapon attacking speed
-	10 	Spell casting speed
-	*/
-
-	public Character(){
-
-	}
+	public Character(){}
 
 	public void printCharacter() {
-		System.out.println("Class: " + className);
-		System.out.println("STR: " + initStrength + "--" + maxStrength);
-		System.out.println("MAG: " + initMagic + "--" + maxMagic);
-		System.out.println("DEX: " + initDexterity + "--" + maxDexterity);
-		System.out.println("VIT: " + initVitality + "--" + maxVitality);
-		System.out.println("Blocking bonus: " + blockingBonus);
-		System.out.println("Dungeon idle frameset: " + dungeonIdleFrameset);
-		System.out.println("Attacking frameset: " + attackingFrameset);
-		System.out.println("Dungeon walk frameset: " + dungeonWalkFrameset);
-		System.out.println("Block speed: " + blockSpeed + " (" + (0.05 * blockSpeed) + "secs)");
-		System.out.println("Death frameset: " + deathFrameset);
-		System.out.println("Casting frameset: " + castingFrameset);
-		System.out.println("Hit recovery speed: " + hitRecoverySpeed + " (" + (0.05 * hitRecoverySpeed) + "secs)");
-		System.out.println("Town idle frameset: " + townIdleFrameset);
-		System.out.println("Town walk frameset: " + townWalkFrameset);
-		System.out.println("One handed attack speed: " + oneHandedAttackSpeed);
-		System.out.println("Casting speed: " + castingSpeed + " (" + (0.05 * castingSpeed) + "secs)");
-		System.out.println();
+		System.out.println(
+			"Class: " + className + "\n" +
+			"STR: " + initStrength + "--" + maxStrength + "\n" +
+			"MAG: " + initMagic + "--" + maxMagic + "\n" +
+			"DEX: " + initDexterity + "--" + maxDexterity + "\n" +
+			"VIT: " + initVitality + "--" + maxVitality + "\n" +
+			"Blocking bonus: " + blockingBonus + "\n" +
+			"Dungeon idle frameset: " + dungeonIdleFrameset + "\n" +
+			"Attacking frameset: " + attackingFrameset + "\n" +
+			"Dungeon walk frameset: " + dungeonWalkFrameset + "\n" +
+			"Block speed: " + blockSpeed + " (" + (0.05 * blockSpeed) + "secs)" + "\n" +
+			"Death frameset: " + deathFrameset + "\n" +
+			"Casting frameset: " + castingFrameset + "\n" +
+			"Hit recovery speed: " + hitRecoverySpeed + " (" + (0.05 * hitRecoverySpeed) + "secs)" + "\n" +
+			"Town idle frameset: " + townIdleFrameset + "\n" +
+			"Town walk frameset: " + townWalkFrameset + "\n" +
+			"One handed attack speed: " + oneHandedAttackSpeed + "\n" +
+			"Casting speed: " + castingSpeed + " (" + (0.05 * castingSpeed) + "secs)" + "\n"
+		);
 	}
 
 	long getInitStrength() {
