@@ -1,6 +1,7 @@
 package uk.me.karlsen.ode;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class ShrinesStore {
@@ -19,6 +20,7 @@ public class ShrinesStore {
 		this.readInShrines();
 	}
 
+	//TODO -- remove redundant code
 	public void readInShrines(){
 
 		BinEditHelper beh = new BinEditHelper();
@@ -98,26 +100,24 @@ public class ShrinesStore {
 		byte[] maxShrineLevelBytes = this.getMaxShrineLevelBytes();
 		byte[] gameTypesInWhichPresentBytes = this.getGameTypesInWhichPresentBytes();
 
-		/*
 		System.out.println("ORIG: " + Arrays.toString(origShrinePointerBytes));
-		System.out.println("BACK: " + Arrays.toString(shrinePointerBytes));
+		//System.out.println("BACK: " + Arrays.toString(shrinePointerBytes));
 		System.out.println();
 		System.out.println("ORIG: " + Arrays.toString(origMinShrineLevelBytes));
-		System.out.println("BACK: " + Arrays.toString(minShrineLevelBytes));
+		//System.out.println("BACK: " + Arrays.toString(minShrineLevelBytes));
 		System.out.println();
 		System.out.println("ORIG: " + Arrays.toString(origMaxShrineLevelBytes));
-		System.out.println("BACK: " + Arrays.toString(maxShrineLevelBytes));
+		//System.out.println("BACK: " + Arrays.toString(maxShrineLevelBytes));
 		System.out.println();
 		System.out.println("ORIG: " + Arrays.toString(origGameTypesInWhichPresentBytes));
-		System.out.println("BACK: " + Arrays.toString(gameTypesInWhichPresentBytes));
+		//System.out.println("BACK: " + Arrays.toString(gameTypesInWhichPresentBytes));
 		System.out.println();
-		*/
 
 		ShrinesAsBytes sab = new ShrinesAsBytes(shrinePointerBytes, minShrineLevelBytes, maxShrineLevelBytes, gameTypesInWhichPresentBytes);
 		return sab;
 	}
 
-	private byte[] getShrinePointerBytes(){
+	public byte[] getShrinePointerBytes(){
 		byte[] shrinePointerBytes = new byte[TomeOfKnowledge.NUMBER_OF_SHRINES*4];
 		int location = 0;
 		for(int i = 0; i < TomeOfKnowledge.NUMBER_OF_SHRINES; i++){
@@ -129,7 +129,7 @@ public class ShrinesStore {
 		return shrinePointerBytes;
 	}
 
-	private byte[] getMinShrineLevelBytes(){
+	public byte[] getMinShrineLevelBytes(){
 		byte[] minShrineLevelBytes = new byte[TomeOfKnowledge.NUMBER_OF_SHRINES];
 		for(int i = 0; i < TomeOfKnowledge.NUMBER_OF_SHRINES; i++){
 			Shrine s = shrines.get(i);
@@ -138,7 +138,7 @@ public class ShrinesStore {
 		return minShrineLevelBytes;
 	}
 
-	private byte[] getMaxShrineLevelBytes(){
+	public byte[] getMaxShrineLevelBytes(){
 		byte[] maxShrineLevelBytes = new byte[TomeOfKnowledge.NUMBER_OF_SHRINES];
 		for(int i = 0; i < TomeOfKnowledge.NUMBER_OF_SHRINES; i++){
 			Shrine s = shrines.get(i);
@@ -147,7 +147,7 @@ public class ShrinesStore {
 		return maxShrineLevelBytes;
 	}
 
-	private byte[] getGameTypesInWhichPresentBytes(){
+	public byte[] getGameTypesInWhichPresentBytes(){
 		byte[] gameTypesInWhichPresentBytes = new byte[TomeOfKnowledge.NUMBER_OF_SHRINES];
 		for(int i = 0; i < TomeOfKnowledge.NUMBER_OF_SHRINES; i++){
 			Shrine s = shrines.get(i);
