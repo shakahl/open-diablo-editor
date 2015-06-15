@@ -32,7 +32,6 @@ public class Spell {
 	private long maxCharges;
 	private long bookCost;
 	private long staffCostMultiplier;
-	private byte[] spellBytes;
 	int index;
 
 	public Spell(int index, byte[] byteArray, ReaderWriter rw) {
@@ -42,7 +41,6 @@ public class Spell {
 		}
 		this.index = index+1; //spell index starts from 1, loop in SpellsStore starts from 0
 		BinEditHelper beh = new BinEditHelper();
-		this.spellBytes = byteArray;
 		unmoddedSpellIndex = beh.convertUnsignedByteToInt(byteArray[0]);
 		manaToCast = beh.convertUnsignedByteToInt(byteArray[1]);
 		animationWhenCasting = beh.convertTwoBytesToInt(byteArray[2], byteArray[3]);
@@ -238,11 +236,6 @@ public class Spell {
 		beh.setLongAsFourBytes(maxCharges, spellAsBytes, 44);
 		beh.setLongAsFourBytes(bookCost, spellAsBytes, 48);
 		beh.setLongAsFourBytes(staffCostMultiplier, spellAsBytes, 52);
-
-		System.out.println("ORIG: " + Arrays.toString(spellBytes));
-		//System.out.println("BACK: " + Arrays.toString(spellAsBytes));
-		//System.out.println();
-
 		return spellAsBytes;
 	}
 

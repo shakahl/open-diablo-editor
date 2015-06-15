@@ -1,7 +1,6 @@
 package uk.me.karlsen.ode;
 
 import java.util.ArrayList;
-//import java.util.Arrays;
 import java.util.List;
 
 public class UniqueItem {
@@ -13,10 +12,8 @@ public class UniqueItem {
 	private int numberOfEffects;
 	private long goldValue;
 	private List<ItemEffect> itemEffects;
-	//private byte[] itemBytes;
 
 	public UniqueItem(byte[] readIn, ReaderWriter rw){
-		//this.itemBytes = readIn;
 		BinEditHelper beh = new BinEditHelper();
 		itemEffects = new ArrayList<ItemEffect>();
 		namePointer = beh.convertFourBytesToOffset(readIn, 0);
@@ -224,10 +221,6 @@ public class UniqueItem {
 			beh.setLongAsFourBytes(ie.getMinValue(), itemAsBytes, offset+4);
 			beh.setLongAsFourBytes(ie.getMaxValue(), itemAsBytes, offset+8);
 		}
-
-		//System.out.println("ORIG: " + Arrays.toString(itemBytes));
-		//System.out.println("BACK: " + Arrays.toString(itemAsBytes));
-		//System.out.println();
 
 		return itemAsBytes;
 	}

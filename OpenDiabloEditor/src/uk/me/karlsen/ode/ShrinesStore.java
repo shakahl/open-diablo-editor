@@ -100,19 +100,6 @@ public class ShrinesStore {
 		byte[] maxShrineLevelBytes = this.getMaxShrineLevelBytes();
 		byte[] gameTypesInWhichPresentBytes = this.getGameTypesInWhichPresentBytes();
 
-		System.out.println("ORIG: " + Arrays.toString(origShrinePointerBytes));
-		//System.out.println("BACK: " + Arrays.toString(shrinePointerBytes));
-		System.out.println();
-		System.out.println("ORIG: " + Arrays.toString(origMinShrineLevelBytes));
-		//System.out.println("BACK: " + Arrays.toString(minShrineLevelBytes));
-		System.out.println();
-		System.out.println("ORIG: " + Arrays.toString(origMaxShrineLevelBytes));
-		//System.out.println("BACK: " + Arrays.toString(maxShrineLevelBytes));
-		System.out.println();
-		System.out.println("ORIG: " + Arrays.toString(origGameTypesInWhichPresentBytes));
-		//System.out.println("BACK: " + Arrays.toString(gameTypesInWhichPresentBytes));
-		System.out.println();
-
 		ShrinesAsBytes sab = new ShrinesAsBytes(shrinePointerBytes, minShrineLevelBytes, maxShrineLevelBytes, gameTypesInWhichPresentBytes);
 		return sab;
 	}
