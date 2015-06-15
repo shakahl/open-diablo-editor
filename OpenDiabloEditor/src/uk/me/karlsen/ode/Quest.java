@@ -300,7 +300,6 @@ public class Quest {
 	private int zeroTwo;
 	private long mpTriggerFlag;
 	private long textEntryIDX;
-	private byte[] questBytes;
 	int slotNumber;
 
 	public Quest(int indexValue, byte[] questBytes, ReaderWriter rw){
@@ -316,7 +315,6 @@ public class Quest {
 		zeroTwo = beh.convertUnsignedByteToInt(questBytes[7]);
 		mpTriggerFlag = beh.convertFourBytesToNumber(questBytes, 8);
 		textEntryIDX = beh.convertFourBytesToNumber(questBytes, 12);
-		this.questBytes = questBytes;
 	}
 
 	public void printQuest(){
@@ -349,9 +347,6 @@ public class Quest {
 		questAsBytes[7] = (byte) zeroTwo;
 		beh.setLongAsFourBytes(mpTriggerFlag, questAsBytes, 8);
 		beh.setLongAsFourBytes(textEntryIDX, questAsBytes, 12);
-		//System.out.println("ORIG: " + Arrays.toString(questBytes));
-		//System.out.println("BACK: " + Arrays.toString(questAsBytes));
-		//System.out.println();
 
 		return questAsBytes;
 	}
@@ -434,13 +429,5 @@ public class Quest {
 
 	public void setTextEntryIDX(long textEntryIDX) {
 		this.textEntryIDX = textEntryIDX;
-	}
-
-	public byte[] getQuestBytes() {
-		return questBytes;
-	}
-
-	public void setQuestBytes(byte[] questBytes) {
-		this.questBytes = questBytes;
 	}
 }
