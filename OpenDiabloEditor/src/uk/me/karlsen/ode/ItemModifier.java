@@ -19,7 +19,6 @@ public class ItemModifier {
 	private long minGold;
 	private long maxGold;
 	private long valueMultiplier;
-	private byte[] itemBytes;
 
 	public ItemModifier(byte[] readIn, ReaderWriter rw){
 		this.rw = rw;
@@ -75,7 +74,6 @@ public class ItemModifier {
 		minGold = beh.convertFourBytesToNumber(readIn, 36);
 		maxGold = beh.convertFourBytesToNumber(readIn, 40);
 		valueMultiplier = beh.convertFourBytesToNumber(readIn, 44);
-		itemBytes = readIn;
 	}
 
 	public byte[] getModifierAsBytes(){
@@ -109,10 +107,6 @@ public class ItemModifier {
 		beh.setLongAsFourBytes(minGold, modifierAsBytes, 36);
 		beh.setLongAsFourBytes(maxGold, modifierAsBytes, 40);
 		beh.setLongAsFourBytes(valueMultiplier, modifierAsBytes, 44);
-
-		//System.out.println("ORIG: " + Arrays.toString(itemBytes));
-		//System.out.println("BACK: " + Arrays.toString(modifierAsBytes));
-		//System.out.println();
 
 		return modifierAsBytes;
 	}
@@ -323,13 +317,5 @@ public class ItemModifier {
 
 	public void setValueMultiplier(long valueMultiplier) {
 		this.valueMultiplier = valueMultiplier;
-	}
-
-	public byte[] getItemBytes() {
-		return itemBytes;
-	}
-
-	public void setItemBytes(byte[] itemBytes) {
-		this.itemBytes = itemBytes;
 	}
 }
