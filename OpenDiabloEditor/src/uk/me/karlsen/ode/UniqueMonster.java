@@ -52,10 +52,8 @@ public class UniqueMonster {
 	private int packTrigger;
 	private long packSpecials;
 	private long specialSoundWav;
-	//byte[] uniqueBytes;
 
 	public UniqueMonster(byte[] monsterBytes, ReaderWriter rw) {
-		//uniqueBytes = monsterBytes;
 		BinEditHelper beh = new BinEditHelper();
 		monsterType = beh.convertFourBytesToNumber(monsterBytes, 0);
 		namePointer = beh.convertFourBytesToOffset(monsterBytes, 4);
@@ -131,10 +129,6 @@ public class UniqueMonster {
 		uniqueAsBytes[29] = (byte) (specialSoundWav >>> 8);
 		uniqueAsBytes[30] = (byte) (specialSoundWav >>> 16);
 		uniqueAsBytes[31] = (byte) (specialSoundWav >>> 24);
-
-		//System.out.println("ORIG: " + Arrays.toString(uniqueBytes));
-		//System.out.println("BACK: " + Arrays.toString(uniqueAsBytes));
-		//System.out.println();
 
 		return uniqueAsBytes;
 	}
