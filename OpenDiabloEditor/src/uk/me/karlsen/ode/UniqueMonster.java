@@ -2,7 +2,7 @@ package uk.me.karlsen.ode;
 
 public class UniqueMonster {
 
-	String[] monsterAIs = {
+	private String[] monsterAIs = {
 		"Zombie",
 		"Overlord",
 		"Skeleton",
@@ -66,52 +66,40 @@ public class UniqueMonster {
 		intelligenceFactor = beh.convertUnsignedByteToInt(monsterBytes[17]);
 		minAttackDmg = beh.convertUnsignedByteToInt(monsterBytes[18]);
 		maxAttackDmg = beh.convertUnsignedByteToInt(monsterBytes[19]);
-		resistances = String.format("%16s", Integer.toBinaryString(beh.convertUnsignedByteToInt(monsterBytes[20]))).replace(' ', '0') + ";" +
-				String.format("%16s", Integer.toBinaryString(beh.convertUnsignedByteToInt(monsterBytes[21]))).replace(' ', '0');
+		resistances = beh.convertByteToBinaryString(monsterBytes[20]) + ";" + beh.convertByteToBinaryString(monsterBytes[21]);
 		packTrigger = beh.convertTwoBytesToInt(monsterBytes[22], monsterBytes[23]);
 		packSpecials = beh.convertFourBytesToNumber(monsterBytes, 24);
 		specialSoundWav = beh.convertFourBytesToNumber(monsterBytes, 28);
 	}
 
 	public void printItem() {
-		System.out.println("Name: " + name);
-		System.out.println("Monster type: " + monsterType);
-		System.out.println("Name pointer: " + namePointer);
-		System.out.println("TRN pointer: " + trnPointer);
-		System.out.println("TRN file: " + trnName);
-		System.out.println("Dungeon level: " + dungeonLevel);
-		System.out.println("HPs: " + hitPoints);
-		System.out.println("Monster AI: " + monsterAIs[monsterAI]);
-		System.out.println("Intelligence factor: " + intelligenceFactor);
-		System.out.println("Min attack dmg: " + minAttackDmg);
-		System.out.println("Max attack dmg: " + maxAttackDmg);
-		System.out.println("Resistances: " + resistances);
-		System.out.println("Pack trigger: " + packTrigger);
-		System.out.println("Pack specials: " + packSpecials);
-		System.out.println("Special WAV sound: " + specialSoundWav);
-		System.out.println();
+		System.out.println(
+			"Name: " + name + "\n" +
+			"Monster type: " + monsterType + "\n" +
+			"Name pointer: " + namePointer + "\n" +
+			"TRN pointer: " + trnPointer + "\n" +
+			"TRN file: " + trnName + "\n" +
+			"Dungeon level: " + dungeonLevel + "\n" +
+			"HPs: " + hitPoints + "\n" +
+			"Monster AI: " + monsterAIs[monsterAI] + "\n" +
+			"Intelligence factor: " + intelligenceFactor + "\n" +
+			"Min attack dmg: " + minAttackDmg + "\n" +
+			"Max attack dmg: " + maxAttackDmg + "\n" +
+			"Resistances: " + resistances + "\n" +
+			"Pack trigger: " + packTrigger + "\n" +
+			"Pack specials: " + packSpecials + "\n" +
+			"Special WAV sound: " + specialSoundWav + "\n"
+		);
 	}
 
 	public byte[] getUniqueAsBytes() {
 		byte[] uniqueAsBytes = new byte[32];
-		uniqueAsBytes[0] = (byte) (monsterType >>> 0);
-		uniqueAsBytes[1] = (byte) (monsterType >>> 8);
-		uniqueAsBytes[2] = (byte) (monsterType >>> 16);
-		uniqueAsBytes[3] = (byte) (monsterType >>> 24);
-		long namePointerRev = namePointer + TomeOfKnowledge.DIABLO_POINTERS_OFFSET;
-		uniqueAsBytes[4] = (byte) (namePointerRev >>> 0);
-		uniqueAsBytes[5] = (byte) (namePointerRev >>> 8);
-		uniqueAsBytes[6] = (byte) (namePointerRev >>> 16);
-		uniqueAsBytes[7] = (byte) (namePointerRev >>> 24);
-		long trnPointerRev = trnPointer + TomeOfKnowledge.DIABLO_POINTERS_OFFSET;
-		uniqueAsBytes[8] = (byte) (trnPointerRev >>> 0);
-		uniqueAsBytes[9] = (byte) (trnPointerRev >>> 8);
-		uniqueAsBytes[10] = (byte) (trnPointerRev >>> 16);
-		uniqueAsBytes[11] = (byte) (trnPointerRev >>> 24);
-		uniqueAsBytes[12] = (byte) (dungeonLevel >>> 0);
-		uniqueAsBytes[13] = (byte) (dungeonLevel >>> 8);
-		uniqueAsBytes[14] = (byte) (hitPoints >>> 0);
-		uniqueAsBytes[15] = (byte) (hitPoints >>> 8);
+		BinEditHelper beh = new BinEditHelper();
+		beh.setLongAsFourBytes(monsterType, uniqueAsBytes, 0);
+		beh.setPointerAsFourBytes(namePointer, uniqueAsBytes, 4);
+		beh.setPointerAsFourBytes(trnPointer, uniqueAsBytes, 8);
+		beh.setIntAsTwoBytes(dungeonLevel, uniqueAsBytes, 12);
+		beh.setIntAsTwoBytes(hitPoints, uniqueAsBytes, 14);
 		uniqueAsBytes[16] = (byte) monsterAI;
 		uniqueAsBytes[17] = (byte) intelligenceFactor;
 		uniqueAsBytes[18] = (byte) minAttackDmg;
@@ -119,17 +107,9 @@ public class UniqueMonster {
 		String[] resistancesSplit = resistances.split(";");
 		uniqueAsBytes[20] = (byte) Byte.parseByte(resistancesSplit[0], 2);
 		uniqueAsBytes[21] = (byte) Byte.parseByte(resistancesSplit[1], 2);
-		uniqueAsBytes[22] = (byte) (packTrigger >>> 0);
-		uniqueAsBytes[23] = (byte) (packTrigger >>> 8);
-		uniqueAsBytes[24] = (byte) (packSpecials >>> 0);
-		uniqueAsBytes[25] = (byte) (packSpecials >>> 8);
-		uniqueAsBytes[26] = (byte) (packSpecials >>> 16);
-		uniqueAsBytes[27] = (byte) (packSpecials >>> 24);
-		uniqueAsBytes[28] = (byte) (specialSoundWav >>> 0);
-		uniqueAsBytes[29] = (byte) (specialSoundWav >>> 8);
-		uniqueAsBytes[30] = (byte) (specialSoundWav >>> 16);
-		uniqueAsBytes[31] = (byte) (specialSoundWav >>> 24);
-
+		beh.setIntAsTwoBytes(packTrigger, uniqueAsBytes, 22);
+		beh.setLongAsFourBytes(packSpecials, uniqueAsBytes, 24);
+		beh.setLongAsFourBytes(specialSoundWav, uniqueAsBytes, 28);
 		return uniqueAsBytes;
 	}
 
