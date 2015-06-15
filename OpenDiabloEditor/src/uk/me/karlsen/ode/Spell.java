@@ -1,5 +1,7 @@
 package uk.me.karlsen.ode;
 
+import java.util.Arrays;
+
 public class Spell {
 
 	String[] castingSounds = {"Fire", "Lighting", "Utility", "Other"};
@@ -30,7 +32,7 @@ public class Spell {
 	private long maxCharges;
 	private long bookCost;
 	private long staffCostMultiplier;
-	//private byte[] spellBytes;
+	private byte[] spellBytes;
 	int index;
 
 	public Spell(int index, byte[] byteArray, ReaderWriter rw) {
@@ -40,27 +42,17 @@ public class Spell {
 		}
 		this.index = index+1; //spell index starts from 1, loop in SpellsStore starts from 0
 		BinEditHelper beh = new BinEditHelper();
-		//this.spellBytes = byteArray;
+		this.spellBytes = byteArray;
 		unmoddedSpellIndex = beh.convertUnsignedByteToInt(byteArray[0]);
 		manaToCast = beh.convertUnsignedByteToInt(byteArray[1]);
 		animationWhenCasting = beh.convertTwoBytesToInt(byteArray[2], byteArray[3]);
 		pointerToNameAsSpell = beh.convertFourBytesToOffset(byteArray, 4);
 		nameAsSpell = beh.getNameUsingPointer(pointerToNameAsSpell);
-		if(byteArray[8] + byteArray[9] + byteArray[10] + byteArray[11] > 0){
-			pointerToNameAsSkill = beh.convertFourBytesToOffset(byteArray, 8);
-		} else {
-			pointerToNameAsSkill = 0; //sometimes pointer is 00000000 and therefore useless
-		}
+		pointerToNameAsSkill = beh.convertFourBytesToOffset(byteArray, 8);
 		if(pointerToNameAsSkill != 0){
 			nameAsSkill = beh.getNameUsingPointer(pointerToNameAsSkill);
 		} else {
 			nameAsSkill = "not set";
-		}
-		if((pointerToNameAsSkill == 0) && (pointerToNameAsSpell != 0)){
-			pointerToNameAsSkill = pointerToNameAsSpell;
-		}
-		if((pointerToNameAsSpell == 0) && (pointerToNameAsSkill != 0)){
-			pointerToNameAsSpell = pointerToNameAsSkill;
 		}
 		spellbookQuality = beh.convertFourBytesToNumber(byteArray, 12);
 		staffQuality = beh.convertFourBytesToNumber(byteArray, 16);
@@ -83,7 +75,9 @@ public class Spell {
 		maxCharges = beh.convertFourBytesToNumber(byteArray, 44);
 		bookCost = beh.convertFourBytesToNumber(byteArray, 48);
 		staffCostMultiplier = beh.convertFourBytesToNumber(byteArray, 52);
-		
+	}
+	
+	public void fillBlankNames(){
 		if((pointerToNameAsSkill == 0) && (pointerToNameAsSpell != 0)){
 			pointerToNameAsSkill = pointerToNameAsSpell;
 		}
@@ -245,7 +239,7 @@ public class Spell {
 		beh.setLongAsFourBytes(bookCost, spellAsBytes, 48);
 		beh.setLongAsFourBytes(staffCostMultiplier, spellAsBytes, 52);
 
-		//System.out.println("ORIG: " + Arrays.toString(spellBytes));
+		System.out.println("ORIG: " + Arrays.toString(spellBytes));
 		//System.out.println("BACK: " + Arrays.toString(spellAsBytes));
 		//System.out.println();
 

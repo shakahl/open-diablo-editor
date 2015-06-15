@@ -52,7 +52,7 @@ public class OpenDiabloEditor {
 		//uniqueItemStore.printItems();
 		//characterStore.printCharacters();
 		//baseItemStore.printItems();
-		baseMonsterStore.printMonsters();
+		//baseMonsterStore.printMonsters();
 		//uniqueMonsterStore.printUniques();
 
 
