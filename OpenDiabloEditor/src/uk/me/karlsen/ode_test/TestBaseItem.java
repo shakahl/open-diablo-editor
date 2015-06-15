@@ -70,7 +70,7 @@ public class TestBaseItem extends TestCase{
 			byte[] itemAsBytes = bis.getItemAsBytes(i);
 			String itemAsString = Arrays.toString(itemAsBytes);
 			String originalString = Arrays.toString(readInBytes[i]);
-			assertEquals(itemAsString, originalString);
+			assertEquals(originalString, itemAsString);
 		}
 	}
 }

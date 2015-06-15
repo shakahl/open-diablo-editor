@@ -148,7 +148,7 @@ public class TestBaseMonster extends TestCase {
 			byte[] monsterAsBytes = mab.getMainBytes();
 			String monsterAsString = Arrays.toString(monsterAsBytes);
 			String originalString = Arrays.toString(readInBytes[i]);
-			assertEquals(monsterAsString, originalString);
+			assertEquals(originalString, monsterAsString);
 		}
 	}
 }
