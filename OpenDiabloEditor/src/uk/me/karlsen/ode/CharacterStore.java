@@ -10,10 +10,7 @@ public class CharacterStore {
 	private Character char1;
 	private Character char2;
 	private List<Character> characters;
-	private byte[] startingStats;
-	private byte[] maxStats;
-	private byte[] blockingBonuses;
-	private byte[] bonusesAndFramesets;
+	
 
 	public CharacterStore(ReaderWriter rw) {
 		this.rw = rw;
@@ -23,6 +20,12 @@ public class CharacterStore {
 
 	//TODO -- make this code more concise
 	public void readInCharacters() {
+		
+		byte[] startingStats;
+		byte[] maxStats;
+		byte[] blockingBonuses;
+		byte[] bonusesAndFramesets;
+		
 		long pos = TomeOfKnowledge.MIN_STATS_OFFSET;
 		rw.seek(pos);
 		startingStats = new byte[TomeOfKnowledge.MIN_STATS_LENGTH_IN_BYTES];
@@ -216,83 +219,83 @@ public class CharacterStore {
 	}
 
 	//TODO -- make this code more concise
-	private byte[] getInitStatBytes(){
+	public byte[] getInitStatBytes(){
 		BinEditHelper beh = new BinEditHelper();
-		byte[] startingStats = new byte[48];
+		byte[] returnedStartingStats = new byte[TomeOfKnowledge.MIN_STATS_LENGTH_IN_BYTES];
 		long warriorInitStrength = char0.getInitStrength();
-		beh.setLongAsFourBytes(warriorInitStrength, startingStats, 0);
+		beh.setLongAsFourBytes(warriorInitStrength, returnedStartingStats, 0);
 		long rogueInitStrength = char1.getInitStrength();
-		beh.setLongAsFourBytes(rogueInitStrength, startingStats, 4);
+		beh.setLongAsFourBytes(rogueInitStrength, returnedStartingStats, 4);
 		long sorcInitStrength = char2.getInitStrength();
-		beh.setLongAsFourBytes(sorcInitStrength, startingStats, 8);
+		beh.setLongAsFourBytes(sorcInitStrength, returnedStartingStats, 8);
 		long warriorInitMagic = char0.getInitMagic();
-		beh.setLongAsFourBytes(warriorInitMagic, startingStats, 12);
+		beh.setLongAsFourBytes(warriorInitMagic, returnedStartingStats, 12);
 		long rogueInitMagic = char1.getInitMagic();
-		beh.setLongAsFourBytes(rogueInitMagic, startingStats, 16);
+		beh.setLongAsFourBytes(rogueInitMagic, returnedStartingStats, 16);
 		long sorcInitMagic = char2.getInitMagic();
-		beh.setLongAsFourBytes(sorcInitMagic, startingStats, 20);
+		beh.setLongAsFourBytes(sorcInitMagic, returnedStartingStats, 20);
 		long warriorInitDex = char0.getInitDexterity();
-		beh.setLongAsFourBytes(warriorInitDex, startingStats, 24);
+		beh.setLongAsFourBytes(warriorInitDex, returnedStartingStats, 24);
 		long rogueInitDex = char1.getInitDexterity();
-		beh.setLongAsFourBytes(rogueInitDex, startingStats, 28);
+		beh.setLongAsFourBytes(rogueInitDex, returnedStartingStats, 28);
 		long sorcInitDex = char2.getInitDexterity();
-		beh.setLongAsFourBytes(sorcInitDex, startingStats, 32);
+		beh.setLongAsFourBytes(sorcInitDex, returnedStartingStats, 32);
 		long warriorInitVit = char0.getInitVitality();
-		beh.setLongAsFourBytes(warriorInitVit, startingStats, 36);
+		beh.setLongAsFourBytes(warriorInitVit, returnedStartingStats, 36);
 		long rogueInitVit = char1.getInitVitality();
-		beh.setLongAsFourBytes(rogueInitVit, startingStats, 40);
+		beh.setLongAsFourBytes(rogueInitVit, returnedStartingStats, 40);
 		long sorcInitVit = char2.getInitVitality();
-		beh.setLongAsFourBytes(sorcInitVit, startingStats, 44);
-		return startingStats;
+		beh.setLongAsFourBytes(sorcInitVit, returnedStartingStats, 44);
+		return returnedStartingStats;
 	}
 
 	//TODO -- make this code more concise
-	private byte[] getMaxStatBytes(){
+	public byte[] getMaxStatBytes(){
 		BinEditHelper beh = new BinEditHelper();
-		byte[] maxStats = new byte[48];
+		byte[] maxStats = new byte[TomeOfKnowledge.MAX_STATS_LENGTH_IN_BYTES];
 		long warriorMaxStrength = char0.getMaxStrength();
-		beh.setLongAsFourBytes(warriorMaxStrength, startingStats, 0);
+		beh.setLongAsFourBytes(warriorMaxStrength, maxStats, 0);
 		long warriorMaxMagic = char0.getMaxMagic();
-		beh.setLongAsFourBytes(warriorMaxMagic, startingStats, 4);
+		beh.setLongAsFourBytes(warriorMaxMagic, maxStats, 4);
 		long warriorMaxDex = char0.getMaxDexterity();
-		beh.setLongAsFourBytes(warriorMaxDex, startingStats, 8);
+		beh.setLongAsFourBytes(warriorMaxDex, maxStats, 8);
 		long warriorMaxVit = char0.getMaxVitality();
-		beh.setLongAsFourBytes(warriorMaxVit, startingStats, 12);
+		beh.setLongAsFourBytes(warriorMaxVit, maxStats, 12);
 		long rogueMaxStrength = char1.getMaxStrength();
-		beh.setLongAsFourBytes(rogueMaxStrength, startingStats, 16);
+		beh.setLongAsFourBytes(rogueMaxStrength, maxStats, 16);
 		long rogueMaxMagic = char1.getMaxMagic();
-		beh.setLongAsFourBytes(rogueMaxMagic, startingStats, 20);
+		beh.setLongAsFourBytes(rogueMaxMagic, maxStats, 20);
 		long rogueMaxDex = char1.getMaxDexterity();
-		beh.setLongAsFourBytes(rogueMaxDex, startingStats, 24);
+		beh.setLongAsFourBytes(rogueMaxDex, maxStats, 24);
 		long rogueMaxVit = char1.getMaxVitality();
-		beh.setLongAsFourBytes(rogueMaxVit, startingStats, 28);
+		beh.setLongAsFourBytes(rogueMaxVit, maxStats, 28);
 		long sorcMaxStrength = char2.getMaxStrength();
-		beh.setLongAsFourBytes(sorcMaxStrength, startingStats, 32);
+		beh.setLongAsFourBytes(sorcMaxStrength, maxStats, 32);
 		long sorcMaxMagic = char2.getMaxMagic();
-		beh.setLongAsFourBytes(sorcMaxMagic, startingStats, 36);
+		beh.setLongAsFourBytes(sorcMaxMagic, maxStats, 36);
 		long sorcMaxDex = char2.getMaxDexterity();
-		beh.setLongAsFourBytes(sorcMaxDex, startingStats, 40);
+		beh.setLongAsFourBytes(sorcMaxDex, maxStats, 40);
 		long sorcMaxVit = char2.getMaxVitality();
-		beh.setLongAsFourBytes(sorcMaxVit, startingStats, 44);
+		beh.setLongAsFourBytes(sorcMaxVit, maxStats, 44);
 		return maxStats;
 	}
 
 	//TODO -- make this code more concise
-	private byte[] getBlockingBonusBytes(){
+	public byte[] getBlockingBonusBytes(){
 		BinEditHelper beh = new BinEditHelper();
-		byte[] blockingBonuses = new byte[12];
+		byte[] blockingBonuses = new byte[TomeOfKnowledge.BLOCKING_BONUSES_LENGTH_IN_BYTES];
 		long warriorBlockingBonus = char0.getBlockingBonus();
-		beh.setLongAsFourBytes(warriorBlockingBonus, startingStats, 0);
+		beh.setLongAsFourBytes(warriorBlockingBonus, blockingBonuses, 0);
 		long rogueBlockingBonus = char1.getBlockingBonus();
-		beh.setLongAsFourBytes(rogueBlockingBonus, startingStats, 4);
+		beh.setLongAsFourBytes(rogueBlockingBonus, blockingBonuses, 4);
 		long sorcBlockingBonus = char2.getBlockingBonus();
-		beh.setLongAsFourBytes(sorcBlockingBonus, startingStats, 8);
+		beh.setLongAsFourBytes(sorcBlockingBonus, blockingBonuses, 8);
 		return blockingBonuses;
 	}
 
 	//TODO -- make this code more concise
-	private byte[] getBonusesAndFramesetBytes(){
-		byte[] bonusesAndFramesets = new byte[33];
+	public byte[] getBonusesAndFramesetBytes(){
+		byte[] bonusesAndFramesets = new byte[TomeOfKnowledge.BONUSES_AND_FRAMESETS_LENGTH_IN_BYTES];
 		bonusesAndFramesets[0] = (byte) char0.getDungeonIdleFrameset();
 		bonusesAndFramesets[1] = (byte) char0.getAttackingFrameset();
 		bonusesAndFramesets[2] = (byte) char0.getDungeonWalkFrameset();
@@ -348,21 +351,6 @@ public class CharacterStore {
 
 		byte[] retrievedBonusesAndFramesetBytes = this.getBonusesAndFramesetBytes();
 		rw.writeBytes(retrievedBonusesAndFramesetBytes, TomeOfKnowledge.BONUSES_AND_FRAMESETS_OFFSET);
-
-		/*
-		System.out.println("ORIG: " + Arrays.toString(startingStats));
-		System.out.println("RETR: " + Arrays.toString(retrievedInitStatBytes));
-		System.out.println();
-		System.out.println("ORIG: " + Arrays.toString(maxStats));
-		System.out.println("RETR: " + Arrays.toString(retrievedMaxStatBytes));
-		System.out.println();
-		System.out.println("ORIG: " + Arrays.toString(blockingBonuses));
-		System.out.println("RETR: " + Arrays.toString(retrievedBlockingBonusBytes));
-		System.out.println();
-		System.out.println("ORIG: " + Arrays.toString(bonusesAndFramesets));
-		System.out.println("RETR: " + Arrays.toString(retrievedBonusesAndFramesetBytes));
-		System.out.println();
-		*/
 	}
 
 	public Character getCharacter(int i) {
