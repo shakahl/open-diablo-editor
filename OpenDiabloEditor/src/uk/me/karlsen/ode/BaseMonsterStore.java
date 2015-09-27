@@ -55,4 +55,14 @@ public class BaseMonsterStore {
 		}
 	}
 
+	public String[] getMonsterNames() {
+		String[] monsterNames = new String[baseMonsters.size()];
+		int monsterNamesIndex = 0;
+		for(BaseMonster bm : baseMonsters){
+			monsterNames[monsterNamesIndex] = "Monster " + monsterNamesIndex + ": " + bm.getName();
+			monsterNamesIndex++;
+		}
+		return monsterNames;
+	}
+
 }

@@ -839,6 +839,10 @@ public class BaseItem {
 					+ "supplied with an argument outside the supported range (0 to 999999)");
 		}
 	}
+	
+	public String getName() {
+		return name;
+	}
 
 	public boolean isChanged() {
 		return changed;

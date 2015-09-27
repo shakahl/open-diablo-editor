@@ -549,7 +549,7 @@ public class BaseMonster {
 	}
 
 	//TODO
-	private String getName() {
+	String getName() {
 		return name;
 	}
 

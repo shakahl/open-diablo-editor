@@ -54,4 +54,18 @@ public class BaseItemStore {
 	public byte[] getItemAsBytes(int i) {
 		return baseItems.get(i).getItemAsBytes();
 	}
+
+	public String[] getItemNames() {
+		String[] itemNames = new String[baseItems.size()];
+		int itemNamesIndex = 0;
+		for(BaseItem bi : baseItems){
+			itemNames[itemNamesIndex] = "Item " + itemNamesIndex + ": " + bi.getName();
+			itemNamesIndex++;
+		}
+		return itemNames;
+	}
+
+	public BaseItem getItem(int itemIndex) {
+		return baseItems.get(itemIndex);
+	}
 }
