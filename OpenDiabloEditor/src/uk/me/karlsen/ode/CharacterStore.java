@@ -416,4 +416,12 @@ public class CharacterStore {
 		rw.writeBytes(spellID, TomeOfKnowledge.CHARACTER_TWO_SPELL_LOC_1);
 	}
 
+	public String[] getCharacterNames() {
+		String[] charNames = new String[3];
+		charNames[0] = characters.get(0).getClassName();
+		charNames[1] = characters.get(1).getClassName();
+		charNames[2] = characters.get(2).getClassName();
+		return charNames;
+	}
+
 }

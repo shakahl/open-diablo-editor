@@ -166,11 +166,135 @@ public class GUI {
 		
 		return itemModifierPanel;
 	}
+	
+	private void addFieldWithLabelToPanel(String label, JPanel panel) {
+		JLabel jLabel = new JLabel(label);
+		JTextField field = new JTextField();
+		panel.add(jLabel);
+		panel.add(field);
+	}
 
 	private JPanel createCharacterPanel() {
 		GridLayout layout = new GridLayout(32,2);
 		JPanel characterPanel = new JPanel();
 		characterPanel.setLayout(layout);
+		
+		String[] charNames = characterStore.getCharacterNames();
+		String[] comboBoxStrings = new String[charNames.length + 1]; 
+		comboBoxStrings[0] = "None selected";
+		System.arraycopy(charNames, 0, comboBoxStrings, 1, charNames.length);
+		JComboBox<String> charComboBox = new JComboBox<String>(comboBoxStrings);
+		charComboBox.setSelectedIndex(0);
+		CharactersListener charListener = new CharactersListener(characterStore);
+		charComboBox.addActionListener(charListener);
+		JLabel monsterCBLabel = new JLabel("Character selected:");
+		characterPanel.add(monsterCBLabel);
+		characterPanel.add(charComboBox);
+		
+		JLabel classNameLabel = new JLabel("Class name:");
+		JTextField classNameField = new JTextField();
+		characterPanel.add(classNameLabel);
+		characterPanel.add(classNameField);
+		
+		JLabel initStrengthLabel = new JLabel("Init strength:");
+		JTextField initStrengthField = new JTextField();
+		characterPanel.add(initStrengthLabel);
+		characterPanel.add(initStrengthField);
+		
+		JLabel maxStrengthLabel = new JLabel("Max strength:");
+		JTextField maxStrengthField = new JTextField();
+		characterPanel.add(maxStrengthLabel);
+		characterPanel.add(maxStrengthField);
+		
+		JLabel initMagicLabel = new JLabel("Init magic:");
+		JTextField initMagicField = new JTextField();
+		characterPanel.add(initMagicLabel);
+		characterPanel.add(initMagicField);
+		
+		JLabel maxMagicLabel = new JLabel("Max magic:");
+		JTextField maxMagicField = new JTextField();
+		characterPanel.add(maxMagicLabel);
+		characterPanel.add(maxMagicField);
+		
+		JLabel initDexterityLabel = new JLabel("Init dexterity:");
+		JTextField initDexterityField = new JTextField();
+		characterPanel.add(initDexterityLabel);
+		characterPanel.add(initDexterityField);
+		
+		JLabel maxDexterityLabel = new JLabel("Max dexterity:");
+		JTextField maxDexterityField = new JTextField();
+		characterPanel.add(maxDexterityLabel);
+		characterPanel.add(maxDexterityField);
+		
+		JLabel initVitalityLabel = new JLabel("Init vitality:");
+		JTextField initVitalityField = new JTextField();
+		characterPanel.add(initVitalityLabel);
+		characterPanel.add(initVitalityField);
+		
+		JLabel maxVitalityLabel = new JLabel("Max vitality:");
+		JTextField maxVitalityField = new JTextField();
+		characterPanel.add(maxVitalityLabel);
+		characterPanel.add(maxVitalityField);
+		
+		JLabel blockingBonusLabel = new JLabel("Blocking bonus:");
+		JTextField blockingBonusField = new JTextField();
+		characterPanel.add(blockingBonusLabel);
+		characterPanel.add(blockingBonusField);
+		
+		JLabel dungeonIdleFramesetLabel = new JLabel("Dungeon idle frameset:");
+		JTextField dungeonIdleFramesetField = new JTextField();
+		characterPanel.add(dungeonIdleFramesetLabel);
+		characterPanel.add(dungeonIdleFramesetField);
+		
+		JLabel attackingFramesetLabel = new JLabel("Attacking frameset:");
+		JTextField attackingFramesetField = new JTextField();
+		characterPanel.add(attackingFramesetLabel);
+		characterPanel.add(attackingFramesetField);
+		
+		JLabel dungeonWalkFramesetLabel = new JLabel("Dungeon walk frameset:");
+		JTextField dungeonWalkFramesetField = new JTextField();
+		characterPanel.add(dungeonWalkFramesetLabel);
+		characterPanel.add(dungeonWalkFramesetField);
+		
+		JLabel blockSpeedLabel = new JLabel("Block speed (1/20 secs):");
+		JTextField blockSpeedField = new JTextField();
+		characterPanel.add(blockSpeedLabel);
+		characterPanel.add(blockSpeedField);
+		
+		JLabel deathFramesetLabel = new JLabel("Death frameset:");
+		JTextField deathFramesetField = new JTextField();
+		characterPanel.add(deathFramesetLabel);
+		characterPanel.add(deathFramesetField);
+		
+		JLabel castingFramesetLabel = new JLabel("Casting frameset:");
+		JTextField castingFramesetField = new JTextField();
+		characterPanel.add(castingFramesetLabel);
+		characterPanel.add(castingFramesetField);
+		
+		JLabel hitRecoverySpeedLabel = new JLabel("Hit recovery speed:");
+		JTextField hitRecoverySpeedField = new JTextField();
+		characterPanel.add(hitRecoverySpeedLabel);
+		characterPanel.add(hitRecoverySpeedField);
+		
+		JLabel townIdleFramesetLabel = new JLabel("Town idle frameset:");
+		JTextField townIdleFramesetField = new JTextField();
+		characterPanel.add(townIdleFramesetLabel);
+		characterPanel.add(townIdleFramesetField);
+		
+		JLabel townWalkFramesetLabel = new JLabel("Town walk frameset:");
+		JTextField townWalkFramesetField = new JTextField();
+		characterPanel.add(townWalkFramesetLabel);
+		characterPanel.add(townWalkFramesetField);
+		
+		JLabel oneHandedAttackSpeedLabel = new JLabel("1H attack speed:");
+		JTextField oneHandedAttackSpeedField = new JTextField();
+		characterPanel.add(oneHandedAttackSpeedLabel);
+		characterPanel.add(oneHandedAttackSpeedField);
+		
+		JLabel castingSpeedLabel = new JLabel("Casting speed (1/20 secs):");
+		JTextField castingSpeedField = new JTextField();
+		characterPanel.add(castingSpeedLabel);
+		characterPanel.add(castingSpeedField);
 		
 		return characterPanel;
 	}
@@ -337,33 +461,131 @@ public class GUI {
 		baseMonstersPanel.add(monsterItemLevelLabel);
 		baseMonstersPanel.add(monsterItemLevelField);
 		
+		JLabel minHitPointsLabel = new JLabel("Minimum hit points");
+		JTextField minHitPointsField = new JTextField();
+		baseMonstersPanel.add(minHitPointsLabel);
+		baseMonstersPanel.add(minHitPointsField);
 		
-		/*
-		"| Monster item level: " + monsterItemLevel + "\n" +
-		"| HPs: " + minHitPoints + "--" + maxHitPoints + "\n" +
-		"| Attack type (byte 1): " + attackType1 + "\n" +
-		"| Attack type (byte 2): " + attackType2 + "\n" +
-		"| Attack type (byte 3): " + attackType3 + "\n" +
-		"| Attack type (byte 4): " + attackType4 + "\n" +
-		"| Attack type (byte 5): " + attackType5 + "\n" +
-		"| Monster intelligence: " + monsterIntelligence + "\n" +
-		"| Attack type (byte 7): " + attackType7 + "\n" +
-		"| Attack type (byte 8): " + attackType8 + "\n" +
-		"| Monster sub-type: " + subType + "\n" +
-		"| Primary attack % hit: " + monsterPriChanceToHit + "\n" +
-		"| Primary to-hit frame: " + priToHitFrame + "\n" +
-		"| Primary damage: " + priMinAttackDamage + "--" + priMaxAttackDamage + "\n" +
-		"| Sec. attack % hit: " + secToHitChance + "\n" +
-		"| Sec. to-hit frame: " + secToHitFrame + "\n" +
-		"| Secondary damage: " + secMinAttackDamage + "--" + secMaxAttackDamage + "\n" +
-		"| Monster AC: " + monsterAc + "\n" +
-		"| Monster type: " + monsterType + "\n" +
-		"| Resistances (norm. and nightmare): " + resistancesNormAndNightmare + "\n" +
-		"| Resistances (hell mode): " + resistancesHell + "\n" +
-		"| Item drop specials: " + itemDropSpecials + "\n" +
-		"| Monster selection outline: " + monsterSelectionOutline + "\n" +
-		"| XP: " + experiencePoints + "\n" +
-		*/
+		JLabel attackType1Label = new JLabel("Attack type 1");
+		JTextField attackType1Field = new JTextField();
+		baseMonstersPanel.add(attackType1Label);
+		baseMonstersPanel.add(attackType1Field);
+		
+		JLabel attackType2Label = new JLabel("Attack type 2");
+		JTextField attackType2Field = new JTextField();
+		baseMonstersPanel.add(attackType2Label);
+		baseMonstersPanel.add(attackType2Field);
+		
+		JLabel attackType3Label = new JLabel("Attack type 3");
+		JTextField attackType3Field = new JTextField();
+		baseMonstersPanel.add(attackType3Label);
+		baseMonstersPanel.add(attackType3Field);
+		
+		JLabel attackType4Label = new JLabel("Attack type 4");
+		JTextField attackType4Field = new JTextField();
+		baseMonstersPanel.add(attackType4Label);
+		baseMonstersPanel.add(attackType4Field);
+		
+		JLabel attackType5Label = new JLabel("Attack type 5");
+		JTextField attackType5Field = new JTextField();
+		baseMonstersPanel.add(attackType5Label);
+		baseMonstersPanel.add(attackType5Field);
+		
+		JLabel monsterIntelligenceLabel = new JLabel("Monster intelligence");
+		JTextField monsterIntelligenceField = new JTextField();
+		baseMonstersPanel.add(monsterIntelligenceLabel);
+		baseMonstersPanel.add(monsterIntelligenceField);
+		
+		JLabel attackType7Label = new JLabel("Attack type 7");
+		JTextField attackType7Field = new JTextField();
+		baseMonstersPanel.add(attackType7Label);
+		baseMonstersPanel.add(attackType7Field);
+		
+		JLabel attackType8Label = new JLabel("Attack type 8");
+		JTextField attackType8Field = new JTextField();
+		baseMonstersPanel.add(attackType8Label);
+		baseMonstersPanel.add(attackType8Field);
+		
+		JLabel subTypeLabel = new JLabel("Sub-type label");
+		JTextField subTypeField = new JTextField();
+		baseMonstersPanel.add(subTypeLabel);
+		baseMonstersPanel.add(subTypeField);
+		
+		JLabel monsterPriChanceToHitLabel = new JLabel("Primary attack % hit");
+		JTextField monsterPriChanceToHitField = new JTextField();
+		baseMonstersPanel.add(monsterPriChanceToHitLabel);
+		baseMonstersPanel.add(monsterPriChanceToHitField);
+		
+		JLabel priToHitFrameLabel = new JLabel("Primary to hit frame");
+		JTextField priToHitFrameField = new JTextField();
+		baseMonstersPanel.add(priToHitFrameLabel);
+		baseMonstersPanel.add(priToHitFrameField);
+		
+		JLabel priMinAttackDamageLabel = new JLabel("Primary min attack dmg");
+		JTextField priMinAttackDamageField = new JTextField();
+		baseMonstersPanel.add(priMinAttackDamageLabel);
+		baseMonstersPanel.add(priMinAttackDamageField);
+		
+		JLabel priMaxAttackDamageLabel = new JLabel("Primary max attack dmg");
+		JTextField priMaxAttackDamageField = new JTextField();
+		baseMonstersPanel.add(priMaxAttackDamageLabel);
+		baseMonstersPanel.add(priMaxAttackDamageField);
+		
+		JLabel secToHitChanceLabel = new JLabel("Sec attack % hit");
+		JTextField secToHitChanceField = new JTextField();
+		baseMonstersPanel.add(secToHitChanceLabel);
+		baseMonstersPanel.add(secToHitChanceField);
+		
+		JLabel secToHitFrameLabel = new JLabel("Sec to hit frame");
+		JTextField secToHitFrameField = new JTextField();
+		baseMonstersPanel.add(secToHitFrameLabel);
+		baseMonstersPanel.add(secToHitFrameField);
+		
+		JLabel secMinAttackDamageLabel = new JLabel("Sec min attack dmg");
+		JTextField secMinAttackDamageField = new JTextField();
+		baseMonstersPanel.add(secMinAttackDamageLabel);
+		baseMonstersPanel.add(secMinAttackDamageField);
+		
+		JLabel secMaxAttackDamageLabel = new JLabel("Sec max attack dmg");
+		JTextField secMaxAttackDamageField = new JTextField();
+		baseMonstersPanel.add(secMaxAttackDamageLabel);
+		baseMonstersPanel.add(secMaxAttackDamageField);
+		
+		JLabel monsterAcLabel = new JLabel("Monster AC");
+		JTextField monsterAcField = new JTextField();
+		baseMonstersPanel.add(monsterAcLabel);
+		baseMonstersPanel.add(monsterAcField);
+		
+		JLabel monsterTypeLabel = new JLabel("Monster type");
+		JTextField monsterTypeField = new JTextField();
+		baseMonstersPanel.add(monsterTypeLabel);
+		baseMonstersPanel.add(monsterTypeField);
+		
+		JLabel resistancesNormAndNightmareLabel = new JLabel("Resist norm + nightmare");
+		JTextField resistancesNormAndNightmareField = new JTextField();
+		baseMonstersPanel.add(resistancesNormAndNightmareLabel);
+		baseMonstersPanel.add(resistancesNormAndNightmareField);
+		
+		JLabel resistancesHellLabel = new JLabel("Resist hell");
+		JTextField resistancesHellField = new JTextField();
+		baseMonstersPanel.add(resistancesHellLabel);
+		baseMonstersPanel.add(resistancesHellField);
+		
+		JLabel itemDropSpecialsLabel = new JLabel("Item drop specials");
+		JTextField itemDropSpecialsField = new JTextField();
+		baseMonstersPanel.add(itemDropSpecialsLabel);
+		baseMonstersPanel.add(itemDropSpecialsField);
+		
+		JLabel monsterSelectionOutline = new JLabel("Monster selection outline");
+		JTextField monsterSelectionField = new JTextField();
+		baseMonstersPanel.add(monsterSelectionOutline);
+		baseMonstersPanel.add(monsterSelectionField);
+		
+		JLabel experiencePointsLabel = new JLabel("XP");
+		JTextField experiencePointsField = new JTextField();
+		baseMonstersPanel.add(experiencePointsLabel);
+		baseMonstersPanel.add(experiencePointsField);
+		
 		return baseMonstersPanel;
 	}
 	
