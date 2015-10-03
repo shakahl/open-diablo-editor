@@ -29,7 +29,7 @@ public class UniqueMonsterStore {
 
 	public void printUniques() {
 		for(UniqueMonster um : uniqueMonsters){
-			um.printItem();
+			um.printUniqueMonster();
 		}
 
 	}
@@ -46,6 +46,14 @@ public class UniqueMonsterStore {
 			pos = pos + TomeOfKnowledge.UNIQUE_MONSTER_LENGTH_IN_BYTES;
 		}
 
+	}
+
+	public String[] getMonsterNames() {
+		String[] monsterNames = new String[uniqueMonsters.size()];
+		for(int i = 0; i < uniqueMonsters.size(); i++){
+			monsterNames[i] = uniqueMonsters.get(i).getName();
+		}
+		return monsterNames;
 	}
 
 }

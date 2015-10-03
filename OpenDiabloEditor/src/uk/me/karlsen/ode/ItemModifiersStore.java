@@ -55,4 +55,13 @@ public class ItemModifiersStore {
 			pos = pos + TomeOfKnowledge.MODIFIER_LENGTH_IN_BYTES;
 		}
 	}
+
+	public String[] getModifierNames() {
+		String[] modifierNames = new String[itemModifiers.size()];
+		for(int i = 0; i < itemModifiers.size(); i++){
+			ItemModifier iMod = itemModifiers.get(i);
+			modifierNames[i] = iMod.getName();
+		}
+		return modifierNames;
+	}
 }

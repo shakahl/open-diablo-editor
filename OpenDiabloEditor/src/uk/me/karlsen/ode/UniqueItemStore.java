@@ -55,4 +55,12 @@ public class UniqueItemStore {
 			pos = pos + TomeOfKnowledge.UNIQUE_ITEM_LENGTH_IN_BYTES;
 		}
 	}
+
+	public String[] getItemNames() {
+		String[] itemNames = new String[uniqueItems.size()];
+		for(int i = 0; i < uniqueItems.size(); i++){
+			itemNames[i] = uniqueItems.get(i).getName();
+		}
+		return itemNames;
+	}
 }

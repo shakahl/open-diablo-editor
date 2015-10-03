@@ -72,7 +72,7 @@ public class UniqueMonster {
 		specialSoundWav = beh.convertFourBytesToNumber(monsterBytes, 28);
 	}
 
-	public void printItem() {
+	public void printUniqueMonster() {
 		System.out.println(
 			"Name: " + name + "\n" +
 			"Monster type: " + monsterType + "\n" +

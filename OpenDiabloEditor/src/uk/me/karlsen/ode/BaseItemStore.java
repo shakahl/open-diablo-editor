@@ -59,7 +59,7 @@ public class BaseItemStore {
 		String[] itemNames = new String[baseItems.size()];
 		int itemNamesIndex = 0;
 		for(BaseItem bi : baseItems){
-			itemNames[itemNamesIndex] = "Item " + itemNamesIndex + ": " + bi.getName();
+			itemNames[itemNamesIndex] = bi.getName();
 			itemNamesIndex++;
 		}
 		return itemNames;
@@ -67,5 +67,16 @@ public class BaseItemStore {
 
 	public BaseItem getItem(int itemIndex) {
 		return baseItems.get(itemIndex);
+	}
+
+	public BaseItem getItemByName(String itemName) {
+		BaseItem itemToReturn = null;
+		for(BaseItem item : baseItems){
+			if(item.getName().equals(itemName)){
+				itemToReturn = item;
+				break;
+			}
+		}
+		return itemToReturn;
 	}
 }

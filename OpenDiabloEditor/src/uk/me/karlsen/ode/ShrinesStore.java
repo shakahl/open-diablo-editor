@@ -189,4 +189,12 @@ public class ShrinesStore {
 		taintedShrine.setMaxShrineLevel(0);
 
 	}
+
+	public String[] getShrineNames() {
+		String[] shrineNames = new String[shrines.size()];
+		for(int i = 0; i < shrines.size(); i++){
+			shrineNames[i] = shrines.get(i).getShrineName();
+		}
+		return shrineNames;
+	}
 }

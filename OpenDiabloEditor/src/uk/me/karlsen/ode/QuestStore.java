@@ -80,4 +80,12 @@ public class QuestStore {
 			pos = pos + TomeOfKnowledge.QUEST_LENGTH_IN_BYTES;
 		}
 	}
+
+	public String[] getQuestNames() {
+		String[] questNames = new String[quests.size()];
+		for(int i = 0; i < quests.size(); i++){
+			questNames[i] = String.valueOf(quests.get(i).getQuestNumber());
+		}
+		return questNames;
+	}
 }

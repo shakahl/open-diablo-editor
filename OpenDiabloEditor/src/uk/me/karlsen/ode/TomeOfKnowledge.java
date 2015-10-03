@@ -61,7 +61,7 @@ public class TomeOfKnowledge {
 	public static final int NUMBER_OF_UNIQUE_MONSTERS = 97;
 	public static final int UNIQUE_MONSTER_LENGTH_IN_BYTES = 32;
 
-	static String[] createSpellNamesArray(){
+	public static String[] createSpellNamesArray(){
 		String[] spellNames = new String[37];
 		spellNames[0] = "none";				//00
 		spellNames[1] = "Firebolt";			//01

@@ -58,4 +58,12 @@ public class SpellsStore {
 			pos = pos + TomeOfKnowledge.SPELL_LENGTH_IN_BYTES;
 		}
 	}
+
+	public String[] getSpellNames() {
+		String[] spellNames = new String[spells.size()];
+		for(int i = 0; i < spells.size(); i++){
+			spellNames[i] = String.valueOf(spells.get(i).getUnmoddedSpellIndex());
+		}
+		return spellNames;
+	}
 }
