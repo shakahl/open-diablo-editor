@@ -290,7 +290,7 @@ public class BaseMonster {
 	}
 
 	//TODO
-	private String getAnimationFileName() {
+	public String getAnimationFileName() {
 		return animationFileName;
 	}
 
@@ -549,7 +549,7 @@ public class BaseMonster {
 	}
 
 	//TODO
-	String getName() {
+	public String getName() {
 		return name;
 	}
 

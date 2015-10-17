@@ -3,6 +3,8 @@ package uk.me.karlsen.ode;
 import java.util.ArrayList;
 import java.util.List;
 
+import uk.me.karlsen.ode.BaseMonster;
+
 public class BaseMonsterStore {
 
 	private ReaderWriter rw;
@@ -59,10 +61,21 @@ public class BaseMonsterStore {
 		String[] monsterNames = new String[baseMonsters.size()];
 		int monsterNamesIndex = 0;
 		for(BaseMonster bm : baseMonsters){
-			monsterNames[monsterNamesIndex] = "Monster " + monsterNamesIndex + ": " + bm.getName();
+			monsterNames[monsterNamesIndex] = bm.getName();
 			monsterNamesIndex++;
 		}
 		return monsterNames;
+	}
+
+	public BaseMonster getMonsterByName(String monsterName) {
+		BaseMonster baseMonsterToReturn = null;
+		for(BaseMonster m : baseMonsters){
+			if(m.getName().equals(monsterName)){
+				baseMonsterToReturn = m;
+				break;
+			}
+		}
+		return baseMonsterToReturn;
 	}
 
 }

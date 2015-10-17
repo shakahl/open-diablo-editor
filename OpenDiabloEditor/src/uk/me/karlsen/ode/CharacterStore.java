@@ -424,4 +424,14 @@ public class CharacterStore {
 		return charNames;
 	}
 
+	public Character getCharacterByName(String charName) {
+		Character characterSelected = null;
+		for(Character c : characters){
+			if(c.getClassName().equals(charName)){
+				characterSelected = c;
+			}
+		}
+		return characterSelected;
+	}
+
 }
