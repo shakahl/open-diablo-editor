@@ -5,21 +5,49 @@ import java.util.Arrays;
 import org.junit.Test;
 
 import uk.me.karlsen.ode.ReaderWriter;
+import uk.me.karlsen.ode.TomeOfKnowledge;
 import uk.me.karlsen.ode.stores.ShrinesStore;
+import uk.me.karlsen.ode.types.Shrine;
+import uk.me.karlsen.ode.utils.BinEditHelper;
 import junit.framework.TestCase;
 
 public class TestShrinesStore extends TestCase {
 
-	protected byte[] origShrinePointerBytes = {0, 12, 11, 74, 0, -116, -41, 73, 0, 4, 11, 74, 0, -80, -11, 72, 0, -4, 10, 74, 0, -12, 10, 74, 0, -24, 10, 74, 0, -36, 10, 74, 0, -52, 10, 74, 0, -64, 10, 74, 0, -72, 10, 74, 0, -4, 10, 74, 0, -84, 10, 74, 0, -92, 10, 74, 0, -100, 10, 74, 0, 124, -12, 72, 0, -108, 10, 74, 0, -120, 10, 74, 0, -128, 10, 74, 0, 116, 10, 74, 0, 108, 10, 74, 0, 100, 10, 74, 0, 88, 10, 74, 0, 80, 10, 74, 0, 68, 10, 74, 0, 60, 10, 74};
-	protected byte[] origMinShrineLevelBytes = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
-	protected byte[] origMaxShrineLevelBytes = {16, 16, 16, 16, 16, 16, 16, 8, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16};
-	protected byte[] origGameTypesInWhichPresentBytes = {1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 2, 0, 0};
+	protected byte[] origShrinePointerBytes;
+	protected byte[] origMinShrineLevelBytes;
+	protected byte[] origMaxShrineLevelBytes;
+	protected byte[] origGameTypesInWhichPresentBytes;
 	
 	protected ShrinesStore ss;
 	
+	public void readInAllShrineBytes(ReaderWriter rw){
+
+		long pos = TomeOfKnowledge.SHRINE_POINTERS_OFFSET;
+		rw.seek(pos);
+		origShrinePointerBytes = rw.readBytes(TomeOfKnowledge.NUMBER_OF_SHRINES*4);
+		rw.seek(pos);
+
+		pos = TomeOfKnowledge.SHRINE_MIN_LEVELS_OFFSET;
+		rw.seek(pos);
+		origMinShrineLevelBytes = rw.readBytes(TomeOfKnowledge.NUMBER_OF_SHRINES);
+		rw.seek(pos);
+
+		pos = TomeOfKnowledge.SHRINE_MAX_LEVELS_OFFSET;
+		rw.seek(pos);
+		origMaxShrineLevelBytes = rw.readBytes(TomeOfKnowledge.NUMBER_OF_SHRINES);
+		rw.seek(pos);
+
+		pos = TomeOfKnowledge.SHRINE_GAME_TYPE_OFFSET;
+		rw.seek(pos);
+		origGameTypesInWhichPresentBytes = rw.readBytes(TomeOfKnowledge.NUMBER_OF_SHRINES);
+		rw.seek(pos);
+	}
+	
+	@Override
 	protected void setUp(){
 		ReaderWriter rw = new ReaderWriter(false);
 		ss = new ShrinesStore(rw);
+		readInAllShrineBytes(rw);
 	}
 	
 	@Test

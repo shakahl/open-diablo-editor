@@ -66,9 +66,9 @@ public class OpenDiabloEditor {
 		//uniqueMonsterStore.printUniques();
 
 
-		//####################################
-		//# DO YOUR MODDING STUFF BELOW HERE #
-		//####################################
+		//######################################################
+		//# DO YOUR MODDING STUFF BELOW HERE -- EXAMPLES BELOW #
+		//######################################################
 
 		//v1
 		//shrineStore.disableBadShrines();
@@ -81,13 +81,10 @@ public class OpenDiabloEditor {
 		//characterStore.setCharOneStartingSkillBySpellID(9); //infravision (inner sight)
 		//characterStore.setCharTwoStartingSkillBySpellID(5); //identify
 
-		//v4
+		//v4 -- TODO
 		//fix or disable yellow zombies
 		//change name of infravision
 		//make healing skill mana drain
-
-		//TODO
-		//promissory note
 
 		//####################################
 		//# NOW WE WRITE TO DIABLO.EXE COPY  #

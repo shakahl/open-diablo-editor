@@ -40,8 +40,6 @@ public class SpellsStore {
 
 		Spell s = new Spell(index, readIn, rw);
 		spells.add(s);
-
-
 	}
 
 	public void printSpells() {

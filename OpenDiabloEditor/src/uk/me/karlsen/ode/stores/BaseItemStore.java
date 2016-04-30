@@ -36,7 +36,6 @@ public class BaseItemStore {
 			pos = pos + TomeOfKnowledge.BASE_ITEM_LENGTH_IN_BYTES;
 			rw.seek(pos);
 		}
-
 	}
 
 	public void printItems() {

@@ -2,28 +2,72 @@ package uk.me.karlsen.ode.test;
 
 import java.util.Arrays;
 
+import org.junit.Test;
+
 import uk.me.karlsen.ode.ReaderWriter;
+import uk.me.karlsen.ode.TomeOfKnowledge;
 import uk.me.karlsen.ode.stores.CharacterStore;
 import junit.framework.TestCase;
 
 public class TestCharacterStore extends TestCase {
 	
-	//TODO -- check these 4 arrays in a hex editor (don't rely on read-in methods)
-	protected byte[] origInitStatBytes = {30, 0, 0, 0, 20, 0, 0, 0, 15, 0, 0, 0, 10, 0, 0, 0, 15, 0, 0, 0, 35, 0, 0, 0, 20, 0, 0, 0, 30, 0, 0, 0, 15, 0, 0, 0, 25, 0, 0, 0, 20, 0, 0, 0, 20, 0, 0, 0};
+	protected byte[] origInitStatBytes;
 	
-	protected byte[] origMaxStatBytes = {-6, 0, 0, 0, 50, 0, 0, 0, 60, 0, 0, 0, 100, 0, 0, 0, 55, 0, 0, 0, 70, 0, 0, 0, -6, 0, 0, 0, 80, 0, 0, 0, 45, 0, 0, 0, -6, 0, 0, 0, 85, 0, 0, 0, 80, 0, 0, 0};
+	protected byte[] origMaxStatBytes;
 	
-	protected byte[] origBlockingBonusBytes = {30, 0, 0, 0, 20, 0, 0, 0, 10, 0, 0, 0};
+	protected byte[] origBlockingBonusBytes;
 	
-	protected byte[] origBonusAndFramesetBytes = {10, 16, 8, 2, 20, 20, 6, 20, 8, 9, 14, 8, 18, 8, 4, 20, 16, 7, 20, 8, 10, 12, 8, 16, 8, 6, 20, 12, 8, 20, 8, 12, 8};
+	protected byte[] origBonusAndFramesetBytes;
 	
 	protected CharacterStore cs;
 	
+	public void readInAllCharacterBytes(ReaderWriter rw) {
+		
+		long pos = TomeOfKnowledge.MIN_STATS_OFFSET;
+		rw.seek(pos);
+		origInitStatBytes = new byte[TomeOfKnowledge.MIN_STATS_LENGTH_IN_BYTES];
+		for(int j = 0; j < TomeOfKnowledge.MIN_STATS_LENGTH_IN_BYTES; j++){
+			origInitStatBytes[j] = rw.readByte();
+			pos++;
+			rw.seek(pos);
+		}
+
+		pos = TomeOfKnowledge.MAX_STATS_OFFSET;
+		rw.seek(pos);
+		origMaxStatBytes = new byte[TomeOfKnowledge.MAX_STATS_LENGTH_IN_BYTES];
+		for(int j = 0; j < TomeOfKnowledge.MAX_STATS_LENGTH_IN_BYTES; j++){
+			origMaxStatBytes[j] = rw.readByte();
+			pos++;
+			rw.seek(pos);
+		}
+
+		pos = TomeOfKnowledge.BLOCKING_BONUSES_OFFSET;
+		rw.seek(pos);
+		origBlockingBonusBytes = new byte[TomeOfKnowledge.BLOCKING_BONUSES_LENGTH_IN_BYTES];
+		for(int j = 0; j < TomeOfKnowledge.BLOCKING_BONUSES_LENGTH_IN_BYTES; j++){
+			origBlockingBonusBytes[j] = rw.readByte();
+			pos++;
+			rw.seek(pos);
+		}
+
+		pos = TomeOfKnowledge.BONUSES_AND_FRAMESETS_OFFSET;
+		rw.seek(pos);
+		origBonusAndFramesetBytes = new byte[TomeOfKnowledge.BONUSES_AND_FRAMESETS_LENGTH_IN_BYTES];
+		for(int j = 0; j < TomeOfKnowledge.BONUSES_AND_FRAMESETS_LENGTH_IN_BYTES; j++){
+			origBonusAndFramesetBytes[j] = rw.readByte();
+			pos++;
+			rw.seek(pos);
+		}
+	}
+		
+	@Override
 	protected void setUp(){
 		ReaderWriter rw = new ReaderWriter(false);
 		cs = new CharacterStore(rw);
+		readInAllCharacterBytes(rw);
 	}
 	
+	@Test
 	public void testGetInitStatBytes(){
 		byte[] retrievedInitStatBytes = cs.getInitStatBytes();
 		String retrievedInitStatString = Arrays.toString(retrievedInitStatBytes);
@@ -31,6 +75,7 @@ public class TestCharacterStore extends TestCase {
 		assertEquals(origInitStatString, retrievedInitStatString);
 	}
 	
+	@Test
 	public void testGetMaxStatBytes(){
 		byte[] retrievedMaxStatBytes = cs.getMaxStatBytes();
 		String retrievedMaxStatString = Arrays.toString(retrievedMaxStatBytes);
@@ -38,6 +83,7 @@ public class TestCharacterStore extends TestCase {
 		assertEquals(origMaxStatString, retrievedMaxStatString);
 	}
 	
+	@Test
 	public void testGetBlockingBonusBytes(){
 		byte[] retrievedBlockingBonusBytes = cs.getBlockingBonusBytes();
 		String retrievedBlockingBonusString = Arrays.toString(retrievedBlockingBonusBytes);
@@ -45,6 +91,7 @@ public class TestCharacterStore extends TestCase {
 		assertEquals(origBlockingBonusString, retrievedBlockingBonusString);
 	}
 	
+	@Test
 	public void testGetBonusesAndFramesetBytes(){
 		byte[] retrievedBonusAndFramesetBytes = cs.getBonusesAndFramesetBytes();
 		String retrievedBonusAndFramesetString = Arrays.toString(retrievedBonusAndFramesetBytes);
