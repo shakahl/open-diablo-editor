@@ -1,5 +1,15 @@
 package uk.me.karlsen.ode;
 
+import uk.me.karlsen.ode.stores.BaseItemStore;
+import uk.me.karlsen.ode.stores.BaseMonsterStore;
+import uk.me.karlsen.ode.stores.CharacterStore;
+import uk.me.karlsen.ode.stores.ItemModifiersStore;
+import uk.me.karlsen.ode.stores.QuestStore;
+import uk.me.karlsen.ode.stores.ShrinesStore;
+import uk.me.karlsen.ode.stores.SpellsStore;
+import uk.me.karlsen.ode.stores.UniqueItemStore;
+import uk.me.karlsen.ode.stores.UniqueMonsterStore;
+
 public class OpenDiabloEditor {
 
 	private ReaderWriter rw;
