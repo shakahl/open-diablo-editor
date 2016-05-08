@@ -40,7 +40,7 @@ public class TestUniqueItem extends TestCase {
 	
 	@Override
 	protected void setUp(){
-		ReaderWriter rw = new ReaderWriter(true);
+		ReaderWriter rw = new ReaderWriter("input/Diablo.exe");
 		uis = new UniqueItemStore(rw);
 		readInAllItemBytes(rw);
 	}

@@ -8,8 +8,6 @@ import uk.me.karlsen.ode.utils.BinEditHelper;
 
 public class ItemModifier {
 
-	ReaderWriter rw = null;
-
 	private long namePointer;
 	private String name;
 	private byte[] itemEffects;
@@ -23,10 +21,12 @@ public class ItemModifier {
 	private long minGold;
 	private long maxGold;
 	private long valueMultiplier;
+	
+	private ReaderWriter rw;
 
 	public ItemModifier(byte[] readIn, ReaderWriter rw){
 		this.rw = rw;
-		BinEditHelper beh = new BinEditHelper();
+		BinEditHelper beh = new BinEditHelper(rw);
 		namePointer = beh.convertFourBytesToOffset(readIn, 0);
 		name = beh.getNameUsingPointer(namePointer);
 		itemEffects = Arrays.copyOfRange(readIn, 4, 4+TomeOfKnowledge.NUMBER_OF_ITEM_EFFECTS);
@@ -81,7 +81,7 @@ public class ItemModifier {
 	}
 
 	public byte[] getModifierAsBytes(){
-		BinEditHelper beh = new BinEditHelper();
+		BinEditHelper beh = new BinEditHelper(rw);
 		byte[] modifierAsBytes = new byte[48];
 		beh.setPointerAsFourBytes(namePointer, modifierAsBytes, 0);
 		modifierAsBytes[4] = itemEffects[0];

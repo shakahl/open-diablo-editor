@@ -29,7 +29,7 @@ public class TestBaseItem extends TestCase{
 	
 	@Override
 	protected void setUp(){
-		ReaderWriter rw = new ReaderWriter(false);
+		ReaderWriter rw = new ReaderWriter("input/Diablo.exe");
 		bis = new BaseItemStore(rw);
 		readInAllItemBytes(rw);
 	}

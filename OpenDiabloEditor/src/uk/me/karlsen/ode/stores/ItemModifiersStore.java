@@ -51,11 +51,11 @@ public class ItemModifiersStore {
 		return itemModifiers.get(i).getModifierAsBytes();
 	}
 
-	public void writeModifiersToEXE() {
+	public void writeModifiersToEXE(ReaderWriter writer) {
 		long pos = TomeOfKnowledge.MODIFIERS_OFFSET;
 		for(int i = 0; i < TomeOfKnowledge.NUMBER_OF_MODIFIERS; i++){
 			byte[] modifierAsBytes = this.getModifierAsBytes(i);
-			rw.writeBytes(modifierAsBytes, pos);
+			writer.writeBytes(modifierAsBytes, pos);
 			pos = pos + TomeOfKnowledge.MODIFIER_LENGTH_IN_BYTES;
 		}
 	}

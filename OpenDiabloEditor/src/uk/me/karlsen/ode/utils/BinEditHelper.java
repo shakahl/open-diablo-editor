@@ -5,14 +5,17 @@ import uk.me.karlsen.ode.TomeOfKnowledge;
 
 public class BinEditHelper {
 
-	public BinEditHelper(){}
+	ReaderWriter readerOnly;
+	
+	public BinEditHelper(ReaderWriter readerOnly){
+		this.readerOnly = readerOnly;
+	}
 
 	public String getNameUsingPointer(long pointer){
 		String name = "Unnamed";
 		if(pointer > 0){
-			ReaderWriter rwTemp = new ReaderWriter(true);
-			rwTemp.seek(pointer);
-			byte[] bytes = rwTemp.readBytes(40);
+			readerOnly.seek(pointer);
+			byte[] bytes = readerOnly.readBytes(40);
 			int endByte = -1;
 			for(int i = 0; i < bytes.length; i++){
 				if(bytes[i] == 0){

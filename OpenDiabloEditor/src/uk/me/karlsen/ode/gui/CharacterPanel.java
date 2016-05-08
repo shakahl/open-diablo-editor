@@ -4,6 +4,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -194,5 +195,17 @@ public class CharacterPanel extends JPanel {
 			}	
 		};
 		charComboBox.addActionListener(charListener);
+		
+		JButton saveButton = new JButton("Store changes");
+		this.add(saveButton);
+		
+		ActionListener saveClick = new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		};
+		saveButton.addActionListener(saveClick);
 	}
 }

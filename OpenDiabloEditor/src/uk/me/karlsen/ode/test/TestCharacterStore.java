@@ -62,7 +62,7 @@ public class TestCharacterStore extends TestCase {
 		
 	@Override
 	protected void setUp(){
-		ReaderWriter rw = new ReaderWriter(false);
+		ReaderWriter rw = new ReaderWriter("input/Diablo.exe");
 		cs = new CharacterStore(rw);
 		readInAllCharacterBytes(rw);
 	}

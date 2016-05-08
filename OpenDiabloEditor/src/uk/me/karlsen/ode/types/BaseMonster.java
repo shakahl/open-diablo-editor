@@ -64,10 +64,12 @@ public class BaseMonster {
 	private int enabled;
 	private boolean changed;
 	private int slotNumber;
+	
+	private ReaderWriter rw;
 
 	public BaseMonster(int slotNumber, byte[] monsterBytes, byte activationByte, ReaderWriter rw) {
 		this.slotNumber = slotNumber;
-		BinEditHelper beh = new BinEditHelper();
+		BinEditHelper beh = new BinEditHelper(rw);
 		animationSize = beh.convertFourBytesToNumber(monsterBytes, 0);
 		seedingSize = beh.convertFourBytesToNumber(monsterBytes, 4);
 		animationFilePointer = beh.convertFourBytesToOffset(monsterBytes, 8);
@@ -130,7 +132,7 @@ public class BaseMonster {
 
 	public MonsterAsBytes getMonsterAsBytes(){
 		byte[] monsterBytes = new byte[TomeOfKnowledge.BASE_MONSTER_LENGTH_IN_BYTES];
-		BinEditHelper beh = new BinEditHelper();
+		BinEditHelper beh = new BinEditHelper(rw);
 		beh.setLongAsFourBytes(animationSize, monsterBytes, 0);
 		beh.setLongAsFourBytes(seedingSize, monsterBytes, 4);
 		beh.setPointerAsFourBytes(animationFilePointer, monsterBytes, 8);

@@ -46,15 +46,15 @@ public class BaseMonsterStore {
 
 	}
 
-	public void writeMonstersToEXE() {
+	public void writeMonstersToEXE(ReaderWriter writer) {
 		long pos = TomeOfKnowledge.BASE_MONSTERS_OFFSET;
 		long posTwo = TomeOfKnowledge.MONSTER_ACTIVATION_BYTES_OFFSET;
 		for(BaseMonster bm : baseMonsters){
 			MonsterAsBytes mab = bm.getMonsterAsBytes();
 			byte[] mainBytes = mab.getMainBytes();
 			byte monsterActivationByte = mab.getEnabledByte();
-			rw.writeBytes(mainBytes, pos);
-			rw.writeByte(monsterActivationByte, posTwo);
+			writer.writeBytes(mainBytes, pos);
+			writer.writeByte(monsterActivationByte, posTwo);
 			pos = pos + TomeOfKnowledge.BASE_MONSTER_LENGTH_IN_BYTES;
 			posTwo = posTwo + 1; //activation bytes are next to each other
 		}

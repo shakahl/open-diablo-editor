@@ -30,7 +30,7 @@ public class TestUniqueMonster extends TestCase {
 	
 	@Override
 	protected void setUp(){
-		ReaderWriter rw = new ReaderWriter(true);
+		ReaderWriter rw = new ReaderWriter("input/Diablo.exe");
 		ums = new UniqueMonsterStore(rw);
 		readInUniqueMonsterBytes(rw);
 	}

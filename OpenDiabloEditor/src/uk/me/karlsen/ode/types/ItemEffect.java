@@ -1,5 +1,6 @@
 package uk.me.karlsen.ode.types;
 
+import uk.me.karlsen.ode.ReaderWriter;
 import uk.me.karlsen.ode.utils.BinEditHelper;
 
 public class ItemEffect {
@@ -10,9 +11,9 @@ public class ItemEffect {
 	private long maxValue;
 	private String[] effectNames;
 	
-	public ItemEffect(byte[] readIn, int offset) {
+	public ItemEffect(ReaderWriter rw, byte[] readIn, int offset) {
 		effectNames = this.createNewItemEffectsArray();
-		BinEditHelper beh = new BinEditHelper();
+		BinEditHelper beh = new BinEditHelper(rw);
 		effectNumber = offset / 12;
 		effect = beh.convertFourBytesToNumber(readIn, offset);
 		minValue = beh.convertFourBytesToNumber(readIn, offset+4);

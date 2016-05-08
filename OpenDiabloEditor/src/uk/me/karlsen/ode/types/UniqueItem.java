@@ -16,10 +16,13 @@ public class UniqueItem {
 	private long goldValue;
 	private List<ItemEffect> itemEffects;
 	private String[] effectsArray;
+	
+	private ReaderWriter rw;
 
 	public UniqueItem(byte[] readIn, ReaderWriter rw){
+		this.rw = rw;
 		effectsArray = this.createNewItemEffectsArray();
-		BinEditHelper beh = new BinEditHelper();
+		BinEditHelper beh = new BinEditHelper(rw);
 		itemEffects = new ArrayList<ItemEffect>();
 		namePointer = beh.convertFourBytesToOffset(readIn, 0);
 		name = beh.getNameUsingPointer(namePointer);
@@ -28,7 +31,7 @@ public class UniqueItem {
 		numberOfEffects = beh.convertTwoBytesToInt(readIn[6], readIn[7]);
 		goldValue = beh.convertFourBytesToNumber(readIn, 8);
 		for(int offset = 12; offset < 84; offset = offset + 12){
-			ItemEffect ie = new ItemEffect(readIn, offset);
+			ItemEffect ie = new ItemEffect(rw, readIn, offset);
 			itemEffects.add(ie);
 		}
 	}
@@ -212,7 +215,7 @@ public class UniqueItem {
 
 	public byte[] getItemAsBytes() {
 		byte[] itemAsBytes = new byte[84];
-		BinEditHelper beh = new BinEditHelper();
+		BinEditHelper beh = new BinEditHelper(rw);
 		beh.setPointerAsFourBytes(namePointer, itemAsBytes, 0);
 		itemAsBytes[4] = (byte) itemType;
 		itemAsBytes[5] = (byte) qualityLevel;

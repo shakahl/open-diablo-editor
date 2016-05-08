@@ -37,14 +37,17 @@ public class Spell {
 	private long bookCost;
 	private long staffCostMultiplier;
 	int index;
+	
+	private ReaderWriter rw;
 
 	public Spell(int index, byte[] byteArray, ReaderWriter rw) {
+		this.rw = rw;
 		if(byteArray.length != 56){
 			System.err.println("byteArray supplied to Spell constructor of incorrect length (not 56).");
 			System.exit(-1);
 		}
 		this.index = index+1; //spell index starts from 1, loop in SpellsStore starts from 0
-		BinEditHelper beh = new BinEditHelper();
+		BinEditHelper beh = new BinEditHelper(rw);
 		unmoddedSpellIndex = beh.convertUnsignedByteToInt(byteArray[0]);
 		manaToCast = beh.convertUnsignedByteToInt(byteArray[1]);
 		animationWhenCasting = beh.convertTwoBytesToInt(byteArray[2], byteArray[3]);
@@ -212,7 +215,7 @@ public class Spell {
 	}
 
 	public byte[] getSpellAsBytes() {
-		BinEditHelper beh = new BinEditHelper();
+		BinEditHelper beh = new BinEditHelper(rw);
 		byte[] spellAsBytes = new byte[56];
 		spellAsBytes[0] = (byte) unmoddedSpellIndex;
 		spellAsBytes[1] = (byte) manaToCast;

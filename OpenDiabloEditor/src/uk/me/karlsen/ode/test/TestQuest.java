@@ -42,7 +42,7 @@ public class TestQuest extends TestCase {
 	
 	@Override
 	protected void setUp(){
-		ReaderWriter rw = new ReaderWriter(false);
+		ReaderWriter rw = new ReaderWriter("input/Diablo.exe");
 		qs = new QuestStore(rw);
 		readInAllQuestBytes(rw);
 	}

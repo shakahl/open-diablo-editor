@@ -76,11 +76,11 @@ public class QuestStore {
 		return quests.get(i).getQuestAsBytes();
 	}
 
-	public void writeQuestsToEXE() {
+	public void writeQuestsToEXE(ReaderWriter writer) {
 		long pos = TomeOfKnowledge.QUESTS_OFFSET;
 		for(int i = 0; i < TomeOfKnowledge.NUMBER_OF_QUESTS; i++){
 			byte[] questAsBytes = this.getQuestAsBytes(i);
-			rw.writeBytes(questAsBytes, pos);
+			writer.writeBytes(questAsBytes, pos);
 			pos = pos + TomeOfKnowledge.QUEST_LENGTH_IN_BYTES;
 		}
 	}

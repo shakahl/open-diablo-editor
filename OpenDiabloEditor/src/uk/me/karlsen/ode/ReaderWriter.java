@@ -7,34 +7,34 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.nio.channels.FileChannel;
+import java.util.Date;
 
 public class ReaderWriter {
 
 	RandomAccessFile raf = null;
 
-	public ReaderWriter(boolean readOnly){
-		if(readOnly){
-			File f = new File("input/Diablo.exe");
-			try {
-				raf = new RandomAccessFile(f, "r");
-			} catch (FileNotFoundException e) {
-				e.printStackTrace();
-				System.exit(-1);
-			}
-		} else {
-
+	public ReaderWriter(String path){
+		File f = new File(path);
+		try {
+			raf = new RandomAccessFile(f, "r");
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+			System.exit(-1);
 		}
-			File f = new File("input/Diablo.exe");
-			File newFile = this.createNewFile(f);
-			try {
-				raf = new RandomAccessFile(newFile, "rw");
-			} catch (FileNotFoundException e) {
-				e.printStackTrace();
-				System.exit(-1);
-			}
+	}
+	
+	public ReaderWriter(String origPath, String newPath){
+		File f = new File(origPath);
+		File newFile = this.createNewFile(f, newPath);
+		try {
+			raf = new RandomAccessFile(newFile, "rw");
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+			System.exit(-1);
+		}
 	}
 
-	private File createNewFile(File originalFile) {
+	private File createNewFile(File originalFile, String newPath) {
 		FileInputStream fis = null;
 		try {
 			fis = new FileInputStream(originalFile);
@@ -42,7 +42,8 @@ public class ReaderWriter {
 			e.printStackTrace();
 			System.exit(-1);
 		}
-		File newFile = new File("output/ODEDiablo.exe");
+		
+		File newFile = new File(newPath);
 		try {
 			newFile.createNewFile();
 		} catch (IOException e1) {

@@ -12,8 +12,8 @@ import uk.me.karlsen.ode.utils.BinEditHelper;
 
 public class ShrinesStore {
 
-	ReaderWriter rw = null;
-	private List<Shrine> shrines = null;
+	ReaderWriter rw;
+	private List<Shrine> shrines;
 
 	byte[] origShrinePointerBytes;
 	byte[] origMinShrineLevelBytes;
@@ -29,7 +29,7 @@ public class ShrinesStore {
 	//TODO -- remove redundant code
 	public void readInShrines(){
 
-		BinEditHelper beh = new BinEditHelper();
+		BinEditHelper beh = new BinEditHelper(rw);
 		
 		long[] shrinePointers = new long[TomeOfKnowledge.NUMBER_OF_SHRINES];
 		int[] minShrineLevels = new int[TomeOfKnowledge.NUMBER_OF_SHRINES];
@@ -87,7 +87,7 @@ public class ShrinesStore {
 
 		//create Shrine objects and add to list
 		for(int i = 0; i < TomeOfKnowledge.NUMBER_OF_SHRINES; i++){
-			BinEditHelper h = new BinEditHelper();
+			BinEditHelper h = new BinEditHelper(rw);
 			String shrineName = h.getNameUsingPointer(shrinePointers[i]);
 			Shrine s = new Shrine(i, shrineName, shrinePointers[i], minShrineLevels[i], maxShrineLevels[i], gameTypesInWhichPresent[i]);
 			shrines.add(s);
@@ -153,20 +153,20 @@ public class ShrinesStore {
 		return shrines.get(i);
 	}
 
-	public void writeShrinesToEXE() {
+	public void writeShrinesToEXE(ReaderWriter writer) {
 		ShrinesAsBytes sab = this.getShrinesAsBytes();
 
 		byte[] shrinePointerBytes = sab.getShrinePointerBytes();
-		rw.writeBytes(shrinePointerBytes, TomeOfKnowledge.SHRINE_POINTERS_OFFSET);
+		writer.writeBytes(shrinePointerBytes, TomeOfKnowledge.SHRINE_POINTERS_OFFSET);
 
 		byte[] minShrineLevelBytes = sab.getMinShrineLevelBytes();
-		rw.writeBytes(minShrineLevelBytes, TomeOfKnowledge.SHRINE_MIN_LEVELS_OFFSET);
+		writer.writeBytes(minShrineLevelBytes, TomeOfKnowledge.SHRINE_MIN_LEVELS_OFFSET);
 
 		byte[] maxShrineLevelBytes = sab.getMaxShrineLevelBytes();
-		rw.writeBytes(maxShrineLevelBytes, TomeOfKnowledge.SHRINE_MAX_LEVELS_OFFSET);
+		writer.writeBytes(maxShrineLevelBytes, TomeOfKnowledge.SHRINE_MAX_LEVELS_OFFSET);
 
 		byte[] gameTypesInWhichPresentBytes = sab.getGameTypeBytes();
-		rw.writeBytes(gameTypesInWhichPresentBytes, TomeOfKnowledge.SHRINE_GAME_TYPE_OFFSET);
+		writer.writeBytes(gameTypesInWhichPresentBytes, TomeOfKnowledge.SHRINE_GAME_TYPE_OFFSET);
 	}
 
 	void disableBadShrines() {

@@ -45,7 +45,7 @@ public class TestShrinesStore extends TestCase {
 	
 	@Override
 	protected void setUp(){
-		ReaderWriter rw = new ReaderWriter(false);
+		ReaderWriter rw = new ReaderWriter("input/Diablo.exe");
 		ss = new ShrinesStore(rw);
 		readInAllShrineBytes(rw);
 	}

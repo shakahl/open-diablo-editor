@@ -100,8 +100,7 @@ public class GUI {
 		
 		jMenuBar.add(fileMenu);
 		
-		BaseItemsPanelFactory bipf = new BaseItemsPanelFactory(baseItemStore);
-		JPanel baseItemsPanel = bipf.createBaseItemsPanel();
+		JPanel baseItemsPanel = new BaseItemsPanel(baseItemStore);
 		JPanel baseMonstersPanel = new BaseMonstersPanel(baseMonsterStore);
 		JPanel characterPanel = new CharacterPanel(characterStore);
 		JPanel itemModifierPanel = new ItemModifierPanel(modifierStore);

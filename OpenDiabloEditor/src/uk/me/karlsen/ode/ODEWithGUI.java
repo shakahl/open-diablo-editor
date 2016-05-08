@@ -17,7 +17,7 @@ public class ODEWithGUI {
 
 public static void main(String[] args){
 		
-		ReaderWriter rw = new ReaderWriter(false);
+		ReaderWriter rw = new ReaderWriter("input/Diablo.exe");
 
 		QuestStore questStore = new QuestStore(rw);
 		SpellsStore spellStore = new SpellsStore(rw);

@@ -33,7 +33,7 @@ public class TestBaseMonster extends TestCase {
 	
 	@Override
 	protected void setUp(){
-		ReaderWriter rw = new ReaderWriter(false);
+		ReaderWriter rw = new ReaderWriter("input/Diablo.exe");
 		bms = new BaseMonsterStore(rw);
 		readInAllMonsterBytes(rw);
 	}

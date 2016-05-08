@@ -10,12 +10,12 @@ import uk.me.karlsen.ode.utils.BinEditHelper;
 
 public class CharacterStore {
 
-	private ReaderWriter rw;
 	private Character char0;
 	private Character char1;
 	private Character char2;
 	private List<Character> characters;
 	
+	private ReaderWriter rw;
 
 	public CharacterStore(ReaderWriter rw) {
 		this.rw = rw;
@@ -40,7 +40,7 @@ public class CharacterStore {
 			rw.seek(pos);
 		}
 
-		BinEditHelper beh = new BinEditHelper();
+		BinEditHelper beh = new BinEditHelper(rw);
 		long initWarriorStrength = beh.convertFourBytesToNumber(startingStats, 0);
 		long initRogueStrength = beh.convertFourBytesToNumber(startingStats, 4);
 		long initSorcStrength = beh.convertFourBytesToNumber(startingStats, 8);
@@ -225,7 +225,7 @@ public class CharacterStore {
 
 	//TODO -- make this code more concise
 	public byte[] getInitStatBytes(){
-		BinEditHelper beh = new BinEditHelper();
+		BinEditHelper beh = new BinEditHelper(rw);
 		byte[] returnedStartingStats = new byte[TomeOfKnowledge.MIN_STATS_LENGTH_IN_BYTES];
 		long warriorInitStrength = char0.getInitStrength();
 		beh.setLongAsFourBytes(warriorInitStrength, returnedStartingStats, 0);
@@ -256,7 +256,7 @@ public class CharacterStore {
 
 	//TODO -- make this code more concise
 	public byte[] getMaxStatBytes(){
-		BinEditHelper beh = new BinEditHelper();
+		BinEditHelper beh = new BinEditHelper(rw);
 		byte[] maxStats = new byte[TomeOfKnowledge.MAX_STATS_LENGTH_IN_BYTES];
 		long warriorMaxStrength = char0.getMaxStrength();
 		beh.setLongAsFourBytes(warriorMaxStrength, maxStats, 0);
@@ -287,7 +287,7 @@ public class CharacterStore {
 
 	//TODO -- make this code more concise
 	public byte[] getBlockingBonusBytes(){
-		BinEditHelper beh = new BinEditHelper();
+		BinEditHelper beh = new BinEditHelper(rw);
 		byte[] blockingBonuses = new byte[TomeOfKnowledge.BLOCKING_BONUSES_LENGTH_IN_BYTES];
 		long warriorBlockingBonus = char0.getBlockingBonus();
 		beh.setLongAsFourBytes(warriorBlockingBonus, blockingBonuses, 0);
@@ -343,19 +343,19 @@ public class CharacterStore {
 		}
 	}
 
-	public void writeCharactersToEXE() {
+	public void writeCharactersToEXE(ReaderWriter writer) {
 
 		byte[] retrievedInitStatBytes = this.getInitStatBytes();
-		rw.writeBytes(retrievedInitStatBytes, TomeOfKnowledge.MIN_STATS_OFFSET);
+		writer.writeBytes(retrievedInitStatBytes, TomeOfKnowledge.MIN_STATS_OFFSET);
 
 		byte[] retrievedMaxStatBytes = this.getMaxStatBytes();
-		rw.writeBytes(retrievedMaxStatBytes, TomeOfKnowledge.MAX_STATS_OFFSET);
+		writer.writeBytes(retrievedMaxStatBytes, TomeOfKnowledge.MAX_STATS_OFFSET);
 
 		byte[] retrievedBlockingBonusBytes = this.getBlockingBonusBytes();
-		rw.writeBytes(retrievedBlockingBonusBytes, TomeOfKnowledge.BLOCKING_BONUSES_OFFSET);
+		writer.writeBytes(retrievedBlockingBonusBytes, TomeOfKnowledge.BLOCKING_BONUSES_OFFSET);
 
 		byte[] retrievedBonusesAndFramesetBytes = this.getBonusesAndFramesetBytes();
-		rw.writeBytes(retrievedBonusesAndFramesetBytes, TomeOfKnowledge.BONUSES_AND_FRAMESETS_OFFSET);
+		writer.writeBytes(retrievedBonusesAndFramesetBytes, TomeOfKnowledge.BONUSES_AND_FRAMESETS_OFFSET);
 	}
 
 	public Character getCharacter(int i) {
@@ -372,6 +372,7 @@ public class CharacterStore {
 	}
 
 	//TODO -- The 3 methods below are "tacked on". Integrate them better.
+	//FIXME -- broken due to change in the approach of reading/writing files
 	public void setCharZeroStartingSkillBySpellID(int i) {
 		long l = i;
 		byte[] spellID = new byte[4];
@@ -383,11 +384,12 @@ public class CharacterStore {
 		String spellName = spellNames[i];
 		byte[][] skillBytes = TomeOfKnowledge.createSkillBytesArray();
 		byte[] bytesToUse = skillBytes[i];
-		rw.writeBytes(bytesToUse, TomeOfKnowledge.CHARACTER_ZERO_SKILL_LOC_1);
-		rw.writeBytes(bytesToUse, TomeOfKnowledge.CHARACTER_ZERO_SKILL_LOC_2);
-		rw.writeBytes(spellID, TomeOfKnowledge.CHARACTER_ZERO_SPELL_LOC_1);
+//		rw.writeBytes(bytesToUse, TomeOfKnowledge.CHARACTER_ZERO_SKILL_LOC_1);
+//		rw.writeBytes(bytesToUse, TomeOfKnowledge.CHARACTER_ZERO_SKILL_LOC_2);
+//		rw.writeBytes(spellID, TomeOfKnowledge.CHARACTER_ZERO_SPELL_LOC_1);
 	}
 
+	//FIXME -- broken due to change in the approach of reading/writing files
 	public void setCharOneStartingSkillBySpellID(int i) {
 		long l = i;
 		byte[] spellID = new byte[4];
@@ -399,12 +401,13 @@ public class CharacterStore {
 		String spellName = spellNames[i];
 		byte[][] skillBytes = TomeOfKnowledge.createSkillBytesArray();
 		byte[] bytesToUse = skillBytes[i];
-		rw.writeBytes(bytesToUse, TomeOfKnowledge.CHARACTER_ONE_SKILL_LOC_1);
-		rw.writeBytes(bytesToUse, TomeOfKnowledge.CHARACTER_ONE_SKILL_LOC_2);
-		rw.writeBytes(spellID, TomeOfKnowledge.CHARACTER_ONE_SPELL_LOC_1);
+//		rw.writeBytes(bytesToUse, TomeOfKnowledge.CHARACTER_ONE_SKILL_LOC_1);
+//		rw.writeBytes(bytesToUse, TomeOfKnowledge.CHARACTER_ONE_SKILL_LOC_2);
+//		rw.writeBytes(spellID, TomeOfKnowledge.CHARACTER_ONE_SPELL_LOC_1);
 
 	}
 
+	//FIXME -- broken due to change in the approach of reading/writing files
 	public void setCharTwoStartingSkillBySpellID(int i) {
 		long l = i;
 		byte[] spellID = new byte[4];
@@ -416,9 +419,9 @@ public class CharacterStore {
 		String spellName = spellNames[i];
 		byte[][] skillBytes = TomeOfKnowledge.createSkillBytesArray();
 		byte[] bytesToUse = skillBytes[i];
-		rw.writeBytes(bytesToUse, TomeOfKnowledge.CHARACTER_TWO_SKILL_LOC_1);
-		rw.writeBytes(bytesToUse, TomeOfKnowledge.CHARACTER_TWO_SKILL_LOC_2);
-		rw.writeBytes(spellID, TomeOfKnowledge.CHARACTER_TWO_SPELL_LOC_1);
+//		rw.writeBytes(bytesToUse, TomeOfKnowledge.CHARACTER_TWO_SKILL_LOC_1);
+//		rw.writeBytes(bytesToUse, TomeOfKnowledge.CHARACTER_TWO_SKILL_LOC_2);
+//		rw.writeBytes(spellID, TomeOfKnowledge.CHARACTER_TWO_SPELL_LOC_1);
 	}
 
 	public String[] getCharacterNames() {

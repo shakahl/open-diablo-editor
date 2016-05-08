@@ -52,11 +52,11 @@ public class SpellsStore {
 		return spells.get(i).getSpellAsBytes();
 	}
 
-	public void writeSpellsToEXE() {
+	public void writeSpellsToEXE(ReaderWriter writer) {
 		long pos = TomeOfKnowledge.SPELLS_OFFSET;
 		for(int i = 0; i < TomeOfKnowledge.NUMBER_OF_SPELLS; i++){
 			byte[] spellAsBytes = this.getSpellAsBytes(i);
-			rw.writeBytes(spellAsBytes, pos);
+			writer.writeBytes(spellAsBytes, pos);
 			pos = pos + TomeOfKnowledge.SPELL_LENGTH_IN_BYTES;
 		}
 	}

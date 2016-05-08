@@ -41,7 +41,7 @@ public class TestSpell extends TestCase {
 	
 	@Override
 	protected void setUp(){
-		ReaderWriter rw = new ReaderWriter(false);
+		ReaderWriter rw = new ReaderWriter("input/Diablo.exe");
 		ss = new SpellsStore(rw);
 		readInAllSpellBytes(rw);
 	}

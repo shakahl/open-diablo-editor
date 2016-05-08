@@ -1,5 +1,8 @@
 package uk.me.karlsen.ode;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import uk.me.karlsen.ode.stores.BaseItemStore;
 import uk.me.karlsen.ode.stores.BaseMonsterStore;
 import uk.me.karlsen.ode.stores.CharacterStore;
@@ -12,7 +15,7 @@ import uk.me.karlsen.ode.stores.UniqueMonsterStore;
 
 public class OpenDiabloEditor {
 
-	private ReaderWriter rw;
+	private ReaderWriter reader;
 
 	QuestStore questStore;
 	SpellsStore spellStore;
@@ -35,17 +38,17 @@ public class OpenDiabloEditor {
 		//#      HERE WE READ IN DATA        #
 		//####################################
 
-		rw = new ReaderWriter(false);
+		reader = new ReaderWriter("input/Diablo.exe");
 
-		questStore = new QuestStore(rw);
-		spellStore = new SpellsStore(rw);
-		shrineStore = new ShrinesStore(rw);
-		modifierStore = new ItemModifiersStore(rw);
-		uniqueItemStore = new UniqueItemStore(rw);
-		characterStore = new CharacterStore(rw);
-		baseItemStore = new BaseItemStore(rw);
-		baseMonsterStore = new BaseMonsterStore(rw);
-		uniqueMonsterStore = new UniqueMonsterStore(rw);
+		questStore = new QuestStore(reader);
+		spellStore = new SpellsStore(reader);
+		shrineStore = new ShrinesStore(reader);
+		modifierStore = new ItemModifiersStore(reader);
+		uniqueItemStore = new UniqueItemStore(reader);
+		characterStore = new CharacterStore(reader);
+		baseItemStore = new BaseItemStore(reader);
+		baseMonsterStore = new BaseMonsterStore(reader);
+		uniqueMonsterStore = new UniqueMonsterStore(reader);
 
 
 		//####################################
@@ -94,14 +97,20 @@ public class OpenDiabloEditor {
 	}
 
 	private void writeAllData() {
-		shrineStore.writeShrinesToEXE();
-		questStore.writeQuestsToEXE();
-		spellStore.writeSpellsToEXE();
-		modifierStore.writeModifiersToEXE();
-		uniqueItemStore.writeItemsToEXE();
-		characterStore.writeCharactersToEXE();
-		baseItemStore.writeItemsToEXE();
-		baseMonsterStore.writeMonstersToEXE();
-		uniqueMonsterStore.writeMonstersToEXE();
+		
+		Date date = new Date();
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss");
+		String newPath = "output/Diablo_MODE_" + dateFormat.format(date) + ".exe";
+		ReaderWriter writer = new ReaderWriter("input/Diablo.exe", newPath);
+		
+		shrineStore.writeShrinesToEXE(writer);
+		questStore.writeQuestsToEXE(writer);
+		spellStore.writeSpellsToEXE(writer);
+		modifierStore.writeModifiersToEXE(writer);
+		uniqueItemStore.writeItemsToEXE(writer);
+		characterStore.writeCharactersToEXE(writer);
+		baseItemStore.writeItemsToEXE(writer);
+		baseMonsterStore.writeMonstersToEXE(writer);
+		uniqueMonsterStore.writeMonstersToEXE(writer);
 	}
 }

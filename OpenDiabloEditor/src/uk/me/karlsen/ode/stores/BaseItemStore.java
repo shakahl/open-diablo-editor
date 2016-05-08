@@ -44,11 +44,11 @@ public class BaseItemStore {
 		}
 	}
 
-	public void writeItemsToEXE() {
+	public void writeItemsToEXE(ReaderWriter writer) {
 		long pos = TomeOfKnowledge.BASE_ITEMS_OFFSET;
 		for(BaseItem bi : baseItems){
 			byte[] itemAsBytes = bi.getItemAsBytes();
-			rw.writeBytes(itemAsBytes, pos);
+			writer.writeBytes(itemAsBytes, pos);
 			pos = pos + TomeOfKnowledge.BASE_ITEM_LENGTH_IN_BYTES;
 		}
 

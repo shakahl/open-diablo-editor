@@ -385,11 +385,13 @@ public class BaseItem {
 	private long priceTwo;
 	private int slotNumber;
 	private boolean changed;
+	
+	private ReaderWriter rw;
 
 	public BaseItem(int slotNumber, byte[] itemBytes, ReaderWriter rw) {
 		changed = false;
 		this.slotNumber = slotNumber;
-		BinEditHelper beh = new BinEditHelper();
+		BinEditHelper beh = new BinEditHelper(rw);
 		activationTrigger = beh.convertFourBytesToNumber(itemBytes, 0);
 		itemType = beh.convertUnsignedByteToInt(itemBytes[4]);
 		equipLocation = beh.convertUnsignedByteToInt(itemBytes[5]);
@@ -424,7 +426,7 @@ public class BaseItem {
 
 	public byte[] getItemAsBytes(){
 		byte[] bytes = new byte[TomeOfKnowledge.BASE_ITEM_LENGTH_IN_BYTES];
-		BinEditHelper beh = new BinEditHelper();
+		BinEditHelper beh = new BinEditHelper(rw);
 		beh.setLongAsFourBytes(activationTrigger, bytes, 0);
 		bytes[4] = (byte) itemType;
 		bytes[5] = (byte) equipLocation;
