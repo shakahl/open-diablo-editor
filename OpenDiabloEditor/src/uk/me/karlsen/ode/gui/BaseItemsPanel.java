@@ -220,7 +220,40 @@ public class BaseItemsPanel extends JPanel {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+				String actionCommand = e.getActionCommand();
+				String itemName = (String) itemComboBox.getSelectedItem();
+				if(itemName.equals("None selected")){
+					//do nothing
+				} else {
+					BaseItem bi = bis.getItemByName(itemName);
+
+					//bi.setName(nameField.getText());
+					bi.setNamePointer(Long.parseLong(namePointerField.getText()));
+					//magicalNameField.setText();
+					bi.setMagicalNamePointer(Long.parseLong(magicalNamePointerField.getText()));
+					//activationTriggerBox
+					//itemTypeBox
+					//equipLocationBox
+					//graphicValueBox
+					//itemCodeBox
+					//uniqueItemCodeBox
+					bi.setQualityLevel(Long.parseLong(qualityLevelField.getText()));
+					bi.setDurability(Long.parseLong(durabilityField.getText()));
+					bi.setMinAttackDamage(Long.parseLong(minAttackDamageField.getText()));
+					bi.setMaxAttackDamage(Long.parseLong(maxAttackDamageField.getText()));
+					bi.setMinAc(Long.parseLong(minAcField.getText()));
+					bi.setMaxAc(Long.parseLong(maxAcField.getText()));
+					bi.setRequiredStr(Integer.parseInt(requiredStrField.getText()));
+					bi.setRequiredDex(Integer.parseInt(requiredDexField.getText()));
+					bi.setRequiredMag(Integer.parseInt(requiredMagField.getText()));
+					bi.setRequiredVit(Integer.parseInt(requiredVitField.getText()));
+					bi.setSpecialEffects(Long.parseLong(specialEffectsField.getText()));
+					//magicCodeBox
+					//spellNumberBox
+					//useCountBox
+					bi.setPriceOne(Long.parseLong(priceOneField.getText()));
+					bi.setPriceTwo(Long.parseLong(priceTwoField.getText()));
+				}
 			}
 		};
 		saveButton.addActionListener(saveClick);

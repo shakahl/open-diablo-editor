@@ -169,7 +169,30 @@ public class ItemModifierPanel extends JPanel {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+				String actionCommand = e.getActionCommand();
+				String modifierName = (String) modifierComboBox.getSelectedItem();
+				if(modifierName.equals("None selected")){
+					//Do nothing
+				} else {
+					ItemModifier modifier = modifierStore.getModifierByName(modifierName);
+
+					modifier.setName(nameField.getText());
+					modifier.setNamePointer(Long.parseLong(nameField.getText()));
+					modifier.setItemEffectOne(Byte.parseByte(itemEffects1Field.getText()));
+					modifier.setItemEffectTwo(Byte.parseByte(itemEffects2Field.getText()));
+					modifier.setItemEffectThree(Byte.parseByte(itemEffects3Field.getText()));
+					modifier.setItemEffectFour(Byte.parseByte(itemEffects4Field.getText()));
+					modifier.setMinimumEffectValue(Long.parseLong(minimumEffectValueField.getText()));
+					modifier.setMaximumEffectValue(Long.parseLong(maximumEffectValueField.getText()));
+					modifier.setQualityLevel(Long.parseLong(qualityLevelField.getText()));
+					modifier.setOccurencePossibilities(occurencePossibilitiesField.getText());
+					modifier.setByteTwentyThree(Integer.parseInt(byteTwentyThreeField.getText()));
+					modifier.setExcludedComboIndicator(excludedComboIndicatorField.getText());
+					modifier.setCursedIndicator(Long.parseLong(cursedIndicatorField.getText()));
+					modifier.setMinGold(Long.parseLong(minGoldField.getText()));
+					modifier.setMaxGold(Long.parseLong(maxGoldField.getText()));
+					modifier.setValueMultiplier(Long.parseLong(valueMultiplierField.getText()));
+				}
 			}
 		};
 		saveButton.addActionListener(saveClick);

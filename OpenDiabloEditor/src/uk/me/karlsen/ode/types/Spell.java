@@ -390,6 +390,18 @@ public class Spell {
 		return spellEffects[2];
 	}
 
+	public void setSpellEffect1(byte b) {
+		spellEffects[0] = b;
+	}
+
+	public void setSpellEffect2(byte b) {
+		spellEffects[0] = b;
+	}
+
+	public void setSpellEffect3(byte b) {
+		spellEffects[0] = b;
+	}
+
 	public void setSpellEffects(byte[] spellEffects) {
 		this.spellEffects = spellEffects;
 	}

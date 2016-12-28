@@ -234,10 +234,6 @@ public class ItemModifier {
 	public void setName(String name) {
 		this.name = name;
 	}
-
-	public byte[] getItemEffects() {
-		return itemEffects;
-	}
 	
 	public byte getItemEffectOne() {
 		return itemEffects[0];
@@ -255,8 +251,20 @@ public class ItemModifier {
 		return itemEffects[3];
 	}
 
-	public void setItemEffects(byte[] itemEffects) {
-		this.itemEffects = itemEffects;
+	public void setItemEffectOne(byte b) {
+		this.itemEffects[0] = b;
+	}
+
+	public void setItemEffectTwo(byte b) {
+		this.itemEffects[1] = b;
+	}
+
+	public void setItemEffectThree(byte b) {
+		this.itemEffects[2] = b;
+	}
+
+	public void setItemEffectFour(byte b) {
+		this.itemEffects[3] = b;
 	}
 
 	public long getMinimumEffectValue() {

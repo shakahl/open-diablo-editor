@@ -134,7 +134,24 @@ public class QuestsPanel extends JPanel {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+				String questName = (String) comboBox.getSelectedItem();
+				if(questName.equals("None selected")){
+					//do nothing
+				} else {
+					Quest quest = questStore.getQuestByName(questName);
+					//TODO -- set quest name
+					quest.setQuestNumber(Integer.parseInt(slotNumberField.getText()));
+					quest.setDungeonLevelSingle(Integer.parseInt(dungeonLevelSingleField.getText()));
+					quest.setDungeonLevelMulti(Integer.parseInt(dungeonLevelMultiField.getText()));
+					quest.setDungeonType(Integer.parseInt(dungeonTypeField.getText()));
+					quest.setQuestNumber(Integer.parseInt(questNumberField.getText()));
+					quest.setByteFourValue(Integer.parseInt(byteFourValueField.getText()));
+					quest.setSpecialLevel(Integer.parseInt(specialLevelField.getText()));
+					quest.setZeroOne(Integer.parseInt(zeroOneField.getText()));
+					quest.setZeroTwo(Integer.parseInt(zeroTwoField.getText()));
+					quest.setMpTriggerFlag(Long.parseLong(mpTriggerFlagField.getText()));
+					quest.setTextEntryIDX(Long.parseLong(textEntryIndexField.getText()));
+				}
 			}
 		};
 		saveButton.addActionListener(saveClick);

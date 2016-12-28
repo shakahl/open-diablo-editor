@@ -261,7 +261,47 @@ public class UniqueItemsPanel extends JPanel {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+				String uniqueItemName = (String) comboBox.getSelectedItem();
+				if(uniqueItemName.equals("None selected")){
+					//No action
+				} else {
+					UniqueItem item = uniqueItemStore.getUniqueItemByName(uniqueItemName);
+					item.setName(nameField.getText());
+					item.setNamePointer(Long.parseLong(namePointerField.getText()));
+					item.setItemType(Integer.parseInt(itemTypeField.getText()));
+					item.setQualityLevel(Integer.parseInt(qualityLevelField.getText()));
+					item.setNumberOfEffects(Integer.parseInt(numberOfEffectsField.getText()));
+
+					item.setEffect(Long.parseLong(effect1NumberField.getText()), 1);
+					item.setEffectName(1, effect1NameField.getText());
+					item.setMinValue(Long.parseLong(effect1MinValueField.getText()), 1);
+					item.setMaxValue(Long.parseLong(effect1MaxValueField.getText()), 1);
+
+					item.setEffect(Long.parseLong(effect1NumberField.getText()), 2);
+					item.setEffectName(2, effect1NameField.getText());
+					item.setMinValue(Long.parseLong(effect1MinValueField.getText()), 2);
+					item.setMaxValue(Long.parseLong(effect1MaxValueField.getText()), 2);
+
+					item.setEffect(Long.parseLong(effect1NumberField.getText()), 3);
+					item.setEffectName(3, effect1NameField.getText());
+					item.setMinValue(Long.parseLong(effect1MinValueField.getText()), 3);
+					item.setMaxValue(Long.parseLong(effect1MaxValueField.getText()), 3);
+
+					item.setEffect(Long.parseLong(effect1NumberField.getText()), 4);
+					item.setEffectName(4, effect1NameField.getText());
+					item.setMinValue(Long.parseLong(effect1MinValueField.getText()), 4);
+					item.setMaxValue(Long.parseLong(effect1MaxValueField.getText()), 4);
+
+					item.setEffect(Long.parseLong(effect1NumberField.getText()), 5);
+					item.setEffectName(5, effect1NameField.getText());
+					item.setMinValue(Long.parseLong(effect1MinValueField.getText()), 5);
+					item.setMaxValue(Long.parseLong(effect1MaxValueField.getText()), 5);
+
+					item.setEffect(Long.parseLong(effect1NumberField.getText()), 6);
+					item.setEffectName(6, effect1NameField.getText());
+					item.setMinValue(Long.parseLong(effect1MinValueField.getText()), 6);
+					item.setMaxValue(Long.parseLong(effect1MaxValueField.getText()), 6);
+				}
 			}
 		};
 		saveButton.addActionListener(saveClick);

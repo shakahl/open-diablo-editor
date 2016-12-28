@@ -184,6 +184,11 @@ public class BaseMonstersPanel extends JPanel {
 		JTextField minHitPointsField = new JTextField();
 		this.add(minHitPointsLabel);
 		this.add(minHitPointsField);
+
+        JLabel maxHitPointsLabel = new JLabel("Maximum hit points");
+        JTextField maxHitPointsField = new JTextField();
+        this.add(maxHitPointsLabel);
+        this.add(maxHitPointsField);
 		
 		JLabel attackType1Label = new JLabel("Attack type 1");
 		JTextField attackType1Field = new JTextField();
@@ -381,7 +386,68 @@ public class BaseMonstersPanel extends JPanel {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+				String actionCommand = e.getActionCommand();
+				String monsterName = (String) monsterComboBox.getSelectedItem();
+				if(monsterName.equals("None selected")){
+					//do nothing
+				} else {
+					BaseMonster baseMonster = baseMonsterStore.getMonsterByName(monsterName);
+					//TODO baseMonster.setMonsterName(); monsterNameField.setText(baseMonster.getName());
+					baseMonster.setEnabled(Integer.parseInt(monsterEnabledField.getText()));
+					baseMonster.setAnimationSize(Long.parseLong(animationSizeField.getText()));
+					baseMonster.setSeedingSize(Long.parseLong(seedingSizeField.getText()));
+					//animationFileField
+					baseMonster.setAnimationFilePointer(Long.parseLong(animationPointerField.getText()));
+					baseMonster.setSecondAttackOnOrOff(Long.parseLong(secondAttackField.getText()));
+					//soundFileField.setText("");
+					baseMonster.setSoundPointer(Long.parseLong(soundPointerField.getText()));
+					//secondAttackSoundField.setText(String.valueOf(baseMonster.getHasSecondAttackSound()));
+					baseMonster.setUsesTrnToModColor(Long.parseLong(trnToModColorField.getText()));
+					baseMonster.setTrnPointer(Long.parseLong(trnPointerField.getText()));
+					//trnFileField.setText(String.valueOf(""));
+					baseMonster.setIdleFrameset(Long.parseLong(idleFramesetField.getText()));
+					baseMonster.setWalkFrameset(Long.parseLong(walkFramesetField.getText()));
+					baseMonster.setAttackFrameset(Long.parseLong(attackFramesetField.getText()));
+					baseMonster.setHitRecoveryFrameset(Long.parseLong(hitRecoveryFramesetField.getText()));
+					baseMonster.setDeathFrameset(Long.parseLong(deathFramesetField.getText()));
+					baseMonster.setSecondAttackFrameset(Long.parseLong(secondAttackFramesetField.getText()));
+					baseMonster.setIdlePlaybackSpeed(Long.parseLong(idlePlaybackSpeedField.getText()));
+					baseMonster.setWalkPlaybackSpeed(Long.parseLong(walkPlaybackSpeedField.getText()));
+                    baseMonster.setAttackPlaybackSpeed(Long.parseLong(attackPlaybackSpeedField.getText()));
+                    baseMonster.setHitRecoverySpeed(Long.parseLong(hitRecoverySpeedField.getText()));
+                    baseMonster.setDeathPlaybackSpeed(Long.parseLong(deathPlaybackSpeedField.getText()));
+                    baseMonster.setSecondAttackSpeed(Long.parseLong(secondAttackSpeedField.getText()));
+					baseMonster.setNamePointer(Long.parseLong(namePointerField.getText()));
+                    baseMonster.setMinDungeonLevel(Integer.parseInt(minDungeonField.getText()));
+                    baseMonster.setMaxDungeonLevel(Integer.parseInt(maxDungeonField.getText()));
+                    baseMonster.setMonsterItemLevel(Integer.parseInt(monsterItemLevelField.getText()));
+                    baseMonster.setMinHitPoints(Long.parseLong(minHitPointsField.getText()));
+                    baseMonster.setMaxHitPoints(Long.parseLong(maxHitPointsField.getText()));
+                    baseMonster.setAttackType1(Integer.parseInt(attackType1Field.getText()));
+                    baseMonster.setAttackType2(Integer.parseInt(attackType2Field.getText()));
+                    baseMonster.setAttackType3(Integer.parseInt(attackType3Field.getText()));
+                    baseMonster.setAttackType4(Integer.parseInt(attackType4Field.getText()));
+                    baseMonster.setAttackType5(Integer.parseInt(attackType5Field.getText()));
+                    baseMonster.setMonsterIntelligence(Integer.parseInt(monsterIntelligenceField.getText()));
+                    baseMonster.setAttackType7(Integer.parseInt(attackType7Field.getText()));
+                    baseMonster.setAttackType8(Integer.parseInt(attackType8Field.getText()));
+                    baseMonster.setSubType(Integer.parseInt(subTypeField.getText()));
+					baseMonster.setMonsterPriChanceToHit(Integer.parseInt(monsterPriChanceToHitField.getText()));
+					baseMonster.setPriToHitFrame(Integer.parseInt(priToHitFrameField.getText()));
+                    baseMonster.setPriMinAttackDamage(Integer.parseInt(priMinAttackDamageField.getText()));
+                    baseMonster.setPriMaxAttackDamage(Integer.parseInt(priMaxAttackDamageField.getText()));
+                    baseMonster.setSecToHitChance(Integer.parseInt(secToHitChanceField.getText()));
+                    baseMonster.setSecToHitFrame(Integer.parseInt(secToHitFrameField.getText()));
+                    baseMonster.setSecMinAttackDamage(Integer.parseInt(secMinAttackDamageField.getText()));
+                    baseMonster.setSecMaxAttackDamage(Integer.parseInt(secMaxAttackDamageField.getText()));
+                    baseMonster.setMonsterAc(Integer.parseInt(monsterAcField.getText()));
+					baseMonster.setMonsterType(Integer.parseInt(monsterTypeField.getText()));
+					baseMonster.setResistancesNormAndNightmare(resistancesNormAndNightmareField.getText());
+                    baseMonster.setResistancesHell(resistancesHellField.getText());
+                    baseMonster.setItemDropSpecials(Integer.parseInt(itemDropSpecialsField.getText()));
+                    baseMonster.setMonsterSelectionOutline(Integer.parseInt(monsterSelectionField.getText()));
+					baseMonster.setExperiencePoints(Long.parseLong(experiencePointsField.getText()));
+				}
 			}
 		};
 		saveButton.addActionListener(saveClick);

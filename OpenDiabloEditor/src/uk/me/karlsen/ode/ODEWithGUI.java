@@ -13,11 +13,13 @@ import uk.me.karlsen.ode.stores.SpellsStore;
 import uk.me.karlsen.ode.stores.UniqueItemStore;
 import uk.me.karlsen.ode.stores.UniqueMonsterStore;
 
+import java.io.File;
+
 public class ODEWithGUI {
 
 public static void main(String[] args){
-		
-		ReaderWriter rw = new ReaderWriter("input/Diablo.exe");
+
+		ReaderWriter rw = new ReaderWriter("./OpenDiabloEditor/input/Diablo.exe"); //OR just "./input/Diablo.exe"
 
 		QuestStore questStore = new QuestStore(rw);
 		SpellsStore spellStore = new SpellsStore(rw);
@@ -40,7 +42,7 @@ public static void main(String[] args){
 				gui.setCharacterStore(characterStore);
 				gui.setBaseItemStore(baseItemStore);
 				gui.setBaseMonsterStore(baseMonsterStore);
-				gui.setUniqueMonsterStore(uniqueMonsterStore);;
+				gui.setUniqueMonsterStore(uniqueMonsterStore);
 				gui.displayGUI();
 			}
 		};

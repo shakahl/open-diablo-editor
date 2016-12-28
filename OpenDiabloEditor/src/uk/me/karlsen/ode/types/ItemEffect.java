@@ -143,4 +143,8 @@ public class ItemEffect {
 	{
 		return effectNames[(int) effectNumber];
 	}
+
+	public void setEffectName(String name) {
+		effectNames[(int) effectNumber] = name;
+	}
 }

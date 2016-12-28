@@ -203,7 +203,34 @@ public class CharacterPanel extends JPanel {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+				String actionCommand = e.getActionCommand();
+				String charName = (String) charComboBox.getSelectedItem();
+				if(charName.equals("None selected")){
+					//do nothing
+				} else {
+					Character character = characterStore.getCharacterByName(charName);
+					character.setClassName(classNameField.getText());
+					character.setInitStrength(Long.parseLong(initStrengthField.getText()));
+					character.setMaxStrength(Long.parseLong(maxStrengthField.getText()));
+					character.setInitMagic(Long.parseLong(initMagicField.getText()));
+					character.setMaxMagic(Long.parseLong(maxMagicField.getText()));
+					character.setInitDexterity(Long.parseLong(initDexterityField.getText()));
+					character.setMaxDexterity(Long.parseLong(maxDexterityField.getText()));
+					character.setInitVitality(Long.parseLong(initVitalityField.getText()));
+					character.setMaxVitality(Long.parseLong(maxVitalityField.getText()));
+					character.setBlockingBonus(Long.parseLong(blockingBonusField.getText()));
+					character.setDungeonIdleFrameset(Integer.parseInt(dungeonIdleFramesetField.getText()));
+					character.setAttackingFrameset(Integer.parseInt(attackingFramesetField.getText()));
+					character.setDungeonWalkFrameset(Integer.parseInt(dungeonWalkFramesetField.getText()));
+					character.setBlockSpeed(Integer.parseInt(blockSpeedField.getText()));
+					character.setDeathFrameset(Integer.parseInt(deathFramesetField.getText()));
+					character.setCastingFrameset(Integer.parseInt(castingFramesetField.getText()));
+					character.setHitRecoverySpeed(Integer.parseInt(hitRecoverySpeedField.getText()));
+					character.setTownIdleFrameset(Integer.parseInt(townIdleFramesetField.getText()));
+					character.setTownWalkFrameset(Integer.parseInt(townWalkFramesetField.getText()));
+					character.setOneHandedAttackSpeed(Integer.parseInt(oneHandedAttackSpeedField.getText()));
+					character.setCastingSpeed(Integer.parseInt(castingSpeedField.getText()));
+				}
 			}
 		};
 		saveButton.addActionListener(saveClick);

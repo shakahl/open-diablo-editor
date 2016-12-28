@@ -310,8 +310,16 @@ public class UniqueItem {
 	public long getEffectNumber(int effectIndex) {
 		return itemEffects.get(effectIndex-1).getEffectNumber();
 	}
+
+	public void setEffectNumber(int effectIndex, long effectNumber) {
+		itemEffects.get(effectIndex-1).setEffectNumber(effectNumber);
+	}
 	
 	public String getEffectName(int effectIndex) {
 		return itemEffects.get(effectIndex-1).getEffectName();
+	}
+
+	public void setEffectName(int effectIndex, String effectName) {
+		itemEffects.get(effectIndex - 1).setEffectName(effectName);
 	}
 }

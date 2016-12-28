@@ -241,7 +241,7 @@ public class SpellsPanel extends JPanel {
 					minChargesField.setText(String.valueOf(spell.getMinCharges()));
 					maxChargesField.setText(String.valueOf(spell.getMaxCharges()));
 					bookCostField.setText(String.valueOf(spell.getBookCost()));
-					staffCostMultiplierField.setText(String.valueOf(spell.getStaffCostMultiplier()));				
+					staffCostMultiplierField.setText(String.valueOf(spell.getStaffCostMultiplier()));
 				}
 			}
 			
@@ -255,7 +255,40 @@ public class SpellsPanel extends JPanel {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+				String spellName = (String) comboBox.getSelectedItem();
+				if(spellName.equals("None selected")){
+					//Do nothing
+				} else {
+					Spell spell = spellStore.getSpellByName(spellName);
+					//TODO -- spell.setUnmoddedSpellIndex(Integer.parseInt());
+					spell.setNameAsSpell(unmoddedSpellNameField.getText());
+					spell.setManaToCast(Integer.parseInt(manaToCastField.getText()));
+					spell.setAnimationWhenCasting(Integer.parseInt(animationWhenCastingField.getText()));
+					spell.setPointerToNameAsSpell(Long.parseLong(pointerToNameAsSpellField.getText()));
+					spell.setNameAsSpell(nameAsSpellField.getText());
+					spell.setPointerToNameAsSkill(Long.parseLong(pointerToNameAsSkillField.getText()));
+					spell.setNameAsSkill(nameAsSkillField.getText());
+					spell.setSpellbookQuality(Long.parseLong(spellbookQualityField.getText()));
+					spell.setStaffQuality(Long.parseLong(staffQualityField.getText()));
+					spell.setByteTwenty(Integer.parseInt(byteTwentyField.getText()));
+					spell.setByteTwentyone(Integer.parseInt(byteTwentyoneField.getText()));
+					spell.setByteTwentytwo(Integer.parseInt(byteTwentytwoField.getText()));
+					spell.setByteTwentythree(Integer.parseInt(byteTwentythreeField.getText()));
+					spell.setSpellActiveInTown(Long.parseLong(spellActiveInTownField.getText()));
+					spell.setBaseRequiredMagic(Long.parseLong(baseRequiredMagicField.getText()));
+					spell.setCastingSound(Integer.parseInt(castingSoundField.getText()));
+					spell.setSpellEffect1(Byte.parseByte(spellEffect1Field.getText()));
+					spell.setSpellEffect2(Byte.parseByte(spellEffect2Field.getText()));
+					spell.setSpellEffect3(Byte.parseByte(spellEffect3Field.getText()));
+					spell.setManaStep(Integer.parseInt(manaStepField.getText()));
+					spell.setMinCastingCost(Integer.parseInt(minCastingCostField.getText()));
+					spell.setByteThirtyEight(Integer.parseInt(byteThirtyEightField.getText()));
+					spell.setByteThirtyNine(Integer.parseInt(byteThirtyNineField.getText()));
+					spell.setMinCharges(Long.parseLong(minChargesField.getText()));
+					spell.setMaxCharges(Long.parseLong(maxChargesField.getText()));
+					spell.setBookCost(Long.parseLong(bookCostField.getText()));
+					spell.setStaffCostMultiplier(Long.parseLong(staffCostMultiplierField.getText()));
+				}
 			}
 		};
 		saveButton.addActionListener(saveClick);

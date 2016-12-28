@@ -156,7 +156,26 @@ public class UniqueMonstersPanel extends JPanel {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+				String monsterName = (String) comboBox.getSelectedItem();
+				if(monsterName.equals("None selected")){
+					//No action
+				} else {
+					UniqueMonster monster = uniqueMonsterStore.getMonsterByName(monsterName);
+					monster.setName(nameField.getText());
+					monster.setMonsterType(Long.parseLong(monsterTypeField.getText()));
+					monster.setNamePointer(Long.parseLong(namePointerField.getText()));
+					monster.setTrnPointer(Long.parseLong(trnPointerField.getText()));
+					monster.setDungeonLevel(Integer.parseInt(dungeonLevelField.getText()));
+					monster.setHitPoints(Integer.parseInt(hitPointsField.getText()));
+					monster.setMonsterAI(Integer.parseInt(monsterAIField.getText()));
+					monster.setIntelligenceFactor(Integer.parseInt(intelligenceFactorField.getText()));
+					monster.setMinAttackDmg(Integer.parseInt(minAttackDmgField.getText()));
+					monster.setMaxAttackDmg(Integer.parseInt(maxAttackDmgField.getText()));
+					monster.setResistances(resistancesField.getText());
+					monster.setPackTrigger(Integer.parseInt(packTriggerField.getText()));
+					monster.setPackSpecials(Long.parseLong(packSpecialsField.getText()));
+					monster.setSpecialSoundWav(Long.parseLong(specialSoundWavField.getText()));
+				}
 			}
 		};
 		saveButton.addActionListener(saveClick);

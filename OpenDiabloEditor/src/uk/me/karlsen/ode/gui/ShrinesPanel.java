@@ -101,7 +101,18 @@ public class ShrinesPanel extends JPanel {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+				String shrineName = (String) comboBox.getSelectedItem();
+				if(shrineName.equals("None selected")){
+					//Do nothing
+				} else {
+					Shrine shrine = shrineStore.getShrineByName(shrineName);
+					shrine.setShrineIndex(Integer.parseInt(shrineIndexField.getText()));
+					shrine.setShrineName(shrineNameField.getText());
+					shrine.setShrinePointer(Long.parseLong(shrinePointerField.getText()));
+					shrine.setMinShrineLevel(Integer.parseInt(minShrineLevelField.getText()));
+					shrine.setMaxShrineLevel(Integer.parseInt(maxShrineLevelField.getText()));
+					shrine.setGameTypesInWhichPresent(Integer.parseInt(gameTypesInWhichPresentField.getText()));
+				}
 			}
 		};
 		saveButton.addActionListener(saveClick);

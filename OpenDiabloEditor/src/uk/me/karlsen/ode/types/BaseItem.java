@@ -894,4 +894,8 @@ public class BaseItem {
 		specialEffectMap.put(0x00000080, "Cursed Resistance");
 		return specialEffectMap;
 	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
 }
