@@ -266,6 +266,7 @@ public class BaseItem {
 	 * the argument supplied to setSpecialEffects().
 	 */
 	List<Integer> specialEffectCodes = Arrays.asList(
+		0x00000000, //i.e. no special effect
 		0x01000000,
 		0x02000000,
 		0x04000000,
@@ -607,12 +608,12 @@ public class BaseItem {
 	}
 
 	public void setMagicalNamePointer(long magicalNamePointer) {
-		if(magicalNamePointer >= 1024 && magicalNamePointer <= 7018496){
+		if(magicalNamePointer == 0 || magicalNamePointer >= 1024 && magicalNamePointer <= 7018496){
 			this.magicalNamePointer = magicalNamePointer;
 			this.setChanged();
 		} else {
 			System.err.println("Error: BaseItem's setMagicalNamePointer() was"
-					+ "supplied with an argument outside the supported range (1024 to 7018496)");
+					+ "supplied with a value of " + magicalNamePointer + " -- outside the supported range (0; 1024 to 7018496)");
 		}
 	}
 

@@ -2,6 +2,8 @@ package uk.me.karlsen.ode.gui;
 
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -31,7 +33,7 @@ public class GUI {
 	public GUI() {
 		
 	}
-	
+
 	private ItemModifiersStore modifierStore;
 	private BaseItemStore baseItemStore;
 	private QuestStore questStore;
@@ -89,14 +91,14 @@ public class GUI {
 		jFrame.setJMenuBar(jMenuBar);
 		
 		JMenu fileMenu = new JMenu("File");
-		JMenuItem openItem = new JMenuItem("Open");
-		fileMenu.add(openItem);
-		JMenuItem closeItem = new JMenuItem("Close");
-		fileMenu.add(closeItem);
-		JMenuItem saveItem = new JMenuItem("Save");
-		fileMenu.add(saveItem);
-		JMenuItem saveAsItem = new JMenuItem("Save As...");
-		fileMenu.add(saveAsItem);
+//		JMenuItem openItem = new JMenuItem("Open");
+//		fileMenu.add(openItem);
+//		JMenuItem closeItem = new JMenuItem("Close");
+//		fileMenu.add(closeItem);
+//		JMenuItem saveItem = new JMenuItem("Save");
+//		fileMenu.add(saveItem);
+//		JMenuItem saveAsItem = new JMenuItem("Save As...");
+//		fileMenu.add(saveAsItem);
 		
 		jMenuBar.add(fileMenu);
 		

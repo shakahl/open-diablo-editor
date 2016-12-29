@@ -177,7 +177,7 @@ public class ItemModifierPanel extends JPanel {
 					ItemModifier modifier = modifierStore.getModifierByName(modifierName);
 
 					modifier.setName(nameField.getText());
-					modifier.setNamePointer(Long.parseLong(nameField.getText()));
+					modifier.setNamePointer(Long.parseLong(namePointerField.getText()));
 					modifier.setItemEffectOne(Byte.parseByte(itemEffects1Field.getText()));
 					modifier.setItemEffectTwo(Byte.parseByte(itemEffects2Field.getText()));
 					modifier.setItemEffectThree(Byte.parseByte(itemEffects3Field.getText()));

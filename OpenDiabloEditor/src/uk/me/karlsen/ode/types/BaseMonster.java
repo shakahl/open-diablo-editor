@@ -366,7 +366,7 @@ public class BaseMonster {
 	}
 
 	public void setTrnPointer(long trnPointer) {
-		if(trnPointer <= 1024 && trnPointer >= 7018496){
+		if(trnPointer == 0 || trnPointer >= 1024 && trnPointer <= 7018496){
 			this.trnPointer = trnPointer;
 			this.setChanged();
 		} else {
@@ -447,12 +447,12 @@ public class BaseMonster {
 	}
 
 	public void setSecondAttackFrameset(long secondAttackFrameset) {
-		if(secondAttackFrameset > 0 && secondAttackFrameset <= 24){
+		if(secondAttackFrameset >= 0 && secondAttackFrameset <= 24){
 			this.secondAttackFrameset = secondAttackFrameset;
 			this.setChanged();
 		} else {
 			System.err.println("Error: BaseMonster's setSecondAttackFrameset() was"
-					+ "supplied with an argument outside the supported range (1 to 24)");
+					+ "supplied with an argument outside the supported range (0 to 24)");
 		}
 	}
 
@@ -545,7 +545,7 @@ public class BaseMonster {
 	}
 
 	public void setNamePointer(long namePointer) {
-		if(namePointer <= 1024 && namePointer >= 7018496){
+		if(namePointer >= 1024 && namePointer <= 7018496){
 			this.namePointer = namePointer;
 			this.setChanged();
 		} else {
@@ -583,7 +583,7 @@ public class BaseMonster {
 	}
 
 	public void setMaxDungeonLevel(int maxDungeonLevel) {
-		if(maxDungeonLevel <= 0 && maxDungeonLevel <= 50){
+		if(maxDungeonLevel >= 0 && maxDungeonLevel <= 50){
 			this.maxDungeonLevel = maxDungeonLevel;
 			this.setChanged();
 		} else {
@@ -597,12 +597,12 @@ public class BaseMonster {
 	}
 
 	public void setMonsterItemLevel(int monsterItemLevel) {
-		if(monsterItemLevel <= 1 && monsterItemLevel >= 30){
+		if(monsterItemLevel >= 1 && monsterItemLevel <= 30){
 			this.monsterItemLevel = monsterItemLevel;
 			this.setChanged();
 		} else {
 			System.err.println("Error: BaseMonster's setMonsterItemLevel() was"
-					+ "supplied with an argument outside the supported range (1 to 30)");
+					+ "supplied with an argument outside the supported range (1 to 30). Value: " + monsterItemLevel);
 		}
 	}
 
@@ -977,12 +977,12 @@ public class BaseMonster {
 	}
 
 	public void setEnabled(int enabled) {
-		if(enabled <= 0 && enabled >= 1){
+		if(enabled >= 0 && enabled <= 1){
 			this.enabled = enabled;
 			this.setChanged();
 		} else {
 			System.err.println("Error: BaseMonster's setEnabled() was"
-					+ "supplied with an argument outside the supported range (0 to 1)");
+					+ "supplied with an argument outside the supported range (0 to 1). Value: " + enabled);
 		}
 	}
 

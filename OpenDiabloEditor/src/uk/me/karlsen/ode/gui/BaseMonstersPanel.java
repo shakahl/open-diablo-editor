@@ -422,7 +422,9 @@ public class BaseMonstersPanel extends JPanel {
                     baseMonster.setMaxDungeonLevel(Integer.parseInt(maxDungeonField.getText()));
                     baseMonster.setMonsterItemLevel(Integer.parseInt(monsterItemLevelField.getText()));
                     baseMonster.setMinHitPoints(Long.parseLong(minHitPointsField.getText()));
-                    baseMonster.setMaxHitPoints(Long.parseLong(maxHitPointsField.getText()));
+					if(!maxHitPointsField.getText().equals("")) { //FIXME -- hack. need to fix.
+						baseMonster.setMaxHitPoints(Long.parseLong(maxHitPointsField.getText()));
+					}
                     baseMonster.setAttackType1(Integer.parseInt(attackType1Field.getText()));
                     baseMonster.setAttackType2(Integer.parseInt(attackType2Field.getText()));
                     baseMonster.setAttackType3(Integer.parseInt(attackType3Field.getText()));

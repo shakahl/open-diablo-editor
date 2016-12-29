@@ -17,9 +17,16 @@ import java.io.File;
 
 public class ODEWithGUI {
 
-public static void main(String[] args){
+	public static void main(String[] args){
 
-		ReaderWriter rw = new ReaderWriter("./OpenDiabloEditor/input/Diablo.exe"); //OR just "./input/Diablo.exe"
+		File moddedFile = new File("./OpenDiabloEditor/input/DiabloModded.exe"); //OR just "./input/DiabloModded.exe"
+
+		ReaderWriter rw;
+		if(moddedFile.exists()) {
+			rw = new ReaderWriter("./OpenDiabloEditor/input/DiabloModded.exe"); //OR just "./input/DiabloModded.exe"
+		} else {
+			rw = new ReaderWriter("./OpenDiabloEditor/input/Diablo.exe", "./OpenDiabloEditor/input/DiabloModded.exe"); //OR just "./input/DiabloModded.exe" and "./input/Diablo.exe"
+		}
 
 		QuestStore questStore = new QuestStore(rw);
 		SpellsStore spellStore = new SpellsStore(rw);
