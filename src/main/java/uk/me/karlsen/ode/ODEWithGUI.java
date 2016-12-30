@@ -19,13 +19,13 @@ public class ODEWithGUI {
 
 	public static void main(String[] args){
 
-		File moddedFile = new File("./DiabloModded.exe"); //OR just "./input/DiabloModded.exe"
+		File moddedFile = new File("DiabloModded.exe");
 
 		ReaderWriter rw;
 		if(moddedFile.exists()) {
-			rw = new ReaderWriter("./DiabloModded.exe"); //OR just "./input/DiabloModded.exe"
+			rw = new ReaderWriter("DiabloModded.exe", false);
 		} else {
-			rw = new ReaderWriter("./Diablo.exe", "./DiabloModded.exe"); //OR just "./input/DiabloModded.exe" and "./input/Diablo.exe"
+			rw = new ReaderWriter("Diablo.exe", "DiabloModded.exe");
 		}
 
 		QuestStore questStore = new QuestStore(rw);

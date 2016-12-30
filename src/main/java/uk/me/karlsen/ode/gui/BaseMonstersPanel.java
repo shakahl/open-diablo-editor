@@ -379,7 +379,7 @@ public class BaseMonstersPanel extends JPanel {
 		};
 		monsterComboBox.addActionListener(bmpcbl);
 		
-		JButton saveButton = new JButton("Store changes");
+		JButton saveButton = new JButton("Cache changes");
 		this.add(saveButton);
 		
 		ActionListener saveClick = new ActionListener() {

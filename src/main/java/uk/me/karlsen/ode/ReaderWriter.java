@@ -13,10 +13,14 @@ public class ReaderWriter {
 
 	RandomAccessFile raf = null;
 
-	public ReaderWriter(String path){
+	public ReaderWriter(String path, boolean readOnly){
 		File f = new File(path);
 		try {
-			raf = new RandomAccessFile(f, "r");
+			if(readOnly) {
+				raf = new RandomAccessFile(f, "r");
+			} else {
+				raf = new RandomAccessFile(f, "rw");
+			}
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 			System.exit(-1);
@@ -120,6 +124,7 @@ public class ReaderWriter {
 	}
 
 	public void writeBytes(byte[] bytes, long pos){
+		System.out.println("Writing bytes to " + pos);
 		try {
 			raf.seek(pos);
 			raf.write(bytes);
@@ -130,6 +135,7 @@ public class ReaderWriter {
 	}
 	
 	public void writeByte(byte b, long pos){
+		System.out.println("Writing byte to " + pos);
 		try {
 			raf.seek(pos);
 			raf.write(b);

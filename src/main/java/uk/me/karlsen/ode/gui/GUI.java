@@ -95,8 +95,22 @@ public class GUI {
 //		fileMenu.add(openItem);
 //		JMenuItem closeItem = new JMenuItem("Close");
 //		fileMenu.add(closeItem);
-//		JMenuItem saveItem = new JMenuItem("Save");
-//		fileMenu.add(saveItem);
+		JMenuItem saveItem = new JMenuItem("Save");
+		saveItem.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent actionEvent) {
+				shrineStore.writeShrinesToEXE();
+				questStore.writeQuestsToEXE();
+				spellStore.writeSpellsToEXE();
+				modifierStore.writeModifiersToEXE();
+				uniqueItemStore.writeItemsToEXE();
+				characterStore.writeCharactersToEXE();
+				baseItemStore.writeItemsToEXE();
+				baseMonsterStore.writeMonstersToEXE();
+				uniqueMonsterStore.writeMonstersToEXE();
+			}
+		});
+		fileMenu.add(saveItem);
 //		JMenuItem saveAsItem = new JMenuItem("Save As...");
 //		fileMenu.add(saveAsItem);
 		

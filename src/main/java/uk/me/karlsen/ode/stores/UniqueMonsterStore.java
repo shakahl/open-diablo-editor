@@ -10,8 +10,10 @@ import uk.me.karlsen.ode.types.UniqueMonster;
 public class UniqueMonsterStore {
 
 	List<UniqueMonster> uniqueMonsters;
+	ReaderWriter rw;
 
 	public UniqueMonsterStore(ReaderWriter rw) {
+		this.rw = rw;
 		uniqueMonsters = new ArrayList<UniqueMonster>();
 		this.readInUniques(rw);
 	}
@@ -40,11 +42,11 @@ public class UniqueMonsterStore {
 		return uniqueMonsters.get(i).getUniqueAsBytes();
 	}
 
-	public void writeMonstersToEXE(ReaderWriter writer) {
+	public void writeMonstersToEXE() {
 		long pos = TomeOfKnowledge.UNIQUE_MONSTERS_OFFSET;
 		for(int i = 0; i < TomeOfKnowledge.NUMBER_OF_UNIQUE_MONSTERS; i++){
 			byte[] uniqueAsBytes = this.getUniqueAsBytes(i);
-			writer.writeBytes(uniqueAsBytes, pos);
+			rw.writeBytes(uniqueAsBytes, pos);
 			pos = pos + TomeOfKnowledge.UNIQUE_MONSTER_LENGTH_IN_BYTES;
 		}
 

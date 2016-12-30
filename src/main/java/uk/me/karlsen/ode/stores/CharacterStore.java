@@ -343,19 +343,19 @@ public class CharacterStore {
 		}
 	}
 
-	public void writeCharactersToEXE(ReaderWriter writer) {
+	public void writeCharactersToEXE() {
 
 		byte[] retrievedInitStatBytes = this.getInitStatBytes();
-		writer.writeBytes(retrievedInitStatBytes, TomeOfKnowledge.MIN_STATS_OFFSET);
+		rw.writeBytes(retrievedInitStatBytes, TomeOfKnowledge.MIN_STATS_OFFSET);
 
 		byte[] retrievedMaxStatBytes = this.getMaxStatBytes();
-		writer.writeBytes(retrievedMaxStatBytes, TomeOfKnowledge.MAX_STATS_OFFSET);
+		rw.writeBytes(retrievedMaxStatBytes, TomeOfKnowledge.MAX_STATS_OFFSET);
 
 		byte[] retrievedBlockingBonusBytes = this.getBlockingBonusBytes();
-		writer.writeBytes(retrievedBlockingBonusBytes, TomeOfKnowledge.BLOCKING_BONUSES_OFFSET);
+		rw.writeBytes(retrievedBlockingBonusBytes, TomeOfKnowledge.BLOCKING_BONUSES_OFFSET);
 
 		byte[] retrievedBonusesAndFramesetBytes = this.getBonusesAndFramesetBytes();
-		writer.writeBytes(retrievedBonusesAndFramesetBytes, TomeOfKnowledge.BONUSES_AND_FRAMESETS_OFFSET);
+		rw.writeBytes(retrievedBonusesAndFramesetBytes, TomeOfKnowledge.BONUSES_AND_FRAMESETS_OFFSET);
 	}
 
 	public Character getCharacter(int i) {

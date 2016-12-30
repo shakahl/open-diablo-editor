@@ -51,11 +51,11 @@ public class UniqueItemStore {
 		return uniqueItems.get(i).getItemAsBytes();
 	}
 
-	public void writeItemsToEXE(ReaderWriter writer) {
+	public void writeItemsToEXE() {
 		long pos = TomeOfKnowledge.UNIQUE_ITEMS_OFFSET;
 		for(int i = 0; i < TomeOfKnowledge.NUMBER_OF_UNIQUE_ITEMS; i++){
 			byte[] itemAsBytes = this.getItemAsBytes(i);
-			writer.writeBytes(itemAsBytes, pos);
+			rw.writeBytes(itemAsBytes, pos);
 			pos = pos + TomeOfKnowledge.UNIQUE_ITEM_LENGTH_IN_BYTES;
 		}
 	}

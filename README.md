@@ -13,6 +13,7 @@ Quickstart
 ==========
 
 - Install Java 1.8 (from http://www.oracle.com/technetwork/java/javase/downloads/index.html)
+- Set your JAVA_HOME and add Java 1.8 to your PATH variable
 - Install Git (https://git-scm.com/downloads)
 - Bring up a command prompt for the folder where you want to store the code
     - In Windows, shift + right click in an explorer pane then select open prompt
@@ -20,7 +21,7 @@ Quickstart
 - Enter the OpenDiabloEditor folder and bring up a new prompt
 - Run "gradlew createReleaseJar"
 - Move the resulting jar from .../OpenDiabloEditor/build/libs to your Diablo folder
-- Run the JAR
+- Run the JAR with the command "java -jar open-diablo-editor-0.0.1.jar" (changing the version as appropriate)
     - Diablo.exe will remain unchanged
     - A new DiabloModded.exe will be created
     - No other files will be changed

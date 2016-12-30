@@ -34,21 +34,26 @@ public class OpenDiabloEditor {
 
 	public void run(){
 
-		//####################################
-		//#      HERE WE READ IN DATA        #
-		//####################################
+		//#################################################
+		//#      HERE WE READ IN DATA AND SET UP WRITER   #
+		//#################################################
 
-		reader = new ReaderWriter("input/Diablo.exe");
+		reader = new ReaderWriter("Diablo.exe", true);
 
-		questStore = new QuestStore(reader);
-		spellStore = new SpellsStore(reader);
-		shrineStore = new ShrinesStore(reader);
-		modifierStore = new ItemModifiersStore(reader);
-		uniqueItemStore = new UniqueItemStore(reader);
-		characterStore = new CharacterStore(reader);
-		baseItemStore = new BaseItemStore(reader);
-		baseMonsterStore = new BaseMonsterStore(reader);
-		uniqueMonsterStore = new UniqueMonsterStore(reader);
+		Date date = new Date();
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss");
+		String newPath = "Diablo_MODE_" + dateFormat.format(date) + ".exe";
+		ReaderWriter writer = new ReaderWriter("Diablo.exe", newPath);
+
+		questStore = new QuestStore(writer);
+		spellStore = new SpellsStore(writer);
+		shrineStore = new ShrinesStore(writer);
+		modifierStore = new ItemModifiersStore(writer);
+		uniqueItemStore = new UniqueItemStore(writer);
+		characterStore = new CharacterStore(writer);
+		baseItemStore = new BaseItemStore(writer);
+		baseMonsterStore = new BaseMonsterStore(writer);
+		uniqueMonsterStore = new UniqueMonsterStore(writer);
 
 
 		//####################################
@@ -98,19 +103,14 @@ public class OpenDiabloEditor {
 
 	private void writeAllData() {
 		
-		Date date = new Date();
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss");
-		String newPath = "output/Diablo_MODE_" + dateFormat.format(date) + ".exe";
-		ReaderWriter writer = new ReaderWriter("input/Diablo.exe", newPath);
-		
-		shrineStore.writeShrinesToEXE(writer);
-		questStore.writeQuestsToEXE(writer);
-		spellStore.writeSpellsToEXE(writer);
-		modifierStore.writeModifiersToEXE(writer);
-		uniqueItemStore.writeItemsToEXE(writer);
-		characterStore.writeCharactersToEXE(writer);
-		baseItemStore.writeItemsToEXE(writer);
-		baseMonsterStore.writeMonstersToEXE(writer);
-		uniqueMonsterStore.writeMonstersToEXE(writer);
+		shrineStore.writeShrinesToEXE();
+		questStore.writeQuestsToEXE();
+		spellStore.writeSpellsToEXE();
+		modifierStore.writeModifiersToEXE();
+		uniqueItemStore.writeItemsToEXE();
+		characterStore.writeCharactersToEXE();
+		baseItemStore.writeItemsToEXE();
+		baseMonsterStore.writeMonstersToEXE();
+		uniqueMonsterStore.writeMonstersToEXE();
 	}
 }

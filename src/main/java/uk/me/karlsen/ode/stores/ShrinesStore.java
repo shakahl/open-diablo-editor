@@ -153,20 +153,20 @@ public class ShrinesStore {
 		return shrines.get(i);
 	}
 
-	public void writeShrinesToEXE(ReaderWriter writer) {
+	public void writeShrinesToEXE() {
 		ShrinesAsBytes sab = this.getShrinesAsBytes();
 
 		byte[] shrinePointerBytes = sab.getShrinePointerBytes();
-		writer.writeBytes(shrinePointerBytes, TomeOfKnowledge.SHRINE_POINTERS_OFFSET);
+		rw.writeBytes(shrinePointerBytes, TomeOfKnowledge.SHRINE_POINTERS_OFFSET);
 
 		byte[] minShrineLevelBytes = sab.getMinShrineLevelBytes();
-		writer.writeBytes(minShrineLevelBytes, TomeOfKnowledge.SHRINE_MIN_LEVELS_OFFSET);
+		rw.writeBytes(minShrineLevelBytes, TomeOfKnowledge.SHRINE_MIN_LEVELS_OFFSET);
 
 		byte[] maxShrineLevelBytes = sab.getMaxShrineLevelBytes();
-		writer.writeBytes(maxShrineLevelBytes, TomeOfKnowledge.SHRINE_MAX_LEVELS_OFFSET);
+		rw.writeBytes(maxShrineLevelBytes, TomeOfKnowledge.SHRINE_MAX_LEVELS_OFFSET);
 
 		byte[] gameTypesInWhichPresentBytes = sab.getGameTypeBytes();
-		writer.writeBytes(gameTypesInWhichPresentBytes, TomeOfKnowledge.SHRINE_GAME_TYPE_OFFSET);
+		rw.writeBytes(gameTypesInWhichPresentBytes, TomeOfKnowledge.SHRINE_GAME_TYPE_OFFSET);
 	}
 
 	void disableBadShrines() {

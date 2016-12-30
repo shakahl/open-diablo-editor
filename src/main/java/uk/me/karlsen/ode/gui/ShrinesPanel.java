@@ -94,7 +94,7 @@ public class ShrinesPanel extends JPanel {
 		};
 		comboBox.addActionListener(shrinesListener);
 		
-		JButton saveButton = new JButton("Store changes");
+		JButton saveButton = new JButton("Cache changes");
 		this.add(saveButton);
 		
 		ActionListener saveClick = new ActionListener() {

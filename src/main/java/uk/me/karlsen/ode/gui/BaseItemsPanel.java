@@ -213,7 +213,7 @@ public class BaseItemsPanel extends JPanel {
 		};
 		itemComboBox.addActionListener(bipcbl);
 		
-		JButton saveButton = new JButton("Store changes");
+		JButton saveButton = new JButton("Cache changes");
 		this.add(saveButton);
 		
 		ActionListener saveClick = new ActionListener() {
