@@ -6,7 +6,27 @@ Overview
 
 This is an MIT-licensed Diablo editor, written in Java. At present it is very primitive. I uploaded the code due to a request from mewmew (see official forum thread at http://www.lurkerlounge.com/forums/thread-16344.html).
 
-At present it is usable but will require a little knowledge of Java coding. In a future revision (or revisions) I will add a GUI.
+At present it is usable but may require a little knowledge of Java.
+
+==========
+Quickstart
+==========
+
+- Install Java 1.8 (from http://www.oracle.com/technetwork/java/javase/downloads/index.html)
+- Install Git (https://git-scm.com/downloads)
+- Bring up a command prompt for the folder where you want to store the code
+    - In Windows, shift + right click in an explorer pane then select open prompt
+- Run "git clone https://github.com/quixotic-cynic/open-diablo-editor.git"
+- Enter the OpenDiabloEditor folder and bring up a new prompt
+- Run "gradlew createReleaseJar"
+- Move the resulting jar from .../OpenDiabloEditor/build/libs to your Diablo folder
+- Run the JAR
+    - Diablo.exe will remain unchanged
+    - A new DiabloModded.exe will be created
+    - No other files will be changed
+    - If the DiabloModded.exe exists, ODE will load that in preference to the Diablo.exe
+- Enjoy (hopefully)
+- Send me comments
 
 ====================
 Authors/Contributors
@@ -31,6 +51,9 @@ The workshop was originally created by Charlie with assistance from Jarulf.
 
 A big thanks to Zamal & Zenda for continuing to host it, and not letting it disappear.
 
+The gradle wrapper is part of Gradle (https://gradle.org/), licensed under the Apache 2.0 license.
+
+We use JUnit 4 for testing, licensed under the Eclipse Public License 1.0.
 
 =======
 License

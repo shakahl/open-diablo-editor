@@ -1,0 +1,21 @@
+apply plugin: 'java'
+
+version = '0.0.1'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile 'junit:junit:4.12'
+}
+
+task createReleaseJar(type: Jar) {
+    sourceCompatibility = 1.8
+    manifest {
+        attributes 'Implementation-Title': 'Open Diablo Editor',
+                'Implementation-Version': version,
+                'Main-Class': 'uk.me.karlsen.ode.ODEWithGUI'
+    }
+    with jar
+}
