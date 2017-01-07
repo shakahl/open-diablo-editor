@@ -7,11 +7,14 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.nio.channels.FileChannel;
-import java.util.Date;
 
 public class ReaderWriter {
 
 	RandomAccessFile raf = null;
+	
+	public ReaderWriter(String path){
+		this(path, true);
+	}
 
 	public ReaderWriter(String path, boolean readOnly){
 		File f = new File(path);
