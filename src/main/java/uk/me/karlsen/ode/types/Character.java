@@ -1,6 +1,10 @@
 package uk.me.karlsen.ode.types;
 
+import java.util.logging.Logger;
+
 public class Character {
+	
+	private final static Logger LOGGER = Logger.getLogger(Character.class.getName());
 
 	private String className;
 	private long initStrength;
@@ -27,7 +31,7 @@ public class Character {
 	public Character(){}
 
 	public void printCharacter() {
-		System.out.println(
+		LOGGER.info(
 			"Class: " + className + "\n" +
 			"STR: " + initStrength + "--" + maxStrength + "\n" +
 			"MAG: " + initMagic + "--" + maxMagic + "\n" +

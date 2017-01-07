@@ -1,12 +1,15 @@
 package uk.me.karlsen.ode.types;
 
 import java.util.Arrays;
+import java.util.logging.Logger;
 
 import uk.me.karlsen.ode.ReaderWriter;
 import uk.me.karlsen.ode.TomeOfKnowledge;
 import uk.me.karlsen.ode.utils.BinEditHelper;
 
 public class ItemModifier {
+	
+	private final static Logger LOGGER = Logger.getLogger(ItemModifier.class.getName());
 
 	private long namePointer;
 	private String name;
@@ -116,21 +119,21 @@ public class ItemModifier {
 	}
 
 	public void printModifier(){
-		System.out.println("Modifier name: " + name);
-		System.out.println("Modifier name pointer: " + namePointer);
+		LOGGER.info("Modifier name: " + name);
+		LOGGER.info("Modifier name pointer: " + namePointer);
 		String[] itemEffectStrings = createNewItemEffectsString();
-		System.out.println("Item Effects: " + itemEffectStrings[itemEffects[0]] + "; " + itemEffectStrings[itemEffects[1]] + "; " + itemEffectStrings[itemEffects[2]] + "; " + itemEffectStrings[itemEffects[3]]);
-		System.out.println("Minimum effect value: " + minimumEffectValue);
-		System.out.println("Maximum effect value: " + maximumEffectValue);
-		System.out.println("Quality level: " + qualityLevel);
-		System.out.println("Occurrence probability (bit encoded): " + occurencePossibilities);
-		System.out.println("Zero: " + byteTwentyThree);
-		System.out.println("Excluded combinations indicator: " + excludedComboIndicator);
-		System.out.println("Cursed indicator: " + cursedIndicator);
-		System.out.println("Min gold: " + minGold);
-		System.out.println("Max gold: " + maxGold);
-		System.out.println("Value multiplier: " + valueMultiplier);
-		System.out.println();
+		LOGGER.info("Item Effects: " + itemEffectStrings[itemEffects[0]] + "; " + itemEffectStrings[itemEffects[1]] + "; " + itemEffectStrings[itemEffects[2]] + "; " + itemEffectStrings[itemEffects[3]]);
+		LOGGER.info("Minimum effect value: " + minimumEffectValue);
+		LOGGER.info("Maximum effect value: " + maximumEffectValue);
+		LOGGER.info("Quality level: " + qualityLevel);
+		LOGGER.info("Occurrence probability (bit encoded): " + occurencePossibilities);
+		LOGGER.info("Zero: " + byteTwentyThree);
+		LOGGER.info("Excluded combinations indicator: " + excludedComboIndicator);
+		LOGGER.info("Cursed indicator: " + cursedIndicator);
+		LOGGER.info("Min gold: " + minGold);
+		LOGGER.info("Max gold: " + maxGold);
+		LOGGER.info("Value multiplier: " + valueMultiplier);
+		LOGGER.info("");
 	}
 
 	private String[] createNewItemEffectsString() {

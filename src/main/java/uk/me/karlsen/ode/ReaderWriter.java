@@ -7,8 +7,11 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.nio.channels.FileChannel;
+import java.util.logging.Logger;
 
 public class ReaderWriter {
+	
+	private final static Logger LOGGER = Logger.getLogger(ReaderWriter.class.getName());
 
 	RandomAccessFile raf = null;
 	
@@ -127,7 +130,7 @@ public class ReaderWriter {
 	}
 
 	public void writeBytes(byte[] bytes, long pos){
-		System.out.println("Writing bytes to " + pos);
+		LOGGER.info("Writing bytes to " + pos);
 		try {
 			raf.seek(pos);
 			raf.write(bytes);
@@ -138,7 +141,7 @@ public class ReaderWriter {
 	}
 	
 	public void writeByte(byte b, long pos){
-		System.out.println("Writing byte to " + pos);
+		LOGGER.info("Writing byte to " + pos);
 		try {
 			raf.seek(pos);
 			raf.write(b);

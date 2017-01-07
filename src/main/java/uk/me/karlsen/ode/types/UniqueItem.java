@@ -2,11 +2,14 @@ package uk.me.karlsen.ode.types;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 import uk.me.karlsen.ode.ReaderWriter;
 import uk.me.karlsen.ode.utils.BinEditHelper;
 
 public class UniqueItem {
+	
+	private final static Logger LOGGER = Logger.getLogger(UniqueItem.class.getName());
 
 	private long namePointer;
 	private String name;
@@ -37,18 +40,18 @@ public class UniqueItem {
 	}
 
 	public void printItem() {
-		System.out.println("Name: " + name);
-		System.out.println("Name pointer: " + namePointer);
+		LOGGER.info("Name: " + name);
+		LOGGER.info("Name pointer: " + namePointer);
 		String[] itemTypesArray = UniqueItem.createNewItemTypeArray();
-		System.out.println("Item type: " + itemTypesArray[itemType]);
-		System.out.println("Quality level: " + qualityLevel);
-		System.out.println("Number of effects: " + numberOfEffects);
-		System.out.println("Gold value: " + goldValue);
+		LOGGER.info("Item type: " + itemTypesArray[itemType]);
+		LOGGER.info("Quality level: " + qualityLevel);
+		LOGGER.info("Number of effects: " + numberOfEffects);
+		LOGGER.info("Gold value: " + goldValue);
 		for(ItemEffect ie : itemEffects){
-			System.out.println("Effect " + ie.getEffectNumber() + ": " + 
+			LOGGER.info("Effect " + ie.getEffectNumber() + ": " + 
 					effectsArray[(int) ie.getEffect()] +"; " + ie.getMinValue() + "; " + ie.getMaxValue());
 		}
-		System.out.println();
+		LOGGER.info("");
 	}
 
 	//TODO -- fix duplicate code

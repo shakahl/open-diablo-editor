@@ -1,8 +1,12 @@
 package uk.me.karlsen.ode.types;
 
+import java.util.logging.Logger;
+
 import uk.me.karlsen.ode.TomeOfKnowledge;
 
 public class Shrine {
+	
+	private final static Logger LOGGER = Logger.getLogger(Shrine.class.getName());
 
 	private String shrineName;
 	private long shrinePointer;
@@ -23,13 +27,13 @@ public class Shrine {
 	}
 
 	public void printShrine() {
-		System.out.println("Shrine index: " + shrineIndex);
-		System.out.println("Shrine name: " + shrineName);
-		System.out.println("Shrine name pointer: " + shrinePointer);
-		System.out.println("Min shrine level: " + minShrineLevel);
-		System.out.println("Max shrine level: " + maxShrineLevel);
-		System.out.println("SP+MP(0)/SP(1)/MP(2): " + gameTypesInWhichPresent);
-		System.out.println();
+		LOGGER.info("Shrine index: " + shrineIndex);
+		LOGGER.info("Shrine name: " + shrineName);
+		LOGGER.info("Shrine name pointer: " + shrinePointer);
+		LOGGER.info("Min shrine level: " + minShrineLevel);
+		LOGGER.info("Max shrine level: " + maxShrineLevel);
+		LOGGER.info("SP+MP(0)/SP(1)/MP(2): " + gameTypesInWhichPresent);
+		LOGGER.info("");
 	}
 
 	public byte[] getShrinePointerBytes() {
