@@ -1,9 +1,13 @@
 package uk.me.karlsen.ode.types;
 
+import java.util.logging.Logger;
+
 import uk.me.karlsen.ode.ReaderWriter;
 import uk.me.karlsen.ode.utils.BinEditHelper;
 
 public class Quest {
+	
+	private final static Logger LOGGER = Logger.getLogger(Quest.class.getName());
 
 	String[] specialLevels = {
 			"NA",
@@ -56,20 +60,20 @@ public class Quest {
 	}
 
 	public void printQuest(){
-		System.out.println("Slot number: " + slotNumber + " (hex: " + Integer.toHexString(slotNumber) + ")");
-		System.out.println("Dungeon level single: " + dungeonLevelSingle);
-		System.out.println("Dungeon level multi: " + dungeonLevelMulti);
+		LOGGER.info("Slot number: " + slotNumber + " (hex: " + Integer.toHexString(slotNumber) + ")");
+		LOGGER.info("Dungeon level single: " + dungeonLevelSingle);
+		LOGGER.info("Dungeon level multi: " + dungeonLevelMulti);
 		if(dungeonType >= 0 && dungeonType <= 4){
-			System.out.println("Dungeon type: " + dungeonTypes[dungeonType]);
+			LOGGER.info("Dungeon type: " + dungeonTypes[dungeonType]);
 		}
-		System.out.println("Quest number: " + questNumber);
-		System.out.println("Unknown: " + byteFourValue);
-		System.out.println("Special level: " + specialLevels[specialLevel]);
-		System.out.println("Zero: " + zeroOne);
-		System.out.println("Zero: " + zeroTwo);
-		System.out.println("Multi player trigger flag: " + mpTriggerFlag);
-		//System.out.println("Text entry IDX: `" + textEntries[(int) textEntryIDX] + "`"); -- Regrettably removed due to copyright concerns. Need to read-in every time ODE is run.
-		System.out.println();
+		LOGGER.info("Quest number: " + questNumber);
+		LOGGER.info("Unknown: " + byteFourValue);
+		LOGGER.info("Special level: " + specialLevels[specialLevel]);
+		LOGGER.info("Zero: " + zeroOne);
+		LOGGER.info("Zero: " + zeroTwo);
+		LOGGER.info("Multi player trigger flag: " + mpTriggerFlag);
+		//LOGGER.info("Text entry IDX: `" + textEntries[(int) textEntryIDX] + "`"); -- Regrettably removed due to copyright concerns. Need to read-in every time ODE is run.
+		LOGGER.info("");
 	}
 
 	public byte[] getQuestAsBytes() {

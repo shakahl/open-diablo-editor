@@ -2,12 +2,15 @@ package uk.me.karlsen.ode.types;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.logging.Logger;
 
 import uk.me.karlsen.ode.ReaderWriter;
 import uk.me.karlsen.ode.TomeOfKnowledge;
 import uk.me.karlsen.ode.utils.BinEditHelper;
 
 public class BaseMonster {
+	
+	private final static Logger LOGGER = Logger.getLogger(BaseMonster.class.getName());
 
 	private long animationSize;
 	private long seedingSize;
@@ -194,7 +197,7 @@ public class BaseMonster {
 	}
 
 	public void printMonster() {
-		System.out.println(
+		LOGGER.info(
 		"+--------------------------------------+" + "\n" +
 		"| Slot number: " + slotNumber + " (hex: " + Integer.toHexString(slotNumber) + ")" + "\n" +
 		"| Monster name: " + name + "\n" +

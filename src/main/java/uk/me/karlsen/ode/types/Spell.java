@@ -1,12 +1,14 @@
 package uk.me.karlsen.ode.types;
 
-import java.util.Arrays;
+import java.util.logging.Logger;
 
 import uk.me.karlsen.ode.ReaderWriter;
 import uk.me.karlsen.ode.TomeOfKnowledge;
 import uk.me.karlsen.ode.utils.BinEditHelper;
 
 public class Spell {
+	
+	private final static Logger LOGGER = Logger.getLogger(Spell.class.getName());
 
 	String[] castingSounds = {"Fire", "Lighting", "Utility", "Other"};
 	String[] animationsWhenCasting = {"fire", "lightning", "magic/other"};
@@ -93,28 +95,28 @@ public class Spell {
 
 	//Important note: Gap bytes are 32, whereas end-of-strings are 0
 	public void printSpell() {
-		System.out.println("Spell #: " + index);
+		LOGGER.info("Spell #: " + index);
 		String[] unmoddedSpellNames = TomeOfKnowledge.createSpellNamesArray();
 		String[] spellEffectsStrings = createSpellEffectsArray();
-		System.out.println("Unmodded Name: " + unmoddedSpellNames[unmoddedSpellIndex]);
-		System.out.println("Mana to cast + mana from reading: " + manaToCast);
-		System.out.println("Animation when casting: " + animationsWhenCasting[animationWhenCasting]);
-		System.out.println("Pointer to name as spell: " + pointerToNameAsSpell);
-		System.out.println("Name as spell: " + nameAsSpell);
+		LOGGER.info("Unmodded Name: " + unmoddedSpellNames[unmoddedSpellIndex]);
+		LOGGER.info("Mana to cast + mana from reading: " + manaToCast);
+		LOGGER.info("Animation when casting: " + animationsWhenCasting[animationWhenCasting]);
+		LOGGER.info("Pointer to name as spell: " + pointerToNameAsSpell);
+		LOGGER.info("Name as spell: " + nameAsSpell);
 		if(pointerToNameAsSkill != -1){
-			System.out.println("Pointer to name as skill: " + pointerToNameAsSkill);
+			LOGGER.info("Pointer to name as skill: " + pointerToNameAsSkill);
 		} else {
-			System.out.println("Pointer to name as skill: not set");
+			LOGGER.info("Pointer to name as skill: not set");
 		}
-		System.out.println("Name as skill: " + nameAsSkill);
-		System.out.println("Quality level of spellbook: " + spellbookQuality);
-		System.out.println("Quality level of staff: " + staffQuality);
-		System.out.println("Byte twenty: " + byteTwenty);
-		System.out.println("Byte twentyone: " + byteTwentyone);
-		System.out.println("Byte twentytwo: " + byteTwentytwo);
-		System.out.println("Byte twentythree: " + byteTwentythree);
-		System.out.println("Spell active in town: " + spellActiveInTown);
-		System.out.println("Base required magic: " + baseRequiredMagic);
+		LOGGER.info("Name as skill: " + nameAsSkill);
+		LOGGER.info("Quality level of spellbook: " + spellbookQuality);
+		LOGGER.info("Quality level of staff: " + staffQuality);
+		LOGGER.info("Byte twenty: " + byteTwenty);
+		LOGGER.info("Byte twentyone: " + byteTwentyone);
+		LOGGER.info("Byte twentytwo: " + byteTwentytwo);
+		LOGGER.info("Byte twentythree: " + byteTwentythree);
+		LOGGER.info("Spell active in town: " + spellActiveInTown);
+		LOGGER.info("Base required magic: " + baseRequiredMagic);
 		int castingSoundIndex = -1;
 		if(castingSound == 76){
 			castingSoundIndex = 0;
@@ -127,17 +129,17 @@ public class Spell {
 		} else {
 			//do nothing
 		}
-		System.out.println("Casting sound: " + castingSounds[castingSoundIndex]);
-		System.out.println("Spell Effects: " + spellEffectsStrings[spellEffects[0]] + "; " + spellEffectsStrings[spellEffects[1]] + "; " + spellEffectsStrings[spellEffects[2]]);
-		System.out.println("Mana step: " + manaStep);
-		System.out.println("Min casting cost: " + minCastingCost);
-		System.out.println("Zero: " + byteThirtyEight);
-		System.out.println("Zero: " + byteThirtyNine);
-		System.out.println("Min charges: " + minCharges);
-		System.out.println("Max charges: " + maxCharges);
-		System.out.println("Book cost: " + bookCost);
-		System.out.println("Staff cost multiplier: " + staffCostMultiplier);
-		System.out.println();
+		LOGGER.info("Casting sound: " + castingSounds[castingSoundIndex]);
+		LOGGER.info("Spell Effects: " + spellEffectsStrings[spellEffects[0]] + "; " + spellEffectsStrings[spellEffects[1]] + "; " + spellEffectsStrings[spellEffects[2]]);
+		LOGGER.info("Mana step: " + manaStep);
+		LOGGER.info("Min casting cost: " + minCastingCost);
+		LOGGER.info("Zero: " + byteThirtyEight);
+		LOGGER.info("Zero: " + byteThirtyNine);
+		LOGGER.info("Min charges: " + minCharges);
+		LOGGER.info("Max charges: " + maxCharges);
+		LOGGER.info("Book cost: " + bookCost);
+		LOGGER.info("Staff cost multiplier: " + staffCostMultiplier);
+		LOGGER.info("");
 	}
 
 	private String[] createSpellEffectsArray() {

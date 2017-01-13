@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Logger;
 
 import uk.me.karlsen.ode.ReaderWriter;
 import uk.me.karlsen.ode.TomeOfKnowledge;
@@ -16,6 +17,8 @@ import uk.me.karlsen.ode.utils.BinEditHelper;
  * any prefixes or suffixes).
  */
 public class BaseItem {
+	
+	private final static Logger LOGGER = Logger.getLogger(BaseItem.class.getName());
 
 	/**
 	 * Textual descriptions for each item type.
@@ -463,7 +466,7 @@ public class BaseItem {
 		String[] uniqueItemCodes = UniqueItem.createNewItemTypeArray();
 		String[] spellNumbers = TomeOfKnowledge.createSpellNamesArray();
 		Map<Integer,String> specialEffectMap = this.getSpecialEffectMap();
-		System.out.println("Slot number: " + slotNumber + " (hex: " + Integer.toHexString(slotNumber) + ")" + "\n" +
+		LOGGER.info("Slot number: " + slotNumber + " (hex: " + Integer.toHexString(slotNumber) + ")" + "\n" +
 			"Name: " + name + "\n" +
 			"Name pointer: " + namePointer + "\n" +
 			"Magical name: " + magicalName + "\n" +

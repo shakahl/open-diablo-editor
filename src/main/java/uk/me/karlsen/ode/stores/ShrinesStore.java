@@ -1,8 +1,8 @@
 package uk.me.karlsen.ode.stores;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
+import java.util.logging.Logger;
 
 import uk.me.karlsen.ode.ReaderWriter;
 import uk.me.karlsen.ode.TomeOfKnowledge;
@@ -11,6 +11,8 @@ import uk.me.karlsen.ode.types.ShrinesAsBytes;
 import uk.me.karlsen.ode.utils.BinEditHelper;
 
 public class ShrinesStore {
+	
+	private final static Logger LOGGER = Logger.getLogger(ShrinesStore.class.getName());
 
 	ReaderWriter rw;
 	private List<Shrine> shrines;
@@ -50,7 +52,7 @@ public class ShrinesStore {
 			shrinePointers[i] = beh.convertThreeBytesToOffset(pointer);
 		}
 
-		System.out.println();
+		LOGGER.info("");
 
 		pos = TomeOfKnowledge.SHRINE_MIN_LEVELS_OFFSET;
 		rw.seek(pos);
@@ -62,7 +64,7 @@ public class ShrinesStore {
 			rw.seek(pos);
 		}
 
-		System.out.println();
+		LOGGER.info("");
 
 		pos = TomeOfKnowledge.SHRINE_MAX_LEVELS_OFFSET;
 		rw.seek(pos);
@@ -74,7 +76,7 @@ public class ShrinesStore {
 			rw.seek(pos);
 		}
 
-		System.out.println();
+		LOGGER.info("");
 		pos = TomeOfKnowledge.SHRINE_GAME_TYPE_OFFSET;
 		rw.seek(pos);
 		origGameTypesInWhichPresentBytes = rw.readBytes(TomeOfKnowledge.NUMBER_OF_SHRINES);

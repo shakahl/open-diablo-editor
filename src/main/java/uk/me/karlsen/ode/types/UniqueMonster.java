@@ -1,9 +1,13 @@
 package uk.me.karlsen.ode.types;
 
+import java.util.logging.Logger;
+
 import uk.me.karlsen.ode.ReaderWriter;
 import uk.me.karlsen.ode.utils.BinEditHelper;
 
 public class UniqueMonster {
+	
+	private final static Logger LOGGER = Logger.getLogger(UniqueMonster.class.getName());
 
 	private String[] monsterAIs = {
 		"Zombie",
@@ -79,7 +83,7 @@ public class UniqueMonster {
 	}
 
 	public void printUniqueMonster() {
-		System.out.println(
+		LOGGER.info(
 			"Name: " + name + "\n" +
 			"Monster type: " + monsterType + "\n" +
 			"Name pointer: " + namePointer + "\n" +
