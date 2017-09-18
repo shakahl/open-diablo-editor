@@ -2,11 +2,14 @@
 
 ## Overview
 
-This is an MIT-licensed Diablo editor, written in Java. At present it is very primitive. I uploaded the code due to a request from mewmew (see official forum thread at http://www.lurkerlounge.com/forums/thread-16344.html).
-
-At present it is usable but may require a little knowledge of Java.
+This is an MIT-licensed Diablo editor, written in Java. I uploaded the code due to a request from mewmew (see official forum thread at http://www.lurkerlounge.com/forums/thread-16344.html).
 
 ## Quickstart
+
+Download the built program from https://www.nexusmods.com/diablo/mods/1/? and follow the usage instructions on that page.
+
+
+## Slow(er) Start: Build via Gradle and Run
 
 - Install Java 1.8 (from http://www.oracle.com/technetwork/java/javase/downloads/index.html)
 - Set your JAVA_HOME and add Java 1.8 to your PATH variable
